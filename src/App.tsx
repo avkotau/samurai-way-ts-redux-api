@@ -2,21 +2,21 @@ import React from 'react';
 import './App.css';
 import Header from "./components/Header/Header";
 import Navbar from "./components/Navbar/Navbar";
-import Profile from "./components/Profile/Profile";
-import Dialogues from "./components/Dialogues/Dialogues";
-import s from './components/Dialogues/Dialogues.module.css'
+import s  from './components/Routes/RouterApp.module.css'
+import RoutesApp from "./components/Routes/RoutesApp";
 
 function App() {
     return (
+
         <div className='app'>
             <Header/>
             <Navbar/>
-            <div className={s.dialogs}>
-                {/*<Dialogues/>*/}
-                <Profile/>
+            {/*<div className={s.dialogs}>*/}
+            <div className={s.routers}>
+                <RoutesApp/>
             </div>
-
         </div>
+
     );
 }
 

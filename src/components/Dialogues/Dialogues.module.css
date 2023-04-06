@@ -1,4 +1,12 @@
-.dialogs {
-    grid-area: content;
-    background-color: cornflowerblue;
+.containerDialogues {
+    display: grid;
+    grid-template-columns: 2fr 5fr;
+}
+
+.dialogues .messages {
+    padding: 10px 0;
+}
+
+.dialogue, .message {
+    padding: 5px;
 }
