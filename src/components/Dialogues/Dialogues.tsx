@@ -9,10 +9,12 @@ type Props = {
     messagesData: MessageDataType[];
 }
 
-const Dialogues: React.FC<Props> = ({
-                                        dialoguesData,
-                                        messagesData
-                                    }) => {
+const Dialogues: React.FC<Props> = (
+    {
+        dialoguesData,
+        messagesData
+    }
+) => {
     return (
         <div className={s.containerDialoguesMessages}>
             <Dialogue dialoguesData={dialoguesData}/>

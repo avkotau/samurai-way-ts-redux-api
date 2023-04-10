@@ -8,6 +8,10 @@
 
 }
 
+.dialogues a {
+
+
+}
 .dialogues .messages {
 
     padding: 10px 0;
@@ -19,4 +23,10 @@
 
 .active {
     color: gold;
+}
+
+.avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
 }

@@ -7,9 +7,11 @@ type Props = {
     postsData: PostDataType[];
 }
 
-const MyPosts: React.FC<Props> = ({
-                                      postsData
-                                  }) => {
+const MyPosts: React.FC<Props> = (
+    {
+        postsData
+    }
+) => {
 
     return (
         <div className={s.myPostsContainer}>

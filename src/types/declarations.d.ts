@@ -16,5 +16,10 @@ export type PostDataType = {
     message: string
     like: number
 }
+export type SitePanelFriendsDataType = {
+    id: number
+    name: string
+    like: number
+}
 
 

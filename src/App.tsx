@@ -4,34 +4,30 @@ import Header from "./components/Header/Header";
 import Navbar from "./components/Navbar/Navbar";
 import s from './components/Routes/RouterApp.module.css'
 import RoutesApp from "./components/Routes/RoutesApp";
-import { DialogueDataType, MessageDataType, PostDataType } from "./types/declarations";
+import { DialogueDataType, MessageDataType, PostDataType, SitePanelFriendsDataType } from "./types/declarations";
+import { sitePanelFriendsData } from "./redux";
 
-function App(): JSX.Element {
 
-    const dialoguesData: DialogueDataType[] = [
-        {id: 1, name: 'Victor'},
-        {id: 2, name: 'Dima'},
-        {id: 3, name: 'Sacha'},
-        {id: 4, name: 'Masha'}
-    ]
+type Props = {
+    dialoguesData: DialogueDataType[]
+    messagesData: MessageDataType[]
+    postsData: PostDataType[]
+    sitePanelFriendsData: SitePanelFriendsDataType[]
+}
 
-    const messagesData: MessageDataType[] = [
-        {id: 1, message: 'Hello Victor'},
-        {id: 2, message: 'Hello Dima'},
-        {id: 3, message: 'Hello Sacha'},
-        {id: 4, message: 'Hello Masha'}
-    ]
-
-    let postsData: PostDataType[] = [
-        {id: 1, message: 'Hello bro', like: 12},
-        {id: 2, message: 'Hello man', like: 20},
-        {id: 3, message: 'Hello women', like: 6}
-    ]
+const App: React.FC<Props> = (
+    {
+        dialoguesData,
+        messagesData,
+        postsData,
+        sitePanelFriendsData
+    }
+) => {
 
     return (
         <div className='app'>
             <Header/>
-            <Navbar/>
+            <Navbar sitePanelFriendsData={sitePanelFriendsData}/>
             {/*<div className={s.dialogs}>*/}
             <div className={s.routers}>
                 <RoutesApp dialoguesData={dialoguesData}
