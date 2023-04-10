@@ -1,12 +1,22 @@
-.containerDialogues {
+.containerDialoguesMessages {
     display: grid;
     grid-template-columns: 2fr 5fr;
 }
 
+.dialogues {
+    display: grid;
+
+}
+
 .dialogues .messages {
+
     padding: 10px 0;
 }
 
 .dialogue, .message {
     padding: 5px;
+}
+
+.active {
+    color: gold;
 }

@@ -1,21 +1,18 @@
 import React from 'react';
 import s from './Dialogues.module.css'
+import Dialogue from "./Dialogue/Dialogue";
+import Messages from "./Messages/Messages";
+import { DialoguesDataArrayType } from "../../types/declarations";
 
-const Dialogues = () => {
+
+const Dialogues: React.FC<DialoguesDataArrayType> = ({
+                                                         dialoguesData,
+                                                         messagesData
+                                                     }) => {
     return (
-        <div className={s.containerDialogues}>
-            <div className={s.dialogues}>
-                <div className={s.dialogue}>Victor</div>
-                <div className={s.dialogue}>Dima</div>
-                <div className={s.dialogue}>Sacha</div>
-                <div className={s.dialogue}>Vitia</div>
-            </div>
-            <div className={s.messages}>
-                <div className={s.message}>Hello Victor</div>
-                <div className={s.message}>Hello Dima</div>
-                <div className={s.message}>Hello Sacha</div>
-                <div className={s.message}>Hello Vitia</div>
-            </div>
+        <div className={s.containerDialoguesMessages}>
+            <Dialogue dialoguesData={dialoguesData}/>
+            <Messages messagesData={messagesData}/>
         </div>
     );
 };
