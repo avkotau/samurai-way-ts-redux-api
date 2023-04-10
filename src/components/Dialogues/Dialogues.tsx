@@ -2,13 +2,17 @@ import React from 'react';
 import s from './Dialogues.module.css'
 import Dialogue from "./Dialogue/Dialogue";
 import Messages from "./Messages/Messages";
-import { DialoguesDataArrayType } from "../../types/declarations";
+import { DialogueDataType, MessageDataType } from "../../types/declarations";
 
+type Props = {
+    dialoguesData: DialogueDataType[]
+    messagesData: MessageDataType[];
+}
 
-const Dialogues: React.FC<DialoguesDataArrayType> = ({
-                                                         dialoguesData,
-                                                         messagesData
-                                                     }) => {
+const Dialogues: React.FC<Props> = ({
+                                        dialoguesData,
+                                        messagesData
+                                    }) => {
     return (
         <div className={s.containerDialoguesMessages}>
             <Dialogue dialoguesData={dialoguesData}/>

@@ -1,26 +1,29 @@
 import React from 'react';
 import s from './MyPosts.module.css';
 import Post from "./Post/Post";
+import { PostDataType } from "../../../types/declarations";
 
-const MyPosts = () => {
-    let postsElemData = [
-        {id: 1, message: 'Hello bro', like: 12},
-        {id: 2, message: 'Hello man', like: 20},
-        {id: 3, message: 'Hello women', like: 6}
-    ]
+type Props = {
+    postsData: PostDataType[];
+}
+
+const MyPosts: React.FC<Props> = ({
+                                      postsData
+                                  }) => {
 
     return (
         <div className={s.myPostsContainer}>
             <h3 className={s.title}>My posts</h3>
             <div>
                 <div>
-                    <textarea> </textarea>
+                    <textarea value="Some default value" onChange={() => {
+                    }}> </textarea>
                 </div>
                 <div>
                     <button>Add post</button>
                 </div>
             </div>
-            {postsElemData.map(el => (
+            {postsData.map(el => (
                 <Post key={el.id} message={el.message} like={el.like}/>
             ))}
         </div>

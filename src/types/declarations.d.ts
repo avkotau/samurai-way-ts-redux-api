@@ -7,21 +7,14 @@ export type DialogueDataType = {
     id: number
     name: string
 }
-
 export type MessageDataType = {
     id: number
-    name: string
+    message: string
+}
+export type PostDataType = {
+    id: number
+    message: string
+    like: number
 }
 
-export type DialoguesDataArrayType = {
-    dialoguesData: DialogueDataType[]
-}
 
-export type MessagesDataArrayType = {
-    messagesData: MessageDataType[]
-}
-
-export interface DialoguesMessages {
-    dialoguesData: DialoguesDataArrayType;
-    messagesData: MessagesDataArrayType;
-}
