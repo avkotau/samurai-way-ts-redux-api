@@ -28,7 +28,7 @@ const App: React.FC<Props> = (
         <div className='app'>
             <Header/>
             <Navbar sitePanelFriendsData={sitePanelFriendsData}/>
-            {/*<div className={s.dialogs}>*/}
+
             <div className={s.routers}>
                 <RoutesApp dialoguesData={dialoguesData}
                            messagesData={messagesData}
