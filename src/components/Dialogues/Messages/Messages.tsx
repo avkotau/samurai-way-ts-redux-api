@@ -20,7 +20,7 @@ const Messages: React.FC<Props> = (
     }
 
     const addMessageHandle = () => {
-        console.log(message)
+        // console.log(message)
         setMessage('');
     }
 

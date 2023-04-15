@@ -3,16 +3,23 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import { BrowserRouter } from "react-router-dom";
-import { dialoguesData, messagesData, postsData, sitePanelFriendsData } from "./redux";
+import {
+    addPost,
+    updatingTextPost,
+    state
+} from "./redux";
 
 
-ReactDOM.render(
-    <BrowserRouter>
-        <App dialoguesData={dialoguesData}
-             messagesData={messagesData}
-             postsData={postsData}
-             sitePanelFriendsData={sitePanelFriendsData}
-        />
-    </BrowserRouter>,
-    document.getElementById('root')
-);
+export let renderTree = (state: any) => {
+    ReactDOM.render(
+        <BrowserRouter>
+            <App
+                state={state}
+                addPost={addPost}
+                updatingTextPost={updatingTextPost}
+            />
+        </BrowserRouter>,
+        document.getElementById('root')
+    );
+}
+renderTree(state)

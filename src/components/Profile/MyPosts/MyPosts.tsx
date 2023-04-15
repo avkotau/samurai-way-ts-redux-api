@@ -1,42 +1,53 @@
-import React, { useRef, useState } from 'react';
+import React, { ChangeEvent, LegacyRef, useState } from 'react';
 import s from './MyPosts.module.css';
 import Post from "./Post/Post";
-import { PostDataType } from "../../../types/declarations";
+import { NewPostTextType, PostDataType } from "../../../types/declarations";
+
 
 type Props = {
     postsData: PostDataType[];
+    addPost: () => void
+    updatingTextPost: (textPost: string) => void
+    newPostText: NewPostTextType
 }
 
 const MyPosts: React.FC<Props> = (
     {
-        postsData
+        postsData,
+        addPost,
+        updatingTextPost,
+        newPostText
     }
 ) => {
-    const [text, setText] = useState(' ');
-    let newPost = useRef<HTMLTextAreaElement>(null);
 
-    const addPost = () => {
-        console.log(text)
-        setText('')
+const newPostElement = React.createRef<HTMLTextAreaElement>();
+
+    const addPostHandle = () => {
+        addPost()
     }
 
-    const onChangeTextareaHandle = () => {
 
-        setText(newPost.current?.value || '')
+    const onChangeTextareaHandle = (e: ChangeEvent<HTMLTextAreaElement>) => {
+
+        updatingTextPost(e.currentTarget.value)
+
     }
+console.log('newPostText',newPostText.post)
     return (
         <div className={s.myPostsContainer}>
             <h3 className={s.title}>My posts</h3>
             <div>
                 <div>
-                    <textarea ref={newPost}
-                              value={text}
-                              onChange={onChangeTextareaHandle}
-                              placeholder='Введите текст'
+                    <textarea
+                        ref={newPostElement}
+                        value={newPostText.post}
+                        onChange={onChangeTextareaHandle}
+                        placeholder='Введите текст'
                     />
                 </div>
                 <div>
-                    <button onClick={addPost} disabled={!text.trim()}>Add post</button>
+                    <button onClick={addPostHandle} >Add post</button>
+                {/*    disabled={!text.trim()}*/}
                 </div>
             </div>
             {postsData.map(el => (

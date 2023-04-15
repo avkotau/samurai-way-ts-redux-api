@@ -4,30 +4,37 @@ import Dialogues from "../Dialogues/Dialogues";
 import Profile from "../Profile/Profile";
 import {
     DialogueDataType,
-    MessageDataType,
+    MessageDataType, NewPostTextType,
     PostDataType,
 
 } from "../../types/declarations";
+import {  StateType } from "../../redux";
 
 
 type Props = {
-    dialoguesData: DialogueDataType[]
-    messagesData: MessageDataType[]
-    postsData: PostDataType[]
+    state: StateType
+    addPost: () => void
+    updatingTextPost: (textPost: string) => void
+
+
 }
 
 const RoutesApp: React.FC<Props> = ({
-                                        dialoguesData,
-                                        messagesData,
-                                        postsData,
+                                        state,
+                                        addPost,
+                                        updatingTextPost,
 
                                     }) => {
 
     return (
         <>
-            <Route path='/dialogues' render={() => <Dialogues dialoguesData={dialoguesData}
-                                                              messagesData={messagesData}/>}/>
-            <Route path='/profile' render={() => <Profile postsData={postsData}/>}/>
+            <Route path='/dialogues' render={() => <Dialogues dialoguesData={state.dialoguesData}
+                                                              messagesData={state.messagesData}/>}/>
+            <Route path='/profile' render={() => <Profile postsData={state.postsData}
+                                                          addPost={addPost}
+                                                          updatingTextPost={updatingTextPost}
+                                                          newPostText={state.newPostText[0]}
+            />}/>
         </>
 
 

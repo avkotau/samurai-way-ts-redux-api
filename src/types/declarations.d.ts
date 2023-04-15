@@ -22,4 +22,9 @@ export type SitePanelFriendsDataType = {
     like: number
 }
 
+export type NewPostTextType = {
+    id: number
+    post: string
+}
+
 
