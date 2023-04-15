@@ -39,7 +39,7 @@ export const state: StateType = {
         {id: 3, name: 'Nikita', like: 6}
     ],
     newPostText: [
-        {id: 0, post: 'lakakka'}
+        {id: 0, post: ''}
     ]
 }
 

@@ -20,7 +20,7 @@ const MyPosts: React.FC<Props> = (
     }
 ) => {
 
-const newPostElement = React.createRef<HTMLTextAreaElement>();
+// const newPostElement = React.createRef<HTMLTextAreaElement>();
 
     const addPostHandle = () => {
         addPost()
@@ -39,7 +39,7 @@ console.log('newPostText',newPostText.post)
             <div>
                 <div>
                     <textarea
-                        ref={newPostElement}
+                        // ref={newPostElement}
                         value={newPostText.post}
                         onChange={onChangeTextareaHandle}
                         placeholder='Введите текст'
