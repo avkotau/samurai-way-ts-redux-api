@@ -26,5 +26,9 @@ export type NewPostTextType = {
     id: number
     post: string
 }
+export type NewMessageTextType = {
+    id: number
+    message: string
+}
 
 

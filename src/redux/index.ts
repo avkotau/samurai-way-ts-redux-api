@@ -1,6 +1,6 @@
 import {
     DialogueDataType,
-    MessageDataType,
+    MessageDataType, NewMessageTextType,
     NewPostTextType,
     PostDataType,
     SitePanelFriendsDataType
@@ -13,6 +13,7 @@ export type StateType = {
     postsData: PostDataType[]
     sitePanelFriendsData: SitePanelFriendsDataType[]
     newPostText: NewPostTextType[]
+    newMessageText: NewMessageTextType[]
 }
 
 export const state: StateType = {
@@ -40,6 +41,9 @@ export const state: StateType = {
     ],
     newPostText: [
         {id: 0, post: ''}
+    ],
+    newMessageText: [
+        {id: 0, message: ''}
     ]
 }
 
@@ -70,7 +74,6 @@ export const state: StateType = {
 // ]
 
 
-
 export const addPost = () => {
     const newPost: PostDataType = {
         id: 4,
@@ -82,8 +85,6 @@ export const addPost = () => {
     renderTree(state)
 }
 
-
-
 export const updatingTextPost = (textPost: string) => {
 
     state.newPostText[0].post = textPost
@@ -92,8 +93,20 @@ export const updatingTextPost = (textPost: string) => {
 }
 
 
-// export const callBackMessage = () => {
-//     messagesData.push()
-// }
+export const addMessage = () => {
+    const newMessage: MessageDataType = {
+        id: 0,
+        message: state.newMessageText[0].message
+    }
+    state.messagesData.push(newMessage)
+    state.newMessageText[0].message = ''
+    renderTree(state)
+}
 
+export const updatingMessageText = (textMessage: string) => {
+
+    state.newMessageText[0].message = textMessage
+
+    renderTree(state)
+}
 

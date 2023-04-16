@@ -6,7 +6,7 @@ import { BrowserRouter } from "react-router-dom";
 import {
     addPost,
     updatingTextPost,
-    state
+    state, addMessage, updatingMessageText
 } from "./redux";
 
 
@@ -17,6 +17,8 @@ export let renderTree = (state: any) => {
                 state={state}
                 addPost={addPost}
                 updatingTextPost={updatingTextPost}
+                addMessage={addMessage}
+                updatingMessageText={updatingMessageText}
             />
         </BrowserRouter>,
         document.getElementById('root')

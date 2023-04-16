@@ -5,7 +5,7 @@ import Navbar from "./components/Navbar/Navbar";
 import s from './components/Routes/RouterApp.module.css'
 import RoutesApp from "./components/Routes/RoutesApp";
 
-import { StateType } from "./redux";
+import { addMessage, StateType, updatingMessageText } from "./redux";
 
 
 type Props = {
@@ -13,6 +13,8 @@ type Props = {
     state: StateType
     addPost: () => void
     updatingTextPost: (textPost: string) => void
+    addMessage: () => void
+    updatingMessageText: (textMessage: string) => void
 
 }
 
@@ -21,7 +23,8 @@ const App: React.FC<Props> = (
         state,
         addPost,
         updatingTextPost,
-
+        addMessage,
+        updatingMessageText,
     }
 ) => {
 
@@ -35,6 +38,8 @@ const App: React.FC<Props> = (
                     state={state}
                     addPost={addPost}
                     updatingTextPost={updatingTextPost}
+                    addMessage={addMessage}
+                    updatingMessageText={updatingMessageText}
 
                 />
             </div>
