@@ -5,7 +5,9 @@ import {
     PostDataType,
     SitePanelFriendsDataType
 } from "../types/declarations";
-import { renderTree } from "../index";
+// import { rerenderTree } from "../index";
+
+
 
 export type StateType = {
     dialoguesData: DialogueDataType[]
@@ -47,6 +49,7 @@ export const state: StateType = {
     ]
 }
 
+
 // export const dialoguesData: DialogueDataType[] = [
 //     {id: 1, name: 'Victor'},
 //     {id: 2, name: 'Dima'},
@@ -73,6 +76,9 @@ export const state: StateType = {
 //     {id: 3, name: 'Nikita', like: 6}
 // ]
 
+let rerenderTree = (state:StateType) => {
+    console.log('rerender')
+}
 
 export const addPost = () => {
     const newPost: PostDataType = {
@@ -82,14 +88,12 @@ export const addPost = () => {
     }
     state.postsData.push(newPost)
     state.newPostText[0].post = ''
-    renderTree(state)
+    rerenderTree(state)
 }
 
 export const updatingTextPost = (textPost: string) => {
-
     state.newPostText[0].post = textPost
-
-    renderTree(state)
+    rerenderTree(state)
 }
 
 
@@ -100,13 +104,15 @@ export const addMessage = () => {
     }
     state.messagesData.push(newMessage)
     state.newMessageText[0].message = ''
-    renderTree(state)
+    rerenderTree(state)
 }
 
 export const updatingMessageText = (textMessage: string) => {
-
     state.newMessageText[0].message = textMessage
-
-    renderTree(state)
+    rerenderTree(state)
 }
 
+
+export const subscriber = (observer: () => void ) => {
+    rerenderTree = observer
+}

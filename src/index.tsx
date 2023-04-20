@@ -6,11 +6,11 @@ import { BrowserRouter } from "react-router-dom";
 import {
     addPost,
     updatingTextPost,
-    state, addMessage, updatingMessageText
+    state, addMessage, updatingMessageText, StateType, subscriber
 } from "./redux";
 
 
-export let renderTree = (state: any) => {
+export let rerenderTree = (state: StateType) => {
     ReactDOM.render(
         <BrowserRouter>
             <App
@@ -24,4 +24,8 @@ export let renderTree = (state: any) => {
         document.getElementById('root')
     );
 }
-renderTree(state)
+rerenderTree(state)
+
+
+subscriber(rerenderTree)
+
