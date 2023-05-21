@@ -23,16 +23,16 @@ const MyPosts: React.FC<Props> = (
 // const newPostElement = React.createRef<HTMLTextAreaElement>();
 
     const addPostHandle = () => {
+
         addPost()
     }
-
 
     const onChangeTextareaHandle = (e: ChangeEvent<HTMLTextAreaElement>) => {
 
         updatingTextPost(e.currentTarget.value)
 
     }
-console.log('newPostText',newPostText.post)
+
     return (
         <div className={s.myPostsContainer}>
             <h3 className={s.title}>My posts</h3>

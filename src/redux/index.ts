@@ -7,8 +7,6 @@ import {
 } from "../types/declarations";
 // import { rerenderTree } from "../index";
 
-
-
 export type StateType = {
     dialoguesData: DialogueDataType[]
     messagesData: MessageDataType[]
@@ -20,17 +18,18 @@ export type StateType = {
 export type ObserverFunction = () => void;
 
 export type ObservableObject = {
-    subscriber: (observer: ObserverFunction) => void;
+    subscribe: (observer: ObserverFunction) => void
 }
 
 export type StoreType = {
     _state: StateType
+    getState: () => void
     _rerenderTree: () => void
     addPost: () => void
     updatingTextPost: (textPost: string) => void
     addMessage: () => void
     updatingMessageText: (textMessage: string) => void
-    subscriber: ObservableObject
+    subscriber: (observer: any) => void
 }
 
 export const store: StoreType = {
@@ -64,23 +63,35 @@ export const store: StoreType = {
             {id: 0, message: ''}
         ]
     },
+
+    getState () {
+        return this._state
+    },
+
     _rerenderTree () {
         console.log('rerender')
     },
+
     addPost () {
+
         const newPost: PostDataType = {
-            id: 4,
+            //Change to number
+            id: Math.random().toString(36).slice(2),
             message: this._state.newPostText[0].post,
             like: 0
         }
+
         this._state.postsData.push(newPost)
         this._state.newPostText[0].post = ''
         // this._rerenderTree(this._state)
     },
+
     updatingTextPost (textPost: string) {
+
         this._state.newPostText[0].post = textPost
         // this._rerenderTree(this._state)
     },
+
     addMessage () {
         const newMessage: MessageDataType = {
             id: 0,
@@ -91,14 +102,17 @@ export const store: StoreType = {
         // this._rerenderTree(this._state)
     },
     updatingMessageText (textMessage: string) {
+
         this._state.newMessageText[0].message = textMessage
        // / this._rerenderTree(this._state)
     },
-    subscriber (observer: ObserverFunction ) {
+    subscriber (observer: any ) {
         this._rerenderTree = observer
     }
 
 }
+
+
 
 // export const state: StateType = {
 //     dialoguesData: [

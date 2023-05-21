@@ -21,7 +21,7 @@ const Profile: React.FC<Props> = (
     }
 ) => {
 
-
+    console.log('newPostText',newPostText)
     return (
         <div className={s.content}>
             <ProfileInfo/>

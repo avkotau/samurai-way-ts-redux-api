@@ -41,7 +41,7 @@ const RoutesApp: React.FC<Props> = ({
             <Route path='/profile' render={() => <Profile postsData={state.postsData}
                                                           addPost={addPost}
                                                           updatingTextPost={updatingTextPost}
-                                                          newPostText={state.newPostText[0]}
+                                                          newPostText={state.newPostText}
             />}/>
         </>
 

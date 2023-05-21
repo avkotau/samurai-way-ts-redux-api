@@ -7,6 +7,7 @@ type TypeProps = {
 }
 
 const Post: React.FC<TypeProps>= (props) => {
+    console.log('props',props)
     return (
         <div className={s.posts}>
             <div className={s.item}>
