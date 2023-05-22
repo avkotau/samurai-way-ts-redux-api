@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import './App.css';
 import Header from "./components/Header/Header";
 import Navbar from "./components/Navbar/Navbar";
@@ -8,7 +8,7 @@ import RoutesApp from "./components/Routes/RoutesApp";
 import { addMessage, StateType, updatingMessageText } from "./redux";
 
 
-type Props = {
+type TypeProps = {
 
     state: StateType
     addPost: () => void
@@ -18,34 +18,59 @@ type Props = {
 
 }
 
-const App: React.FC<Props> = (
-    {
-        state,
-        addPost,
-        updatingTextPost,
-        addMessage,
-        updatingMessageText,
-    }
-) => {
+// const App: React.FC<Props> = (
+//     {
+//         state,
+//         addPost,
+//         updatingTextPost,
+//         addMessage,
+//         updatingMessageText,
+//     }
+// ) => {
+//
+//     return (
+//         <div className='app'>
+//             <Header/>
+//             <Navbar sitePanelFriendsData={state.sitePanelFriendsData}/>
+//
+//             <div className={s.routers}>
+//                 <RoutesApp
+//                     state={state}
+//                     addPost={addPost}
+//                     updatingTextPost={updatingTextPost}
+//                     addMessage={addMessage}
+//                     updatingMessageText={updatingMessageText}
+//
+//                 />
+//             </div>
+//         </div>
+//
+//     );
+// }
 
-    return (
-        <div className='app'>
-            <Header/>
-            <Navbar sitePanelFriendsData={state.sitePanelFriendsData}/>
+class App extends Component<TypeProps> {
 
-            <div className={s.routers}>
-                <RoutesApp
-                    state={state}
-                    addPost={addPost}
-                    updatingTextPost={updatingTextPost}
-                    addMessage={addMessage}
-                    updatingMessageText={updatingMessageText}
+    render() {
+        const {state, addPost, updatingTextPost, addMessage, updatingMessageText} = this.props
 
-                />
+        return (
+            <div className='app'>
+                <Header/>
+                <Navbar sitePanelFriendsData={state.sitePanelFriendsData}/>
+
+                <div className={s.routers}>
+                    <RoutesApp
+                        state={state}
+                        addPost={addPost}
+                        updatingTextPost={updatingTextPost}
+                        addMessage={addMessage}
+                        updatingMessageText={updatingMessageText}
+
+                    />
+                </div>
             </div>
-        </div>
-
-    );
+        )
+    }
 }
 
 export default App;

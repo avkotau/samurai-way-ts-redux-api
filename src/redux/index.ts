@@ -84,12 +84,14 @@ export const store: StoreType = {
         this._state.postsData.push(newPost)
         this._state.newPostText[0].post = ''
         // this._rerenderTree(this._state)
+        this._rerenderTree(this._state);
     },
 
     updatingTextPost (textPost: string) {
 
         this._state.newPostText[0].post = textPost
         // this._rerenderTree(this._state)
+        this._rerenderTree(this._state);
     },
 
     addMessage () {
@@ -100,11 +102,13 @@ export const store: StoreType = {
         this._state.messagesData.push(newMessage)
         this._state.newMessageText[0].message = ''
         // this._rerenderTree(this._state)
+        this._rerenderTree(this._state);
     },
     updatingMessageText (textMessage: string) {
 
         this._state.newMessageText[0].message = textMessage
        // / this._rerenderTree(this._state)
+        this._rerenderTree(this._state);
     },
     subscriber (observer: any ) {
         this._rerenderTree = observer
