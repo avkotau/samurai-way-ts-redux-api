@@ -58,7 +58,7 @@ class MyPosts extends Component<TypeProps> {
 
     render() {
         const {postsData, addPost, updatingTextPost, newPostText} = this.props
-
+        console.log(newPostText)
         const addPostHandle = () => {
 
             addPost()
@@ -77,7 +77,7 @@ class MyPosts extends Component<TypeProps> {
                     <div>
                     <textarea
                         // ref={newPostElement}
-                        value={newPostText.post}
+                        value={newPostText[0].post}
                         onChange={onChangeTextareaHandle}
                         placeholder='Введите текст'
                     />

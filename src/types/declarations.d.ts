@@ -4,30 +4,30 @@ declare module "*.css" {
 }
 
 export type DialogueDataType = {
-    id: number
+    id: string
     name: string
 }
 export type MessageDataType = {
-    id: number
+    id: string
     message: string
 }
 export type PostDataType = {
-    id: number
+    id: string
     message: string
     like: number
 }
 export type SitePanelFriendsDataType = {
-    id: number
+    id: string
     name: string
     like: number
 }
 
 export type NewPostTextType = {
-    id: number
+    id: string
     post: string
 }
 export type NewMessageTextType = {
-    id: number
+    id: string
     message: string
 }
 

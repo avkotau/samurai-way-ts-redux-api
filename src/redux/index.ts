@@ -24,7 +24,7 @@ export type ObservableObject = {
 export type StoreType = {
     _state: StateType
     getState: () => void
-    _rerenderTree: () => void
+    _callSubscriber: () => void
     addPost: () => void
     updatingTextPost: (textPost: string) => void
     addMessage: () => void
@@ -32,35 +32,37 @@ export type StoreType = {
     subscriber: (observer: any) => void
 }
 
+
+
 export const store: StoreType = {
     _state: {
         dialoguesData: [
-            {id: 1, name: 'Victor'},
-            {id: 2, name: 'Dima'},
-            {id: 3, name: 'Sacha'},
-            {id: 4, name: 'Masha'}
+            {id: Math.random().toString(36).slice(2), name: 'Victor'},
+            {id: Math.random().toString(36).slice(2), name: 'Dima'},
+            {id: Math.random().toString(36).slice(2), name: 'Sacha'},
+            {id: Math.random().toString(36).slice(2), name: 'Masha'}
         ],
         messagesData: [
-            {id: 1, message: 'Hello Victor'},
-            {id: 2, message: 'Hello Dima'},
-            {id: 3, message: 'Hello Sacha'},
-            {id: 4, message: 'Hello Masha'}
+            {id: Math.random().toString(36).slice(2), message: 'Hello Victor'},
+            {id: Math.random().toString(36).slice(2), message: 'Hello Dima'},
+            {id: Math.random().toString(36).slice(2), message: 'Hello Sacha'},
+            {id: Math.random().toString(36).slice(2), message: 'Hello Masha'}
         ],
         postsData: [
-            {id: 1, message: 'Hello bro', like: 12},
-            {id: 2, message: 'Hello man', like: 20},
-            {id: 3, message: 'Hello women', like: 6}
+            {id: Math.random().toString(36).slice(2), message: 'Hello bro', like: 12},
+            {id: Math.random().toString(36).slice(2), message: 'Hello man', like: 20},
+            {id: Math.random().toString(36).slice(2), message: 'Hello women', like: 6}
         ],
         sitePanelFriendsData: [
-            {id: 1, name: 'Lena', like: 12},
-            {id: 2, name: 'Kola', like: 20},
-            {id: 3, name: 'Nikita', like: 6}
+            {id: Math.random().toString(36).slice(2), name: 'Lena', like: 12},
+            {id: Math.random().toString(36).slice(2), name: 'Kola', like: 20},
+            {id: Math.random().toString(36).slice(2), name: 'Nikita', like: 6}
         ],
         newPostText: [
-            {id: 0, post: ''}
+            {id: Math.random().toString(36).slice(2), post: ''}
         ],
         newMessageText: [
-            {id: 0, message: ''}
+            {id: Math.random().toString(36).slice(2), message: ''}
         ]
     },
 
@@ -68,7 +70,7 @@ export const store: StoreType = {
         return this._state
     },
 
-    _rerenderTree () {
+    _callSubscriber () {
         console.log('rerender')
     },
 
@@ -83,35 +85,35 @@ export const store: StoreType = {
 
         this._state.postsData.push(newPost)
         this._state.newPostText[0].post = ''
-        // this._rerenderTree(this._state)
-        this._rerenderTree(this._state);
+        // this._callSubscriber(this._state)
+        this._callSubscriber(this._state);
     },
 
     updatingTextPost (textPost: string) {
 
         this._state.newPostText[0].post = textPost
-        // this._rerenderTree(this._state)
-        this._rerenderTree(this._state);
+        // this._callSubscriber(this._state)
+        this._callSubscriber(this._state);
     },
 
     addMessage () {
         const newMessage: MessageDataType = {
-            id: 0,
+            id: Math.random().toString(36).slice(2),
             message: this._state.newMessageText[0].message
         }
         this._state.messagesData.push(newMessage)
         this._state.newMessageText[0].message = ''
-        // this._rerenderTree(this._state)
-        this._rerenderTree(this._state);
+        // this._callSubscriber(this._state)
+        this._callSubscriber(this._state);
     },
     updatingMessageText (textMessage: string) {
 
         this._state.newMessageText[0].message = textMessage
-       // / this._rerenderTree(this._state)
-        this._rerenderTree(this._state);
+       // / this._callSubscriber(this._state)
+        this._callSubscriber(this._state);
     },
     subscriber (observer: any ) {
-        this._rerenderTree = observer
+        this._callSubscriber = observer
     }
 
 }

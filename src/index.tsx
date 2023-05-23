@@ -15,7 +15,7 @@ import {
 // console.log(store.getState())
 
 export let rerenderTree = (state: StateType) => {
-    console.log('state.newPostText',state)
+
     ReactDOM.render(
         <BrowserRouter>
             <App
