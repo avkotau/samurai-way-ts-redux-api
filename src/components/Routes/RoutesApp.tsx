@@ -8,30 +8,26 @@ import {
     PostDataType,
 
 } from "../../types/declarations";
-import { addMessage, DispatchType, StateType, updatingMessageText } from "../../redux";
+import { addMessage, DispatchType, StateType} from "../../redux";
 
 
 type TypeProps = {
     state: StateType
     dispatch: (action: DispatchType) => void
-    addMessage: () => void
-    updatingMessageText: (textMessage: string) => void
-
-
 }
 
 
 class RoutesApp extends Component<TypeProps> {
 
     render() {
-        const {state, dispatch, addMessage, updatingMessageText} = this.props
+        const {state, dispatch} = this.props
 
         return (
             <>
                 <Route path='/dialogues' render={() => <Dialogues dialoguesData={state.dialoguesData}
                                                                   messagesData={state.messagesData}
-                                                                  addMessage={addMessage}
-                                                                  updatingMessageText={updatingMessageText}
+                                                                  dispatch={dispatch}
+                                                                  // updatingMessageText={updatingMessageText}
                                                                   textMessage={state.newMessageText[0]}
                 />}/>
                 <Route path='/profile' render={() => <Profile postsData={state.postsData}

@@ -16,7 +16,7 @@ class Profile extends Component<TypeProps> {
 
     render() {
         const {postsData, dispatch, newPostText} = this.props
-
+        console.log('newPostText',newPostText)
         return (
             <div className={s.content}>
                 <ProfileInfo/>

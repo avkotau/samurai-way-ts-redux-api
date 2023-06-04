@@ -2,7 +2,7 @@ import React, { ChangeEvent, Component, LegacyRef, useState } from 'react';
 import s from './MyPosts.module.css';
 import Post from "./Post/Post";
 import { NewPostTextType, PostDataType } from "../../../types/declarations";
-import { DispatchType } from "../../../redux";
+import { addPost, DispatchType, onChangeTextarea } from "../../../redux";
 
 
 type TypeProps = {
@@ -12,6 +12,7 @@ type TypeProps = {
 }
 
 
+
 class MyPosts extends Component<TypeProps> {
 
     render() {
@@ -19,11 +20,11 @@ class MyPosts extends Component<TypeProps> {
 
         const addPostHandle = () => {
 
-            dispatch({type: 'ADD-POST'})
+            dispatch(addPost())
         }
 
         const onChangeTextareaHandle = (e: ChangeEvent<HTMLTextAreaElement>) => {
-            dispatch({type: 'UPDATING-TEXT-POST', textPost: e.currentTarget.value})
+            dispatch(onChangeTextarea(e.currentTarget.value))
 
         }
 

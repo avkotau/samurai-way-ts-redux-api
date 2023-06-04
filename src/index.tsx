@@ -16,8 +16,6 @@ export let rerenderTree = (state: StateType) => {
             <App
                 state={state}
                 dispatch={store.dispatch.bind(store)}
-                addMessage={store.addMessage.bind(store)}
-                updatingMessageText={store.updatingMessageText.bind(store)}
             />
         </BrowserRouter>,
         document.getElementById('root')

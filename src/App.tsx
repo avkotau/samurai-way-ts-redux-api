@@ -12,16 +12,13 @@ type TypeProps = {
 
     state: StateType
     dispatch: (action: DispatchType) => void
-    addMessage: () => void
-    updatingMessageText: (textMessage: string) => void
-
 }
 
 
 class App extends Component<TypeProps> {
 
     render() {
-        const {state, dispatch, addMessage, updatingMessageText} = this.props
+        const {state, dispatch} = this.props
 
         return (
             <div className='app'>
@@ -32,10 +29,7 @@ class App extends Component<TypeProps> {
                     <RoutesApp
                         state={state}
                         dispatch={dispatch}
-                        addMessage={addMessage}
-                        updatingMessageText={updatingMessageText}
-
-                    />
+                     />
                 </div>
             </div>
         )

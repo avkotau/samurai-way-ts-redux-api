@@ -1,33 +1,30 @@
 import React, { ChangeEvent, FC, useRef, useState } from 'react';
 import s from '../Dialogues.module.css'
 import { MessageDataType, NewMessageTextType } from "../../../types/declarations";
-import { addMessage, updatingMessageText } from "../../../redux";
+import { addMessage, DispatchType, updateMessageText } from "../../../redux";
 
 type Props = {
     messagesData: MessageDataType[]
-    addMessage: () => void
-    updatingMessageText: (textMessage: string) => void
+    dispatch: (action: DispatchType) => void
     textMessage: NewMessageTextType
 }
 
 const Messages: React.FC<Props> = (
     {
         messagesData,
-        addMessage,
-        updatingMessageText,
+        dispatch,
         textMessage
     }
 ) => {
 
     const textareaHandle = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        updatingMessageText(e.currentTarget.value)
-        console.log(textMessage.message)
+        dispatch(updateMessageText(e.currentTarget.value))
     }
 
     const addMessageHandle = () => {
-        addMessage()
+        dispatch(addMessage())
     }
-    console.log(textMessage)
+
     return (
         <div className={s.messages}>
             {messagesData.map(el => (
