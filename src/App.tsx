@@ -23,7 +23,7 @@ class App extends Component<TypeProps> {
         return (
             <div className='app'>
                 <Header/>
-                <Navbar sitePanelFriendsData={state.sitePanelFriendsData}/>
+                <Navbar sidebarData={state.sidebar.sidebarData}/>
 
                 <div className={s.routers}>
                     <RoutesApp

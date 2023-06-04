@@ -1,7 +1,7 @@
 import React, { ChangeEvent, FC, useRef, useState } from 'react';
 import s from '../Dialogues.module.css'
 import { MessageDataType, NewMessageTextType } from "../../../types/declarations";
-import { addMessage, DispatchType, updateMessageText } from "../../../redux";
+import { addMessageActionCreator, DispatchType, updateMessageTextActionCreator } from "../../../redux";
 
 type Props = {
     messagesData: MessageDataType[]
@@ -18,11 +18,11 @@ const Messages: React.FC<Props> = (
 ) => {
 
     const textareaHandle = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        dispatch(updateMessageText(e.currentTarget.value))
+        dispatch(updateMessageTextActionCreator(e.currentTarget.value))
     }
 
     const addMessageHandle = () => {
-        dispatch(addMessage())
+        dispatch(addMessageActionCreator())
     }
 
     return (

@@ -8,7 +8,7 @@ import {
     PostDataType,
 
 } from "../../types/declarations";
-import { addMessage, DispatchType, StateType} from "../../redux";
+import { DispatchType, StateType} from "../../redux";
 
 
 type TypeProps = {
@@ -21,18 +21,17 @@ class RoutesApp extends Component<TypeProps> {
 
     render() {
         const {state, dispatch} = this.props
-
         return (
             <>
-                <Route path='/dialogues' render={() => <Dialogues dialoguesData={state.dialoguesData}
-                                                                  messagesData={state.messagesData}
+                <Route path='/dialogues' render={() => <Dialogues dialoguesData={state.dialoguesPage.dialoguesData}
+                                                                  messagesData={state.dialoguesPage.messagesData}
                                                                   dispatch={dispatch}
                                                                   // updatingMessageText={updatingMessageText}
-                                                                  textMessage={state.newMessageText[0]}
+                                                                  textMessage={state.dialoguesPage.newMessageText[0]}
                 />}/>
-                <Route path='/profile' render={() => <Profile postsData={state.postsData}
+                <Route path='/profile' render={() => <Profile postsData={state.profilePage.postsData}
                                                               dispatch={dispatch}
-                                                              newPostText={state.newPostText}
+                                                              newPostText={state.profilePage.newPostText}
                 />}/>
             </>
         )

@@ -16,7 +16,7 @@ export type PostDataType = {
     message: string
     like: number
 }
-export type SitePanelFriendsDataType = {
+export type SidebarDataType = {
     id: string
     name: string
     like: number

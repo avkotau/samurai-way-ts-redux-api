@@ -2,9 +2,11 @@ import {
     DialogueDataType,
     MessageDataType, NewMessageTextType,
     NewPostTextType,
-    PostDataType,
-    SitePanelFriendsDataType
+    PostDataType, SidebarDataType,
 } from "../types/declarations";
+import { profileReducer } from "./profileReducer";
+import { dialoguesReducer } from "./dialoguesReducer";
+import { sidebarReducer } from "./sidebarReducer";
 
 
 const ADD_POST = 'ADD-POST';
@@ -14,20 +16,30 @@ const UPDATING_TEXT_POST = 'UPDATING-TEXT-POST';
 const ADD_MESSAGE = 'ADD_MESSAGE';
 const UPDATING_MESSAGE_TEXT = 'UPDATING_MESSAGE_TEXT';
 
+export type SidebarType = {
+    sidebarData: SidebarDataType[]
+}
 
 export type DispatchType = {
     type: string
     textPost?: string
 }
 
-export type StateType = {
+export type ProfilePageType = {
+    postsData: PostDataType[]
+    newPostText: NewPostTextType[]
+}
+
+export type DialoguesPageType = {
     dialoguesData: DialogueDataType[]
     messagesData: MessageDataType[]
-    postsData: PostDataType[]
-    sitePanelFriendsData: SitePanelFriendsDataType[]
-    newPostText: NewPostTextType[]
     newMessageText: NewMessageTextType[]
+}
 
+export type StateType = {
+    dialoguesPage: DialoguesPageType
+    profilePage: ProfilePageType
+    sidebar: SidebarType
 }
 export type ObserverFunction = () => void;
 
@@ -39,9 +51,6 @@ export type StoreType = {
     _state: StateType
     getState: () => void
     _callSubscriber: (state: any) => void
-    updatingTextPost: (textPost: string) => void
-    addMessage: () => void
-    updatingMessageText: (textMessage: string) => void
     subscriber: (observer: any) => void
     dispatch: (action: any) => void
 }
@@ -49,35 +58,40 @@ export type StoreType = {
 
 export const store: StoreType = {
     _state: {
-        dialoguesData: [
-            {id: Math.random().toString(36).slice(2), name: 'Victor'},
-            {id: Math.random().toString(36).slice(2), name: 'Dima'},
-            {id: Math.random().toString(36).slice(2), name: 'Sacha'},
-            {id: Math.random().toString(36).slice(2), name: 'Masha'}
-        ],
-        messagesData: [
-            {id: Math.random().toString(36).slice(2), message: 'Hello Victor'},
-            {id: Math.random().toString(36).slice(2), message: 'Hello Dima'},
-            {id: Math.random().toString(36).slice(2), message: 'Hello Sacha'},
-            {id: Math.random().toString(36).slice(2), message: 'Hello Masha'}
-        ],
-        postsData: [
-            {id: Math.random().toString(36).slice(2), message: 'Hello bro', like: 12},
-            {id: Math.random().toString(36).slice(2), message: 'Hello man', like: 20},
-            {id: Math.random().toString(36).slice(2), message: 'Hello women', like: 6}
-        ],
-        sitePanelFriendsData: [
-            {id: Math.random().toString(36).slice(2), name: 'Lena', like: 12},
-            {id: Math.random().toString(36).slice(2), name: 'Kola', like: 20},
-            {id: Math.random().toString(36).slice(2), name: 'Nikita', like: 6}
-        ],
-        newPostText: [
-            {id: Math.random().toString(36).slice(2), post: ''}
-        ],
-        newMessageText: [
-            {id: Math.random().toString(36).slice(2), message: ''}
-        ],
-
+        dialoguesPage: {
+            dialoguesData: [
+                {id: Math.random().toString(36).slice(2), name: 'Victor'},
+                {id: Math.random().toString(36).slice(2), name: 'Dima'},
+                {id: Math.random().toString(36).slice(2), name: 'Sacha'},
+                {id: Math.random().toString(36).slice(2), name: 'Masha'}
+            ],
+            messagesData: [
+                {id: Math.random().toString(36).slice(2), message: 'Hello Victor'},
+                {id: Math.random().toString(36).slice(2), message: 'Hello Dima'},
+                {id: Math.random().toString(36).slice(2), message: 'Hello Sacha'},
+                {id: Math.random().toString(36).slice(2), message: 'Hello Masha'}
+            ],
+            newMessageText: [
+                {id: Math.random().toString(36).slice(2), message: ''}
+            ]
+        },
+        profilePage: {
+            postsData: [
+                {id: Math.random().toString(36).slice(2), message: 'Hello bro', like: 12},
+                {id: Math.random().toString(36).slice(2), message: 'Hello man', like: 20},
+                {id: Math.random().toString(36).slice(2), message: 'Hello women', like: 6}
+            ],
+            newPostText: [
+                {id: Math.random().toString(36).slice(2), post: ''}
+            ],
+        },
+        sidebar: {
+            sidebarData: [
+                {id: Math.random().toString(36).slice(2), name: 'Lena', like: 12},
+                {id: Math.random().toString(36).slice(2), name: 'Kola', like: 20},
+                {id: Math.random().toString(36).slice(2), name: 'Nikita', like: 6}
+            ]
+        }
     },
 
     getState() {
@@ -89,37 +103,12 @@ export const store: StoreType = {
         return state
     },
 
-    dispatch(action) {
-        if (action.type === ADD_POST) {
-            const newPost: PostDataType = {
-                //Change to number
-                id: Math.random().toString(36).slice(2),
-                message: this._state.newPostText[0].post,
-                like: 0
-            }
+    dispatch(action: DispatchType) {
 
-            this._state.postsData.push(newPost)
-            this._state.newPostText[0].post = ''
-
-            this._callSubscriber(this._state);
-        } else if (action.type === UPDATING_TEXT_POST) {
-            this._state.newPostText[0].post = action.textPost
-
-            this._callSubscriber(this._state);
-        } else if(action.type === ADD_MESSAGE) {
-            const newMessage: MessageDataType = {
-                id: Math.random().toString(36).slice(2),
-                message: this._state.newMessageText[0].message
-            }
-            this._state.messagesData.push(newMessage)
-            this._state.newMessageText[0].message = ''
-
-            this._callSubscriber(this._state);
-        } else if (action.type === UPDATING_MESSAGE_TEXT) {
-            this._state.newMessageText[0].message = action.textMessage
-
-            this._callSubscriber(this._state);
-        }
+        this._state.profilePage = profileReducer(this._state.profilePage, action)
+        this._state.dialoguesPage = dialoguesReducer(this._state.dialoguesPage, action)
+        this._state.sidebar = sidebarReducer(this._state.sidebar, action)
+        this._callSubscriber(this._state);
     },
 
     subscriber(observer: any) {
@@ -130,26 +119,26 @@ export const store: StoreType = {
 
 
 
-export const addPost = () => {
+export const addPostActionCreator = () => {
     return {
         type: ADD_POST
     }
 }
 
-export const onChangeTextarea = (newText: string) => {
+export const changeTextareaActionCreator = (newText: string) => {
     return {
         type: UPDATING_TEXT_POST,
         textPost: newText
     }
 }
 
-export const addMessage = () => {
+export const addMessageActionCreator = () => {
     return {
         type: ADD_MESSAGE,
     }
 }
 
-export const updateMessageText = (textMessage: string) => {
+export const updateMessageTextActionCreator = (textMessage: string) => {
     return {
         type: UPDATING_MESSAGE_TEXT,
         textMessage: textMessage
