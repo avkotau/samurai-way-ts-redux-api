@@ -1,11 +1,17 @@
 import { PostDataType } from "../types/declarations";
 import { ProfilePageType } from "./index";
 
-const ADD_POST = 'ADD-POST';
-const UPDATING_TEXT_POST = 'UPDATING-TEXT-POST';
+export const ADD_POST = 'ADD_POST' as const;
+export const UPDATING_TEXT_POST = 'UPDATING_TEXT_POST' as const;
 
 
-export const profileReducer = (state: ProfilePageType, action: any) => {
+export type ActionsProfileType = AddPostActionType | UpdatingTextPostActionType;
+
+type AddPostActionType = ReturnType<typeof addPostActionCreator>
+type UpdatingTextPostActionType = ReturnType<typeof changeTextareaActionCreator>
+
+export const profileReducer = (state: ProfilePageType, action: ActionsProfileType): ProfilePageType => {
+
     switch (action.type) {
         case ADD_POST: {
             const newPost: PostDataType = {
@@ -16,8 +22,9 @@ export const profileReducer = (state: ProfilePageType, action: any) => {
             }
             state.postsData.push(newPost)
             state.newPostText[0].post = ''
+            break
         }
-        break
+
         case UPDATING_TEXT_POST: {
             state.newPostText[0].post = action.textPost
             break
@@ -26,3 +33,15 @@ export const profileReducer = (state: ProfilePageType, action: any) => {
     return state
 }
 
+export const addPostActionCreator = () => {
+    return {
+        type: ADD_POST
+    } as const
+}
+
+export const changeTextareaActionCreator = (newText: string) => {
+    return {
+        type: UPDATING_TEXT_POST,
+        textPost: newText
+    } as const
+}

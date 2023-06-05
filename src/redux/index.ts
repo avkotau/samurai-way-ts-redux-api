@@ -9,13 +9,6 @@ import { dialoguesReducer } from "./dialoguesReducer";
 import { sidebarReducer } from "./sidebarReducer";
 
 
-const ADD_POST = 'ADD-POST';
-const UPDATING_TEXT_POST = 'UPDATING-TEXT-POST';
-
-
-const ADD_MESSAGE = 'ADD_MESSAGE';
-const UPDATING_MESSAGE_TEXT = 'UPDATING_MESSAGE_TEXT';
-
 export type SidebarType = {
     sidebarData: SidebarDataType[]
 }
@@ -50,7 +43,7 @@ export type ObservableObject = {
 export type StoreType = {
     _state: StateType
     getState: () => void
-    _callSubscriber: (state: any) => void
+    _callSubscriber: (state: StateType) => void
     subscriber: (observer: any) => void
     dispatch: (action: any) => void
 }
@@ -98,12 +91,12 @@ export const store: StoreType = {
         return this._state
     },
 
-    _callSubscriber(state: any) {
+    _callSubscriber(state: StateType) {
         console.log('rerender')
         return state
     },
 
-    dispatch(action: DispatchType) {
+    dispatch(action) {
 
         this._state.profilePage = profileReducer(this._state.profilePage, action)
         this._state.dialoguesPage = dialoguesReducer(this._state.dialoguesPage, action)
@@ -118,30 +111,4 @@ export const store: StoreType = {
 }
 
 
-
-export const addPostActionCreator = () => {
-    return {
-        type: ADD_POST
-    }
-}
-
-export const changeTextareaActionCreator = (newText: string) => {
-    return {
-        type: UPDATING_TEXT_POST,
-        textPost: newText
-    }
-}
-
-export const addMessageActionCreator = () => {
-    return {
-        type: ADD_MESSAGE,
-    }
-}
-
-export const updateMessageTextActionCreator = (textMessage: string) => {
-    return {
-        type: UPDATING_MESSAGE_TEXT,
-        textMessage: textMessage
-    }
-}
 

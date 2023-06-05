@@ -2,10 +2,15 @@ import { MessageDataType } from "../types/declarations";
 import { DialoguesPageType } from "./index";
 
 
-const ADD_MESSAGE = 'ADD_MESSAGE';
-const UPDATING_MESSAGE_TEXT = 'UPDATING_MESSAGE_TEXT';
+export const ADD_MESSAGE = 'ADD_MESSAGE';
+export const UPDATING_MESSAGE_TEXT = 'UPDATING_MESSAGE_TEXT';
 
-export const dialoguesReducer = (state: DialoguesPageType, action: any) => {
+export type ActionsDialoguesType = AddMessageType | UpdateMessageTextType
+
+type AddMessageType = ReturnType<typeof addMessageActionCreator>
+type UpdateMessageTextType = ReturnType<typeof updateMessageTextActionCreator>
+
+export const dialoguesReducer = (state: DialoguesPageType, action: ActionsDialoguesType) => {
 
 
     switch (action.type) {
@@ -29,4 +34,17 @@ export const dialoguesReducer = (state: DialoguesPageType, action: any) => {
     }
     return state
 
+}
+
+export const addMessageActionCreator = () => {
+    return {
+        type: ADD_MESSAGE,
+    } as const
+}
+
+export const updateMessageTextActionCreator = (textMessage: string) => {
+    return {
+        type: UPDATING_MESSAGE_TEXT,
+        textMessage: textMessage
+    } as const
 }

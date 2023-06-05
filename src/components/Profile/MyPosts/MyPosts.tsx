@@ -1,8 +1,9 @@
-import React, { ChangeEvent, Component, LegacyRef, useState } from 'react';
+import React, { ChangeEvent, Component } from 'react';
 import s from './MyPosts.module.css';
 import Post from "./Post/Post";
 import { NewPostTextType, PostDataType } from "../../../types/declarations";
-import { addPostActionCreator, DispatchType, changeTextareaActionCreator } from "../../../redux";
+import { DispatchType } from "../../../redux";
+import { addPostActionCreator, changeTextareaActionCreator } from "../../../redux/profileReducer";
 
 
 type TypeProps = {
@@ -10,7 +11,6 @@ type TypeProps = {
     dispatch: (action: DispatchType) => void
     newPostText: NewPostTextType
 }
-
 
 
 class MyPosts extends Component<TypeProps> {
