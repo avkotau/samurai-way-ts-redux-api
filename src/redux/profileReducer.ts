@@ -1,8 +1,8 @@
 import { PostDataType } from "../types/declarations";
 import { ProfilePageType } from "./index";
 
-export const ADD_POST = 'ADD_POST' as const;
-export const UPDATING_TEXT_POST = 'UPDATING_TEXT_POST' as const;
+export const ADD_POST = 'ADD_POST';
+export const UPDATING_TEXT_POST = 'UPDATING_TEXT_POST';
 
 
 export type ActionsProfileType = AddPostActionType | UpdatingTextPostActionType;

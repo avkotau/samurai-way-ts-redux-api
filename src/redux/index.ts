@@ -42,9 +42,9 @@ export type ObservableObject = {
 
 export type StoreType = {
     _state: StateType
-    getState: () => void
+    getState: () => StateType
     _callSubscriber: (state: StateType) => void
-    subscriber: (observer: StoreType) => void
+    subscriber: (observer: (state: StateType) => void) => void
     dispatch: (action: any) => void
 }
 
@@ -104,7 +104,7 @@ export const store: StoreType = {
         this._callSubscriber(this._state);
     },
 
-    subscriber(observer: any) {
+    subscriber(observer) {
         this._callSubscriber = observer
     }
 
