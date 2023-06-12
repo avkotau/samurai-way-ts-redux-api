@@ -10,7 +10,7 @@ export type ActionsDialoguesType = AddMessageType | UpdateMessageTextType
 type AddMessageType = ReturnType<typeof addMessageActionCreator>
 type UpdateMessageTextType = ReturnType<typeof updateMessageTextActionCreator>
 
-export const dialoguesReducer = (state: DialoguesPageType, action: ActionsDialoguesType) => {
+export const dialoguesReducer = (state: DialoguesPageType, action: ActionsDialoguesType): DialoguesPageType => {
 
 
     switch (action.type) {
