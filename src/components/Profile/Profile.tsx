@@ -4,6 +4,7 @@ import MyPosts from "./MyPosts/MyPosts";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import { NewPostTextType, PostDataType } from "../../types/declarations";
 import { DispatchType } from "../../redux";
+import MyPostsContainer from "./MyPosts/MyPostsContainer";
 
 type TypeProps = {
     postsData: PostDataType[];
@@ -20,9 +21,10 @@ class Profile extends Component<TypeProps> {
         return (
             <div className={s.content}>
                 <ProfileInfo/>
-                <MyPosts postsData={postsData}
+                <MyPostsContainer postsData={postsData}
                          dispatch={dispatch}
                          newPostText={newPostText}
+
                 />
             </div>
         )

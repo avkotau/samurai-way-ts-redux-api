@@ -10,7 +10,18 @@ export type ActionsProfileType = AddPostActionType | UpdatingTextPostActionType;
 type AddPostActionType = ReturnType<typeof addPostActionCreator>
 type UpdatingTextPostActionType = ReturnType<typeof changeTextareaActionCreator>
 
-export const profileReducer = (state: ProfilePageType, action: ActionsProfileType): ProfilePageType => {
+
+const initialState =  {
+        postsData: [
+            {id: Math.random().toString(36).slice(2), message: 'Hello bro', like: 12},
+            {id: Math.random().toString(36).slice(2), message: 'Hello man', like: 20},
+            {id: Math.random().toString(36).slice(2), message: 'Hello women', like: 6}
+        ],
+        newPostText: [
+            {id: Math.random().toString(36).slice(2), post: ''}
+        ],
+    }
+export const profileReducer = (state: ProfilePageType = initialState, action: ActionsProfileType): ProfilePageType => {
 
     switch (action.type) {
         case ADD_POST: {

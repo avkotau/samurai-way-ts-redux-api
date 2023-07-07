@@ -8,23 +8,29 @@ import { addPostActionCreator, changeTextareaActionCreator } from "../../../redu
 
 type TypeProps = {
     postsData: PostDataType[];
-    dispatch: (action: DispatchType) => void
     newPostText: NewPostTextType
+    updateNewPostText: (text: string) => void
+    addPost: () => void
+
 }
 
 
 class MyPosts extends Component<TypeProps> {
 
     render() {
-        const {postsData, dispatch, newPostText} = this.props
+        const {
+            postsData,
+            newPostText,
+            updateNewPostText,
+            addPost
+        } = this.props
 
-        const addPostHandle = () => {
 
-            dispatch(addPostActionCreator())
-        }
-
+const onAddPostHandler = () => {
+    addPost()
+}
         const onChangeTextareaHandle = (e: ChangeEvent<HTMLTextAreaElement>) => {
-            dispatch(changeTextareaActionCreator(e.currentTarget.value))
+            updateNewPostText(e.currentTarget.value)
 
         }
 
@@ -40,7 +46,7 @@ class MyPosts extends Component<TypeProps> {
                     />
                     </div>
                     <div>
-                        <button onClick={addPostHandle}>Add post</button>
+                        <button onClick={onAddPostHandler}>Add post</button>
                         {/*    disabled={!text.trim()}*/}
                     </div>
                 </div>

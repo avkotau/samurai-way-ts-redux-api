@@ -10,7 +10,25 @@ export type ActionsDialoguesType = AddMessageType | UpdateMessageTextType
 type AddMessageType = ReturnType<typeof addMessageActionCreator>
 type UpdateMessageTextType = ReturnType<typeof updateMessageTextActionCreator>
 
-export const dialoguesReducer = (state: DialoguesPageType, action: ActionsDialoguesType): DialoguesPageType => {
+
+const initialState = {
+    dialoguesData: [
+        {id: Math.random().toString(36).slice(2), name: 'Victor'},
+        {id: Math.random().toString(36).slice(2), name: 'Dima'},
+        {id: Math.random().toString(36).slice(2), name: 'Sacha'},
+        {id: Math.random().toString(36).slice(2), name: 'Masha'}
+    ],
+    messagesData: [
+        {id: Math.random().toString(36).slice(2), message: 'Hello Victor'},
+        {id: Math.random().toString(36).slice(2), message: 'Hello Dima'},
+        {id: Math.random().toString(36).slice(2), message: 'Hello Sacha'},
+        {id: Math.random().toString(36).slice(2), message: 'Hello Masha'}
+    ],
+    newMessageText: [
+        {id: Math.random().toString(36).slice(2), message: ''}
+    ]
+}
+export const dialoguesReducer = (state: DialoguesPageType = initialState, action: ActionsDialoguesType): DialoguesPageType => {
 
 
     switch (action.type) {

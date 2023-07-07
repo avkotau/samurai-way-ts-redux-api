@@ -5,8 +5,9 @@ import App from './App';
 import { BrowserRouter } from "react-router-dom";
 import {
     StateType,
-    store
+    // store
 } from "./redux";
+import { store } from "./redux/redux-store";
 
 
 export let rerenderTree = (state: StateType) => {
@@ -24,5 +25,5 @@ export let rerenderTree = (state: StateType) => {
 
 rerenderTree(store.getState())
 
-store.subscriber(rerenderTree)
-
+// store.subscriber(() => rerenderTree(store.getState()))
+store.subscribe(() => rerenderTree(store.getState()))
