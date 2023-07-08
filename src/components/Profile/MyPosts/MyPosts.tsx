@@ -4,18 +4,19 @@ import Post from "./Post/Post";
 import { NewPostTextType, PostDataType } from "../../../types/declarations";
 import { DispatchType } from "../../../redux";
 import { addPostActionCreator, changeTextareaActionCreator } from "../../../redux/profileReducer";
+import { MyPostsPropsType } from "./MyPostsContainer";
 
 
-type TypeProps = {
-    postsData: PostDataType[];
-    newPostText: NewPostTextType
-    updateNewPostText: (text: string) => void
-    addPost: () => void
+// type TypeProps = {
+//     postsData: PostDataType[];
+//     newPostText: NewPostTextType[]
+//     updateNewPostText: (text: string) => void
+//     addPost: () => void
+//
+// }
 
-}
 
-
-class MyPosts extends Component<TypeProps> {
+class MyPosts extends Component<MyPostsPropsType> {
 
     render() {
         const {

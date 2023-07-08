@@ -2,30 +2,24 @@ import React from 'react';
 import s from './Dialogues.module.css'
 import Dialogue from "./Dialogue/Dialogue";
 import Messages from "./Messages/Messages";
-import { DialogueDataType, MessageDataType, NewMessageTextType } from "../../types/declarations";
-import { DispatchType } from "../../redux";
+import { DialoguesType } from "./DialoguesContainer";
 
-type Props = {
-    dialoguesData: DialogueDataType[]
-    messagesData: MessageDataType[]
-    dispatch: (action: DispatchType) => void
-    textMessage: NewMessageTextType
-}
-
-const Dialogues: React.FC<Props> = (
+const Dialogues: React.FC<DialoguesType> = (
     {
         dialoguesData,
         messagesData,
-        dispatch,
-        textMessage
+        updateMessageText,
+        addMessage,
+        newMessageText
     }
 ) => {
     return (
         <div className={s.containerDialoguesMessages}>
             <Dialogue dialoguesData={dialoguesData}/>
             <Messages messagesData={messagesData}
-                      dispatch={dispatch}
-                      textMessage={textMessage}/>
+                      updateMessageText={updateMessageText}
+                      addMessage={addMessage}
+                      textMessage={newMessageText}/>
         </div>
     );
 };

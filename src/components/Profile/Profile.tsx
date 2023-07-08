@@ -21,11 +21,13 @@ class Profile extends Component<TypeProps> {
         return (
             <div className={s.content}>
                 <ProfileInfo/>
-                <MyPostsContainer postsData={postsData}
-                         dispatch={dispatch}
-                         newPostText={newPostText}
+                <MyPostsContainer />{/*write text not working*/}
 
-                />
+                {/*<MyPostsContainer postsData={postsData}*/}
+                {/*         dispatch={dispatch}*/}
+                {/*         newPostText={newPostText}*/}
+
+                {/*/>*/}
             </div>
         )
     }

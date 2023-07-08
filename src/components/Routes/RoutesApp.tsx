@@ -9,6 +9,7 @@ import {
 
 } from "../../types/declarations";
 import { DispatchType, StateType} from "../../redux";
+import DialoguesContainer from "../Dialogues/DialoguesContainer";
 
 
 type TypeProps = {
@@ -23,7 +24,9 @@ class RoutesApp extends Component<TypeProps> {
         const {state, dispatch} = this.props
         return (
             <>
-                <Route path='/dialogues' render={() => <Dialogues dialoguesData={state.dialoguesPage.dialoguesData}
+                <Route path='/dialogues' render={() =>
+                    // must delete all props
+                    <DialoguesContainer dialoguesData={state.dialoguesPage.dialoguesData}
                                                                   messagesData={state.dialoguesPage.messagesData}
                                                                   dispatch={dispatch}
                                                                   // updatingMessageText={updatingMessageText}

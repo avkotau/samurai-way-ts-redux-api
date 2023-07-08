@@ -9,7 +9,7 @@ import { dialoguesReducer } from "./dialoguesReducer";
 import { sidebarReducer } from "./sidebarReducer";
 
 
-export type SidebarType = {
+type SidebarType = {
     sidebarData: SidebarDataType[]
 }
 
@@ -18,12 +18,12 @@ export type DispatchType = {
     textPost?: string
 }
 
-export type ProfilePageType = {
+type ProfilePageType = {
     postsData: PostDataType[]
     newPostText: NewPostTextType[]
 }
 
-export type DialoguesPageType = {
+type DialoguesPageType = {
     dialoguesData: DialogueDataType[]
     messagesData: MessageDataType[]
     newMessageText: NewMessageTextType[]

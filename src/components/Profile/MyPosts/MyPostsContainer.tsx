@@ -3,8 +3,11 @@ import s from './MyPosts.module.css';
 import Post from "./Post/Post";
 import { NewPostTextType, PostDataType } from "../../../types/declarations";
 import { DispatchType } from "../../../redux";
-import { addPostActionCreator, changeTextareaActionCreator } from "../../../redux/profileReducer";
+import { addPostActionCreator, changeTextareaActionCreator, InitialStateType } from "../../../redux/profileReducer";
 import MyPosts from "./MyPosts";
+import { connect } from "react-redux";
+import { AppStateType } from "../../../redux/redux-store";
+import { Dispatch } from "redux";
 
 
 type TypeProps = {
@@ -13,27 +16,64 @@ type TypeProps = {
     newPostText: NewPostTextType
 }
 
-class MyPostsContainer extends Component<TypeProps> {
+// class MyPostsContainer extends Component<TypeProps> {
+//
+//     render() {
+//         const {postsData, dispatch, newPostText} = this.props
+//
+//         const addPost = () => {
+//             dispatch(addPostActionCreator())
+//         }
+//
+//         const onChangeTextarea = (text: string) => {
+//             dispatch(changeTextareaActionCreator(text))
+//
+//         }
+//
+//         return (<MyPosts
+//             postsData={postsData}
+//             newPostText={newPostText}
+//             addPost={addPost}
+//             updateNewPostText={onChangeTextarea}/>)
+//     }
+//
+// }
 
-    render() {
-        const {postsData, dispatch, newPostText} = this.props
+//
+// type mapStateToPropsType = {
+//     postsData: PostDataType[];
+//     newPostText: NewPostTextType
+// }
 
-        const addPost = () => {
-            dispatch(addPostActionCreator())
-        }
+export type MyPostsPropsType = MapStateToPropsType & MapDispatchToPropsType
 
-        const onChangeTextarea = (text: string) => {
-            dispatch(changeTextareaActionCreator(text))
+type MapStateToPropsType = InitialStateType
 
-        }
-
-        return (<MyPosts
-            postsData={postsData}
-            newPostText={newPostText}
-            addPost={addPost}
-            updateNewPostText={onChangeTextarea}/>)
-    }
-
+type MapDispatchToPropsType = {
+    // dispatch: (action: DispatchType) => void
+    addPost: () => void
+    updateNewPostText: (text: string) => void
 }
 
+const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
+
+  return {
+      postsData: state.profilePage.postsData,
+      newPostText: state.profilePage.newPostText,
+  }
+}
+
+const mapDispatchToProps = ( dispatch: Dispatch): MapDispatchToPropsType => {
+  return {
+      addPost: () => {
+          dispatch(addPostActionCreator())
+      },
+      updateNewPostText: (text) => {
+          dispatch(changeTextareaActionCreator(text))
+      }
+
+  }
+}
+
+const MyPostsContainer = connect(mapStateToProps, mapDispatchToProps)(MyPosts)
 export default MyPostsContainer;
