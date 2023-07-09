@@ -1,4 +1,4 @@
-import { NewPostTextType, PostDataType } from "../types/declarations";
+import { PostDataType } from "../types/declarations";
 
 export type ActionsProfileType = AddPostActionType | UpdatingTextPostActionType;
 
@@ -13,31 +13,25 @@ const initialState = {
         {id: Math.random().toString(36).slice(2), message: 'Hello women', like: 6}
     ] as Array<PostDataType>,
 
-    newPostText: [
-        {id: Math.random().toString(36).slice(2), post: ''}
-    ] as Array<NewPostTextType>,
+    newPostText: ''
 }
 
 export type InitialStateType = typeof initialState
 
 export const profileReducer = (state: InitialStateType = initialState, action: ActionsProfileType): InitialStateType => {
-
+debugger
     switch (action.type) {
         case 'ADD_POST': {
             const newPost: PostDataType = {
-                //Change to number
                 id: Math.random().toString(36).slice(2),
-                message: state.newPostText[0].post,
+                message: state.newPostText,
                 like: 0
             }
-            state.postsData.push(newPost)
-            state.newPostText[0].post = ''
-            break
+            return {...state, postsData: [...state.postsData, newPost], newPostText: state.newPostText = ''}
         }
 
         case 'UPDATING_TEXT_POST': {
-            state.newPostText[0].post = action.textPost
-            break
+            return {...state, newPostText: state.newPostText = action.textPost}
         }
     }
     return state

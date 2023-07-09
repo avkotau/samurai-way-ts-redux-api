@@ -1,23 +1,10 @@
 import React, { ChangeEvent, Component } from 'react';
 import s from './MyPosts.module.css';
 import Post from "./Post/Post";
-import { NewPostTextType, PostDataType } from "../../../types/declarations";
-import { DispatchType } from "../../../redux";
-import { addPostActionCreator, changeTextareaActionCreator } from "../../../redux/profileReducer";
 import { MyPostsPropsType } from "./MyPostsContainer";
 
 
-// type TypeProps = {
-//     postsData: PostDataType[];
-//     newPostText: NewPostTextType[]
-//     updateNewPostText: (text: string) => void
-//     addPost: () => void
-//
-// }
-
-
 class MyPosts extends Component<MyPostsPropsType> {
-
     render() {
         const {
             postsData,
@@ -26,13 +13,11 @@ class MyPosts extends Component<MyPostsPropsType> {
             addPost
         } = this.props
 
-
 const onAddPostHandler = () => {
     addPost()
 }
         const onChangeTextareaHandle = (e: ChangeEvent<HTMLTextAreaElement>) => {
             updateNewPostText(e.currentTarget.value)
-
         }
 
         return (
@@ -41,7 +26,7 @@ const onAddPostHandler = () => {
                 <div>
                     <div>
                     <textarea
-                        value={newPostText[0].post}
+                        value={newPostText}
                         onChange={onChangeTextareaHandle}
                         placeholder='Введите текст'
                     />

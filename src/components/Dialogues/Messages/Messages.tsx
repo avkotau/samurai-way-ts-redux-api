@@ -1,12 +1,12 @@
 import React, { ChangeEvent } from 'react';
 import s from '../Dialogues.module.css'
-import { MessageDataType, NewMessageTextType } from "../../../types/declarations";
+import { MessageDataType } from "../../../types/declarations";
 
 type Props = {
     messagesData: MessageDataType[]
     updateMessageText: (value: string) => void
     addMessage: () => void
-    textMessage: NewMessageTextType[]
+    textMessage: string
 }
 
 const Messages: React.FC<Props> = (
@@ -33,7 +33,7 @@ const Messages: React.FC<Props> = (
             ))}
             <div>
                 <textarea
-                    value={textMessage[0].message}
+                    value={textMessage}
                     onChange={textareaHandle}>
                 </textarea>
 
