@@ -2,6 +2,19 @@ declare module "*.css" {
     const content: { [className: string]: string };
     export = content;
 }
+type LocationType = {
+    country: string
+    city: string
+}
+
+export type UserType = {
+    id: string
+    photo: string
+    fullName: string
+    location: LocationType
+    followed: boolean
+    status: string
+}
 
 export type DialogueDataType = {
     id: string

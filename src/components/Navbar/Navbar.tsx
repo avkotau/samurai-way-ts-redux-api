@@ -7,7 +7,6 @@ type Props = {
     sidebarData: SidebarDataType[]
 }
 
-
 const Navbar: React.FC<Props> = (
     {
         sidebarData
@@ -23,8 +22,12 @@ const Navbar: React.FC<Props> = (
                     <NavLink to='/dialogues' activeClassName={s.activeLink}>Messages</NavLink>
                 </div>
                 <div className={s.item}>
+                    <NavLink to='/users' activeClassName={s.activeLink}>Users</NavLink>
+                </div>
+                <div className={s.item}>
                     <NavLink to='/news' activeClassName={s.activeLink}>New</NavLink>
                 </div>
+
                 <div className={s.friendsContainer}>
                     <h2>Friends</h2>
                     {sidebarData.map((f, i) =>

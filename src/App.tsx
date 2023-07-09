@@ -7,13 +7,10 @@ import RoutesApp from "./components/Routes/RoutesApp";
 
 import { DispatchType, StateType } from "./redux";
 
-
 type TypeProps = {
-
     state: StateType
     dispatch: (action: DispatchType) => void
 }
-
 
 class App extends Component<TypeProps> {
 
