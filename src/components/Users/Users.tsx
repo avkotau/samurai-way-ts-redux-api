@@ -4,15 +4,17 @@ import axios from "axios";
 import photo from '../../assets/images/photoUser.png'
 
 class Users extends Component<UsersType> {
+    constructor(props: UsersType) {
+        super(props);
+        axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => {
+            this.props.setUsers(response.data.items)
+        })
+    }
 
     render() {
-        const {users, follow, unfollow, setUsers} = this.props
+        const {users, follow, unfollow} = this.props
 
-        if (users.length === 0) {
-            axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => {
-                setUsers(response.data.items)
-            })
-        }
+
 
         return (
             <div>
