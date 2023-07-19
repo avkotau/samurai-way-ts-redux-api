@@ -4,10 +4,17 @@ import axios from "axios";
 import photo from '../../assets/images/photoUser.png';
 import s from './Users.module.css'
 
+
+type ResponseType<T = []> = {
+    items: T
+    error: null | string
+    totalCount: number
+}
+
 class Users extends Component<UsersType> {
 
     componentDidMount() {
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
+        axios.get<ResponseType>(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
             .then(response => {
                 this.props.setUsers(response.data.items)
                 this.props.setTotalUsersCount(response.data.totalCount)
@@ -35,7 +42,7 @@ class Users extends Component<UsersType> {
 
         const onPageChanged = (pageNumber: number) => {
             setCurrentPage(pageNumber)
-            axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`)
+            axios.get<ResponseType>(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`)
                 .then(response => {
                     this.props.setUsers(response.data.items)
                 })
@@ -46,11 +53,9 @@ class Users extends Component<UsersType> {
                 <div>
                     {pages.map((p, i) => {
                         return <span key={i}
-                            className={
-                            // currentPage === p ? s.selectedPage
-                            //     : ''}
-                            `${s.pages} ${currentPage === p ? s.selectedPage : ''}`
-                        }
+                                     className={
+                                         `${s.pages} ${currentPage === p ? s.selectedPage : ''}`
+                                     }
                                      onClick={() => onPageChanged(p)}
                         >{p}</span>
                     })}
