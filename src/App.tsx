@@ -15,7 +15,7 @@ type TypeProps = {
 class App extends Component<TypeProps> {
 
     render() {
-        const {state, dispatch} = this.props
+        const {state} = this.props
 
         return (
             <div className='app'>
@@ -23,10 +23,7 @@ class App extends Component<TypeProps> {
                 <Navbar sidebarData={state.sidebar.sidebarData}/>
 
                 <div className={s.routers}>
-                    <RoutesApp
-                        state={state}
-                        dispatch={dispatch}
-                     />
+                    <RoutesApp/>
                 </div>
             </div>
         )

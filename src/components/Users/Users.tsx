@@ -1,27 +1,22 @@
 import React, { Component } from 'react';
-import { UsersType } from "./UsersContainer";
-import axios from "axios";
-import photo from '../../assets/images/photoUser.png';
-import s from './Users.module.css'
+import s from "./Users.module.css";
+import photo from "../../assets/images/photoUser.png";
+import { UserType } from "../../types/declarations";
 
-
-type ResponseType<T = []> = {
-    items: T
-    error: null | string
-    totalCount: number
+type UsersType = {
+    users: UserType[]
+    totalUsersCount: number
+    pageSize: number
+    currentPage: number
+    follow: (userId: string) => void
+    unfollow: (userId: string) => void
+    onPageChanged: (pageNumber: number) => void
 }
 
 class Users extends Component<UsersType> {
 
-    componentDidMount() {
-        axios.get<ResponseType>(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
-            .then(response => {
-                this.props.setUsers(response.data.items)
-                this.props.setTotalUsersCount(response.data.totalCount)
-            })
-    }
-
     render() {
+
         const {
             users,
             follow,
@@ -29,7 +24,7 @@ class Users extends Component<UsersType> {
             totalUsersCount,
             pageSize,
             currentPage,
-            setCurrentPage
+            onPageChanged
         } = this.props
 
         let pagesCount = Math.ceil(totalUsersCount / pageSize)
@@ -38,14 +33,6 @@ class Users extends Component<UsersType> {
 
         for (let i = 1; i <= pagesCount; i++) {
             pages.push(i)
-        }
-
-        const onPageChanged = (pageNumber: number) => {
-            setCurrentPage(pageNumber)
-            axios.get<ResponseType>(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`)
-                .then(response => {
-                    this.props.setUsers(response.data.items)
-                })
         }
 
         return (
