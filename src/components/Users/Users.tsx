@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import s from "./Users.module.css";
 import photo from "../../assets/images/photoUser.png";
 import { UserType } from "../../types/declarations";
+import { NavLink } from "react-router-dom";
 
 type UsersType = {
     users: UserType[]
@@ -51,9 +52,12 @@ class Users extends Component<UsersType> {
                 {users.map(u =>
                     <div key={u.id}>
                         <span>
-                            <img src={u.photos.small ? u.photos.small
-                                : photo}
-                                 alt={''} style={{width: '100px'}}/>
+                            <NavLink to={'profile/'+u.id}>
+                                             <img src={u.photos.small ? u.photos.small
+                                                 : photo}
+                                                  alt={''} style={{width: '100px'}}/>
+                            </NavLink>
+
 
                             {u.followed
                                 ? <button onClick={() => follow(u.id)}>follow</button>
