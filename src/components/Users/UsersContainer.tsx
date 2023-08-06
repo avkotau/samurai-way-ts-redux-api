@@ -14,9 +14,9 @@ import axios from "axios";
 import Users from "./Users";
 import Preloader from "../common/Preloader/Preloader";
 
-export type UsersType = mapStateToPropsType & mapDispatchToPropsType
+export type UsersType = MapStateToPropsType & MapDispatchToPropsType
 
-type mapStateToPropsType = {
+type MapStateToPropsType = {
     users: UserType[]
     pageSize: number
     totalUsersCount: number
@@ -25,7 +25,7 @@ type mapStateToPropsType = {
 
 }
 
-type mapDispatchToPropsType = {
+type MapDispatchToPropsType = {
     follow: (userId: string) => void
     unfollow: (userId: string) => void
     setUsers: (users: UserType[]) => void
@@ -34,7 +34,7 @@ type mapDispatchToPropsType = {
     toggleIsFetching: (isFetching: boolean) => void
 }
 
-type ResponseType<T = []> = {
+export type ResponseType<T = []> = {
     items: T
     error: null | string
     totalCount: number
@@ -46,6 +46,7 @@ class UsersContainer extends Component<UsersType> {
         this.props.toggleIsFetching(true)
         axios.get<ResponseType>(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
             .then(response => {
+
                 this.props.toggleIsFetching(false)
                 this.props.setUsers(response.data.items)
                 this.props.setTotalUsersCount(response.data.totalCount)
@@ -92,7 +93,7 @@ class UsersContainer extends Component<UsersType> {
     }
 }
 
-const mapStateToProps = (state: AppStateType): mapStateToPropsType => {
+const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
 
     return {
         users: state.usersPage.users,
