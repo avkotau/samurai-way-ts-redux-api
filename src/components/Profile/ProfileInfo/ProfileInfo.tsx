@@ -25,6 +25,7 @@ const ProfileInfo = (props: PropsType) => {
     if (!props.profile) {
         return <Preloader/>
     }
+
     return (
         <div className={s.profileInfoContainer}>
             <img
@@ -33,13 +34,27 @@ const ProfileInfo = (props: PropsType) => {
             <div className={s.description}>
 
                 <img src={props.profile.photos.large} alt=''/>
-                ava + descr
-                //SHOW ALL PROPS https://social-network.samuraijs.com/api/1.0/profile/2
-                <div>{props.profile.aboutMe}</div>
-                <div> {props.profile.contacts.facebook}</div>
+
+                <dl>
+                    <dt>Full name:</dt>
+                    <dd>{props.profile.fullName}</dd>
+
+                    <dt>about me:</dt>
+                    <dd>{props.profile.aboutMe}</dd>
+
+                    <dt>Looking for a job:</dt>
+                    <dd>{props.profile.lookingForAJob ? "Yes" : "No"}</dd>
+
+                    <dt>Description:</dt>
+                    <dd>{props.profile.lookingForAJobDescription}</dd>
+                </dl>
+                <h3>Contact:</h3>
                 <ul>
-                    Contact:
-                    <li></li>
+                    <li>facebook: {props.profile.contacts.facebook}</li>
+                    <li>website: {props.profile.contacts.website}</li>
+                    <li>vk: {props.profile.contacts.vk}</li>
+                    <li>twitter: {props.profile.contacts.twitter}</li>
+                    <li>instagram: {props.profile.contacts.instagram}</li>
                 </ul>
             </div>
         </div>
