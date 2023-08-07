@@ -5,15 +5,16 @@ import { UserType } from "../../types/declarations";
 import { NavLink } from "react-router-dom";
 import { followAPI, unFollowAPI } from "../../api/api";
 
-
 type UsersType = {
     users: UserType[]
     totalUsersCount: number
     pageSize: number
     currentPage: number
-    follow: (userId: string) => void
-    unfollow: (userId: string) => void
+    follow: (userId: number) => void
+    unfollow: (userId: number) => void
     onPageChanged: (pageNumber: number) => void
+    toggleFollowInProgress: (userId: number, isFetching: boolean) => void
+    toggleFollow: number[]
 }
 
 
@@ -28,7 +29,8 @@ class Users extends Component<UsersType> {
             totalUsersCount,
             pageSize,
             currentPage,
-            onPageChanged
+            onPageChanged,
+            toggleFollow
         } = this.props
 
         //pagesCount/100 - for show 24 pages
@@ -39,7 +41,7 @@ class Users extends Component<UsersType> {
         for (let i = 1; i <= pagesCount; i++) {
             pages.push(i)
         }
-
+        console.log('toggleFollow', toggleFollow)
         return (
             <div>
                 <div>
@@ -62,26 +64,30 @@ class Users extends Component<UsersType> {
                             </NavLink>
 
                             {u.followed
-                                ? <button onClick={() => {
+                                ? <button disabled={toggleFollow.some(id => id === u.id)} onClick={() => {
+                                    console.log(this.props)
+                                    this.props.toggleFollowInProgress(u.id, true)
                                     unFollowAPI(u.id)
                                         .then(res => {
+
                                             if (res.data.resultCode === 0) {
                                                 unfollow(u.id)
                                             }
+                                            this.props.toggleFollowInProgress(u.id, false)
                                         })
-                                }
-
-                                }>unfollow</button>
-                                : <button onClick={() => {
+                                }}
+                                >unfollow</button>
+                                : <button disabled={toggleFollow.some(id => id === u.id)} onClick={() => {
+                                    this.props.toggleFollowInProgress(u.id, true)
                                     followAPI(u.id)
                                         .then(res => {
 
                                             if (res.data.resultCode === 0) {
                                                 follow(u.id)
                                             }
+                                            this.props.toggleFollowInProgress(u.id, false)
                                         })
                                 }}
-
                                 >follow</button>
                             }
 

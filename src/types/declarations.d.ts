@@ -8,7 +8,7 @@ type PhotosType = {
 }
 
 export type UserType = {
-    id: string
+    id: number /// debuger console.log
     followed: boolean
     name: string
     photos: PhotosType
@@ -39,9 +39,6 @@ export type NewPostTextType = {
     id: string
     post: string
 }
-// export type NewMessageTextType = {
-//     // id: string
-//     message: string
-// }
+
 
 

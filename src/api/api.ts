@@ -23,10 +23,10 @@ export const getUsersAPI = (currentPage: number, pageSize: number) => {
       .then(res => res.data)
 }
 
-export const unFollowAPI = (id: string) => {
+export const unFollowAPI = (id: number) => {
   return instance.delete<ResponseSubscriberType>(`follow/${id}`)
 }
 
-export const followAPI = (id: string) => {
+export const followAPI = (id: number) => {
   return instance.post<ResponseSubscriberType>(`follow/${id}`,{})
 }
