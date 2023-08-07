@@ -3,7 +3,7 @@ import s from "./Users.module.css";
 import photo from "../../assets/images/photoUser.png";
 import { UserType } from "../../types/declarations";
 import { NavLink } from "react-router-dom";
-import axios from "axios";
+import { followAPI, unFollowAPI } from "../../api/api";
 
 
 type UsersType = {
@@ -16,11 +16,6 @@ type UsersType = {
     onPageChanged: (pageNumber: number) => void
 }
 
-type ResponseType<T = []> = {
-    data: T
-    resultCode: number
-    messages: []
-}
 
 class Users extends Component<UsersType> {
 
@@ -68,10 +63,7 @@ class Users extends Component<UsersType> {
 
                             {u.followed
                                 ? <button onClick={() => {
-                                    axios.delete<ResponseType>(
-                                        `https://social-network.samuraijs.com/api/1.0/follow/${u.id}`,
-                                        {withCredentials: true}
-                                    )
+                                    unFollowAPI(u.id)
                                         .then(res => {
                                             if (res.data.resultCode === 0) {
                                                 unfollow(u.id)
@@ -81,11 +73,7 @@ class Users extends Component<UsersType> {
 
                                 }>unfollow</button>
                                 : <button onClick={() => {
-                                    axios.post<ResponseType>(
-                                        `https://social-network.samuraijs.com/api/1.0/follow/${u.id}`,
-                                        {},
-                                        {withCredentials: true}
-                                    )
+                                    followAPI(u.id)
                                         .then(res => {
 
                                             if (res.data.resultCode === 0) {
