@@ -3,6 +3,8 @@ import s from "./Users.module.css";
 import photo from "../../assets/images/photoUser.png";
 import { UserType } from "../../types/declarations";
 import { NavLink } from "react-router-dom";
+import axios from "axios";
+
 
 type UsersType = {
     users: UserType[]
@@ -12,6 +14,12 @@ type UsersType = {
     follow: (userId: string) => void
     unfollow: (userId: string) => void
     onPageChanged: (pageNumber: number) => void
+}
+
+type ResponseType<T = []> = {
+    data: T
+    resultCode: number
+    messages: []
 }
 
 class Users extends Component<UsersType> {
@@ -28,7 +36,8 @@ class Users extends Component<UsersType> {
             onPageChanged
         } = this.props
 
-        let pagesCount = Math.ceil(totalUsersCount / pageSize)
+        //pagesCount/100 - for show 24 pages
+        let pagesCount = Math.ceil(totalUsersCount / pageSize) / 100
 
         let pages = []
 
@@ -47,21 +56,46 @@ class Users extends Component<UsersType> {
                                      onClick={() => onPageChanged(p)}
                         >{p}</span>
                     })}
-
                 </div>
                 {users.map(u =>
                     <div key={u.id}>
                         <span>
-                            <NavLink to={'profile/'+u.id}>
+                            <NavLink to={'profile/' + u.id}>
                                              <img src={u.photos.small ? u.photos.small
                                                  : photo}
                                                   alt={''} style={{width: '100px'}}/>
                             </NavLink>
 
-
                             {u.followed
-                                ? <button onClick={() => follow(u.id)}>follow</button>
-                                : <button onClick={() => unfollow(u.id)}>unfollow</button>}
+                                ? <button onClick={() => {
+                                    axios.delete<ResponseType>(
+                                        `https://social-network.samuraijs.com/api/1.0/follow/${u.id}`,
+                                        {withCredentials: true}
+                                    )
+                                        .then(res => {
+                                            if (res.data.resultCode === 0) {
+                                                unfollow(u.id)
+                                            }
+                                        })
+                                }
+
+                                }>unfollow</button>
+                                : <button onClick={() => {
+                                    axios.post<ResponseType>(
+                                        `https://social-network.samuraijs.com/api/1.0/follow/${u.id}`,
+                                        {},
+                                        {withCredentials: true}
+                                    )
+                                        .then(res => {
+
+                                            if (res.data.resultCode === 0) {
+                                                follow(u.id)
+                                            }
+                                        })
+                                }}
+
+                                >follow</button>
+                            }
 
                         </span>
 
@@ -69,7 +103,6 @@ class Users extends Component<UsersType> {
                             <div>{u.name}</div>
                             <div>{u.status}</div>
                         </span>
-
                     </div>
                 )}
             </div>

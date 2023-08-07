@@ -92,7 +92,6 @@ export const store: StoreType = {
     },
 
     _callSubscriber(state: StateType) {
-        console.log('rerender')
         return state
     },
 

@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import './App.css';
-import Header from "./components/Header/Header";
 import Navbar from "./components/Navbar/Navbar";
 import s from './components/Routes/RouterApp.module.css'
 import RoutesApp from "./components/Routes/RoutesApp";
 
 import { DispatchType, StateType } from "./redux";
+import HeaderContainer from "./components/Header/HeaderContainer";
 
 type TypeProps = {
     state: StateType
@@ -19,7 +19,7 @@ class App extends Component<TypeProps> {
 
         return (
             <div className='app'>
-                <Header/>
+                <HeaderContainer/>
                 <Navbar sidebarData={state.sidebar.sidebarData}/>
 
                 <div className={s.routers}>

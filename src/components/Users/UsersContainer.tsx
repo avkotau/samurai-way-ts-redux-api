@@ -34,17 +34,23 @@ type MapDispatchToPropsType = {
     toggleIsFetching: (isFetching: boolean) => void
 }
 
-export type ResponseType<T = []> = {
+type ResponseType<T = []> = {
     items: T
     error: null | string
     totalCount: number
 }
 
+const baseURL = 'https://social-network.samuraijs.com/api/1.0/'
+
 class UsersContainer extends Component<UsersType> {
 
     componentDidMount() {
         this.props.toggleIsFetching(true)
-        axios.get<ResponseType>(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
+        axios.get<ResponseType>(
+            baseURL + `users?page=${this.props.currentPage}&count=${this.props.pageSize}`,
+            {
+                withCredentials: true
+            })
             .then(response => {
 
                 this.props.toggleIsFetching(false)
@@ -56,7 +62,12 @@ class UsersContainer extends Component<UsersType> {
     onPageChanged(pageNumber: number) {
         this.props.toggleIsFetching(true)
         this.props.setCurrentPage(pageNumber)
-        axios.get<ResponseType>(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`)
+
+        axios.get<ResponseType>(
+            baseURL + `users?page=${pageNumber}&count=${this.props.pageSize}`,
+            {
+                withCredentials: true
+            })
             .then(response => {
                 this.props.toggleIsFetching(false)
                 this.props.setUsers(response.data.items)

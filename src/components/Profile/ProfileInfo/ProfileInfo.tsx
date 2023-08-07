@@ -3,23 +3,6 @@ import s from './ProfileInfo.module.css'
 import Preloader from "../../common/Preloader/Preloader";
 import { PropsType } from "../Profile";
 
-//    aboutMe: string;
-//     contacts: {
-//         facebook: string;
-//         website: null | string;
-//         vk: string;
-//         twitter: string;
-//         instagram: string;
-//     };
-//     fullName: string;
-//     lookingForAJob: boolean;
-//     lookingForAJobDescription: string;
-//     photos: {
-//         small: string;
-//         large: string;
-//     };
-//     userId: number;
-
 const ProfileInfo = (props: PropsType) => {
 
     if (!props.profile) {
