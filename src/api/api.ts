@@ -1,4 +1,5 @@
 import axios from "axios";
+import { ProfileResponseType } from "../redux/profileReducer";
 
 type ResponseUserType<T = []> = {
     items: T
@@ -29,4 +30,8 @@ export const unFollowAPI = (id: number) => {
 
 export const followAPI = (id: number) => {
   return instance.post<ResponseSubscriberType>(`follow/${id}`,{})
+}
+
+export const profileUserAPI = (userId: number) => {
+    return instance.get<ProfileResponseType>(`profile/${userId}`)
 }

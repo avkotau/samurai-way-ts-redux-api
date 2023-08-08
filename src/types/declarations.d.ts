@@ -8,7 +8,7 @@ type PhotosType = {
 }
 
 export type UserType = {
-    id: number /// debuger console.log
+    id: number
     followed: boolean
     name: string
     photos: PhotosType

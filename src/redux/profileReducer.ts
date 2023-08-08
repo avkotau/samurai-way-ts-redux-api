@@ -1,4 +1,6 @@
 import { PostDataType } from "../types/declarations";
+import { profileUserAPI } from "../api/api";
+import { Dispatch } from "redux";
 
 export type ActionsProfileType = AddPostActionType | UpdatingTextPostActionType
     | SetUserProfileActionType;
@@ -82,5 +84,12 @@ export const setUserProfileAC = (profile: ProfileResponseType) => {
         type: 'SET_USER-PROFILE',
         profile
     } as const
+}
+
+export const fetchUserProfile = (userId: number) => (dispatch: Dispatch) => {
+    return profileUserAPI(userId)
+        .then(res => {
+            dispatch(setUserProfileAC(res.data))
+        })
 }
 
