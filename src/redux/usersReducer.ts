@@ -135,7 +135,7 @@ export const unFollowUser = (userId: number) => (dispatch: Dispatch) => {
         .then(res => {
 
             if (res.data.resultCode === 0) {
-                unfollow(userId)
+                dispatch(unfollow(userId))
             }
             dispatch(toggleFollowInProgress(userId, false))
         })
@@ -147,7 +147,7 @@ export const followUser = (userId: number) => (dispatch: Dispatch) => {
         .then(res => {
 
             if (res.data.resultCode === 0) {
-                follow(userId)
+                dispatch(follow(userId))
             }
             dispatch(toggleFollowInProgress(userId, false))
         })
