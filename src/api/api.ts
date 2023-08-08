@@ -1,5 +1,6 @@
 import axios from "axios";
 import { ProfileResponseType } from "../redux/profileReducer";
+import { AuthUserDataType } from "../components/Header/HeaderContainer";
 
 type ResponseUserType<T = []> = {
     items: T
@@ -11,6 +12,13 @@ type ResponseSubscriberType<T = []> = {
     data: T
     resultCode: number
     messages: []
+}
+
+type ResponseAuthType = {
+    data: AuthUserDataType
+    fieldsErrors: []
+    messages: []
+    resultCode: number
 }
 
 const instance = axios.create({
@@ -34,4 +42,10 @@ export const followAPI = (id: number) => {
 
 export const profileUserAPI = (userId: number) => {
     return instance.get<ProfileResponseType>(`profile/${userId}`)
+}
+
+export const authAPI = () => {
+    debugger
+    return instance.get<ResponseAuthType>(`auth/me`)
+
 }
