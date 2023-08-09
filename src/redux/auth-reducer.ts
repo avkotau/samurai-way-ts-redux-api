@@ -41,7 +41,6 @@ export const setAuthUserData = (userData: InitialStateType) => {
 }
 
 export const auth = () => (dispatch: Dispatch) => {
-    debugger
     return authAPI()
         .then(res => {
             if (res.data.resultCode === 0) {

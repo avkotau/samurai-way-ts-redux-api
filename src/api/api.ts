@@ -45,7 +45,6 @@ export const profileUserAPI = (userId: number) => {
 }
 
 export const authAPI = () => {
-    debugger
     return instance.get<ResponseAuthType>(`auth/me`)
 
 }

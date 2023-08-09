@@ -6,6 +6,7 @@ import { DispatchType, StateType} from "../../redux";
 import DialoguesContainer from "../Dialogues/DialoguesContainer";
 import UsersContainer from "../Users/UsersContainer";
 import ProfileContainer from "../Profile/ProfileContainer";
+import Login from "../Login/Login";
 
 class RoutesApp extends Component {
 
@@ -15,6 +16,7 @@ class RoutesApp extends Component {
                 <Route path='/dialogues' render={() => <DialoguesContainer/>}/>
                 <Route path='/profile/:userId?' render={() => <ProfileContainer/>}/>
                 <Route path='/users' render={() => <UsersContainer/>}/>
+                <Route path='/login' render={() => <Login/>}/>
             </>
         )
     }

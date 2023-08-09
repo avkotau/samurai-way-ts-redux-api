@@ -8,7 +8,7 @@ import {
     updateMessageTextActionCreator
 } from "../../redux/dialoguesReducer";
 
-type MapStateToPropsType = InitialStateType
+type MapStateToPropsType = InitialStateType & { isAuth: boolean }
 
 type MapDispatchToPropsType = {
     updateMessageText: (value: string) => void
@@ -22,7 +22,8 @@ const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
     return {
         dialoguesData: state.dialoguesPage.dialoguesData,
         messagesData: state.dialoguesPage.messagesData,
-        newMessageText: state.dialoguesPage.newMessageText
+        newMessageText: state.dialoguesPage.newMessageText,
+        isAuth: state.auth.isAuth
     }
 }
 

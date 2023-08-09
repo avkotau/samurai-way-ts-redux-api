@@ -14,7 +14,7 @@ const Messages: React.FC<Props> = (
         messagesData,
         updateMessageText,
         addMessage,
-        textMessage
+        textMessage,
     }
 ) => {
 
