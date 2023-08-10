@@ -1,3 +1,4 @@
+import React from "react";
 import Dialogues from "./Dialogues";
 import { connect } from "react-redux";
 import { AppStateType } from "../../redux/redux-store";
@@ -38,7 +39,7 @@ const mapDispatchToProps = ( dispatch: Dispatch): MapDispatchToPropsType => {
     }
 }
 
-export default compose(
+export default compose<React.ComponentType>(
     withAuthRedirect,
     connect(mapStateToProps, mapDispatchToProps)
 )(Dialogues)

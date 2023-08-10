@@ -55,7 +55,7 @@ const mapStateToProps = (state: AppStateType): MapStateToPropsType => ({
 })
 
 //With help withRouter new component for get url data from props
-export default compose(
+export default compose<React.ComponentType>(
     withAuthRedirect,
     connect(mapStateToProps, {fetchUserProfile}),
     withRouter
