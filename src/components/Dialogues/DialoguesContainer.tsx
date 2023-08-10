@@ -1,7 +1,7 @@
 import Dialogues from "./Dialogues";
 import { connect } from "react-redux";
 import { AppStateType } from "../../redux/redux-store";
-import { Dispatch } from "redux";
+import { compose, Dispatch } from "redux";
 import {
     addMessageActionCreator,
     InitialStateType,
@@ -38,6 +38,7 @@ const mapDispatchToProps = ( dispatch: Dispatch): MapDispatchToPropsType => {
     }
 }
 
-const DialoguesContainer= withAuthRedirect(connect(mapStateToProps, mapDispatchToProps)(Dialogues))
-
-export default DialoguesContainer
+export default compose(
+    withAuthRedirect,
+    connect(mapStateToProps, mapDispatchToProps)
+)(Dialogues)
