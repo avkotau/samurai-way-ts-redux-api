@@ -1,47 +1,50 @@
-import React from 'react';
+import React, { Component } from 'react';
 import s from './ProfileInfo.module.css'
 import Preloader from "../../common/Preloader/Preloader";
 import { PropsType } from "../Profile";
+import { ProfileStatus } from "../ProfileStatus";
 
-const ProfileInfo = (props: PropsType) => {
 
-    if (!props.profile) {
-        return <Preloader/>
-    }
+class ProfileInfo extends Component<PropsType> {
 
-    return (
-        <div className={s.profileInfoContainer}>
-            <img
-                src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_960_720.jpg"
-                alt=""/>
-            <div className={s.description}>
+    render() {
+        if (!this.props.profile) {
+            return <Preloader/>
+        }
 
-                <img src={props.profile.photos.large} alt=''/>
+        return (
+            <div className={s.profileInfoContainer}>
 
-                <dl>
-                    <dt>Full name:</dt>
-                    <dd>{props.profile.fullName}</dd>
+                <div className={s.description}>
 
-                    <dt>about me:</dt>
-                    <dd>{props.profile.aboutMe}</dd>
+                    <img src={this.props.profile.photos.large} alt=''/>
+                    <ProfileStatus/>
 
-                    <dt>Looking for a job:</dt>
-                    <dd>{props.profile.lookingForAJob ? "Yes" : "No"}</dd>
+                    <dl>
+                        <dt>Full name:</dt>
+                        <dd>{this.props.profile.fullName}</dd>
 
-                    <dt>Description:</dt>
-                    <dd>{props.profile.lookingForAJobDescription}</dd>
-                </dl>
-                <h3>Contact:</h3>
-                <ul>
-                    <li>facebook: {props.profile.contacts.facebook}</li>
-                    <li>website: {props.profile.contacts.website}</li>
-                    <li>vk: {props.profile.contacts.vk}</li>
-                    <li>twitter: {props.profile.contacts.twitter}</li>
-                    <li>instagram: {props.profile.contacts.instagram}</li>
-                </ul>
+                        <dt>about me:</dt>
+                        <dd>{this.props.profile.aboutMe}</dd>
+
+                        <dt>Looking for a job:</dt>
+                        <dd>{this.props.profile.lookingForAJob ? "Yes" : "No"}</dd>
+
+                        <dt>Description:</dt>
+                        <dd>{this.props.profile.lookingForAJobDescription}</dd>
+                    </dl>
+                    <h3>Contact:</h3>
+                    <ul>
+                        <li>facebook: {this.props.profile.contacts.facebook}</li>
+                        <li>website: {this.props.profile.contacts.website}</li>
+                        <li>vk: {this.props.profile.contacts.vk}</li>
+                        <li>twitter: {this.props.profile.contacts.twitter}</li>
+                        <li>instagram: {this.props.profile.contacts.instagram}</li>
+                    </ul>
+                </div>
             </div>
-        </div>
-    );
-};
+        );
+    }
+}
 
 export default ProfileInfo;
