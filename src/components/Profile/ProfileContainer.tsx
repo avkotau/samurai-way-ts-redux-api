@@ -55,6 +55,6 @@ const mapStateToProps = (state: AppStateType): MapStateToPropsType => ({
 
 
 //new component for get url data from props
-export const withAuthRedirectContainer = withRouter(ProfileContainer)
+const withAuthRedirectContainer = withRouter(ProfileContainer)
 
 export default withAuthRedirect(connect(mapStateToProps, {fetchUserProfile})(withAuthRedirectContainer));

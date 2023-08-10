@@ -3,7 +3,6 @@ import s from './Dialogues.module.css'
 import Dialogue from "./Dialogue/Dialogue";
 import Messages from "./Messages/Messages";
 import { DialoguesType } from "./DialoguesContainer";
-import { Redirect } from "react-router-dom";
 
 const Dialogues: React.FC<DialoguesType> = (
     {
@@ -12,10 +11,8 @@ const Dialogues: React.FC<DialoguesType> = (
         updateMessageText,
         addMessage,
         newMessageText,
-        isAuth
     }
 ) => {
-    if (!isAuth) return <Redirect to={'login'}/>
 
     return (
         <div className={s.containerDialoguesMessages}>

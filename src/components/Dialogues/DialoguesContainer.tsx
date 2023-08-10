@@ -7,8 +7,9 @@ import {
     InitialStateType,
     updateMessageTextActionCreator
 } from "../../redux/dialoguesReducer";
+import { withAuthRedirect } from "../../hok/withAuthRedirect";
 
-type MapStateToPropsType = InitialStateType & { isAuth: boolean }
+type MapStateToPropsType = InitialStateType
 
 type MapDispatchToPropsType = {
     updateMessageText: (value: string) => void
@@ -23,7 +24,6 @@ const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
         dialoguesData: state.dialoguesPage.dialoguesData,
         messagesData: state.dialoguesPage.messagesData,
         newMessageText: state.dialoguesPage.newMessageText,
-        isAuth: state.auth.isAuth
     }
 }
 
@@ -38,6 +38,6 @@ const mapDispatchToProps = ( dispatch: Dispatch): MapDispatchToPropsType => {
     }
 }
 
-const DialoguesContainer= connect(mapStateToProps, mapDispatchToProps)(Dialogues)
+const DialoguesContainer= withAuthRedirect(connect(mapStateToProps, mapDispatchToProps)(Dialogues))
 
 export default DialoguesContainer
