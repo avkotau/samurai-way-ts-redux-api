@@ -21,6 +21,12 @@ type ResponseAuthType = {
     resultCode: number
 }
 
+export type ResponseStatusType = {
+    resultCode: number
+    messages: []
+    data: {}
+}
+
 const instance = axios.create({
     baseURL: 'https://social-network.samuraijs.com/api/1.0/',
     withCredentials: true,
@@ -28,16 +34,16 @@ const instance = axios.create({
 })
 
 export const getUsersAPI = (currentPage: number, pageSize: number) => {
-  return instance.get<ResponseUserType>(`users?page=${currentPage}&count=${pageSize}`)
-      .then(res => res.data)
+    return instance.get<ResponseUserType>(`users?page=${currentPage}&count=${pageSize}`)
+        .then(res => res.data)
 }
 
 export const unFollowAPI = (id: number) => {
-  return instance.delete<ResponseSubscriberType>(`follow/${id}`)
+    return instance.delete<ResponseSubscriberType>(`follow/${id}`)
 }
 
 export const followAPI = (id: number) => {
-  return instance.post<ResponseSubscriberType>(`follow/${id}`,{})
+    return instance.post<ResponseSubscriberType>(`follow/${id}`, {})
 }
 
 export const profileUserAPI = (userId: number) => {
@@ -46,5 +52,12 @@ export const profileUserAPI = (userId: number) => {
 
 export const authAPI = () => {
     return instance.get<ResponseAuthType>(`auth/me`)
+}
 
+export const getUserStatusAPI = (userId: number) => {
+    return instance.get<string>(`/profile/status/${userId}`)
+}
+
+export const updateUserStatusAPI = (status: string) => {
+    return instance.put<ResponseStatusType>(`/profile/status`, {status})
 }

@@ -4,21 +4,20 @@ import Preloader from "../../common/Preloader/Preloader";
 import { PropsType } from "../Profile";
 import { ProfileStatus } from "../ProfileStatus";
 
-
 class ProfileInfo extends Component<PropsType> {
 
     render() {
+
         if (!this.props.profile) {
             return <Preloader/>
         }
 
         return (
             <div className={s.profileInfoContainer}>
-
                 <div className={s.description}>
-
                     <img src={this.props.profile.photos.large} alt=''/>
-                    <ProfileStatus/>
+
+                    <ProfileStatus status={this.props.status} updateUserStatus={this.props.updateUserStatus}/>
 
                     <dl>
                         <dt>Full name:</dt>
