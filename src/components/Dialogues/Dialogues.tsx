@@ -8,9 +8,7 @@ const Dialogues: React.FC<DialoguesType> = (
     {
         dialoguesData,
         messagesData,
-        updateMessageText,
         addMessage,
-        newMessageText,
     }
 ) => {
 
@@ -18,9 +16,7 @@ const Dialogues: React.FC<DialoguesType> = (
         <div className={s.containerDialoguesMessages}>
             <Dialogue dialoguesData={dialoguesData}/>
             <Messages messagesData={messagesData}
-                      updateMessageText={updateMessageText}
                       addMessage={addMessage}
-                      textMessage={newMessageText}
             />
         </div>
     );

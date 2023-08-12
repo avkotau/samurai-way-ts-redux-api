@@ -2,11 +2,10 @@ import { PostDataType } from "../types/declarations";
 import { getUserStatusAPI, profileUserAPI, updateUserStatusAPI } from "../api/api";
 import { Dispatch } from "redux";
 
-export type ActionsProfileType = AddPostActionType | UpdatingTextPostActionType
+export type ActionsProfileType = AddPostActionType
     | SetUserProfileActionType | GetUserStatusActionType | UpdateUserStatusActionType
 
 type AddPostActionType = ReturnType<typeof addPostAC>
-type UpdatingTextPostActionType = ReturnType<typeof changeTextareaAC>
 type SetUserProfileActionType = ReturnType<typeof setUserProfileAC>
 type GetUserStatusActionType = ReturnType<typeof getUserStatusAC>
 type UpdateUserStatusActionType = ReturnType<typeof updateUserStatusAC>
@@ -36,8 +35,6 @@ const initialState = {
         {id: Math.random().toString(36).slice(2), message: 'Hello man', like: 20},
         {id: Math.random().toString(36).slice(2), message: 'Hello women', like: 6}
     ] as Array<PostDataType>,
-
-    newPostText: '',
     profile: null as ProfileResponseType | null,
     status: ''
 }
@@ -50,13 +47,10 @@ export const profileReducer = (state: InitialStateType = initialState, action: A
         case 'ADD_POST':
             const newPost: PostDataType = {
                 id: Math.random().toString(36).slice(2),
-                message: state.newPostText,
+                message: action.newPost,
                 like: 0
             }
-            return {...state, postsData: [...state.postsData, newPost], newPostText: state.newPostText = ''}
-
-        case 'UPDATING_TEXT_POST':
-            return {...state, newPostText: state.newPostText = action.textPost}
+            return {...state, postsData: [newPost, ...state.postsData]}
 
         case "SET_USER-PROFILE":
             return {
@@ -69,7 +63,6 @@ export const profileReducer = (state: InitialStateType = initialState, action: A
                 status: action.status
             }
         case "UPDATE_USER_STATUS":
-
             return {
                 ...state,
                 status: action.status
@@ -79,16 +72,10 @@ export const profileReducer = (state: InitialStateType = initialState, action: A
     return state
 }
 
-export const addPostAC = () => {
+export const addPostAC = (newPost: string) => {
     return {
-        type: 'ADD_POST'
-    } as const
-}
-
-export const changeTextareaAC = (newText: string) => {
-    return {
-        type: 'UPDATING_TEXT_POST',
-        textPost: newText
+        type: 'ADD_POST',
+        newPost
     } as const
 }
 

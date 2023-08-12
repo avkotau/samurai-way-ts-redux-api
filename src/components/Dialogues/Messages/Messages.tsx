@@ -1,29 +1,22 @@
-import React, { ChangeEvent } from 'react';
+import React from 'react';
 import s from '../Dialogues.module.css'
-import { MessageDataType } from "../../../types/declarations";
+import { FormValuesType, MessageDataType } from "../../../types/declarations";
+import MessageForm from "../../MessageForm/MessageForm";
 
 type Props = {
     messagesData: MessageDataType[]
-    updateMessageText: (value: string) => void
-    addMessage: () => void
-    textMessage: string
+    addMessage: (newMessage: string) => void
 }
 
 const Messages: React.FC<Props> = (
     {
         messagesData,
-        updateMessageText,
         addMessage,
-        textMessage,
     }
 ) => {
 
-    const textareaHandle = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        updateMessageText(e.currentTarget.value)
-    }
-
-    const addMessageHandle = () => {
-        addMessage()
+    const sendMessage = (values: FormValuesType) => {
+        addMessage(values.textarea)
     }
 
     return (
@@ -31,15 +24,9 @@ const Messages: React.FC<Props> = (
             {messagesData.map(el => (
                 <div key={el.id} className={s.dialogue}>{el.message}</div>
             ))}
-            <div>
-                <textarea
-                    value={textMessage}
-                    onChange={textareaHandle}>
-                </textarea>
-
-                <button onClick={addMessageHandle}>Add message</button>
-            </div>
-
+            <MessageForm
+                onSubmit={sendMessage}
+            />
         </div>
     )
 }

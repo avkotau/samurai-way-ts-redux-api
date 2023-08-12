@@ -6,15 +6,13 @@ import { compose, Dispatch } from "redux";
 import {
     addMessageActionCreator,
     InitialStateType,
-    updateMessageTextActionCreator
 } from "../../redux/dialoguesReducer";
 import { withAuthRedirect } from "../../hok/withAuthRedirect";
 
 type MapStateToPropsType = InitialStateType
 
 type MapDispatchToPropsType = {
-    updateMessageText: (value: string) => void
-    addMessage: () => void
+    addMessage: (newMessage: string) => void
 }
 
 export type DialoguesType = MapStateToPropsType & MapDispatchToPropsType
@@ -24,17 +22,13 @@ const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
     return {
         dialoguesData: state.dialoguesPage.dialoguesData,
         messagesData: state.dialoguesPage.messagesData,
-        newMessageText: state.dialoguesPage.newMessageText,
     }
 }
 
 const mapDispatchToProps = ( dispatch: Dispatch): MapDispatchToPropsType => {
     return {
-        updateMessageText: (value) => {
-            dispatch(updateMessageTextActionCreator(value))
-        },
-        addMessage: () => {
-            dispatch(addMessageActionCreator())
+        addMessage: (newMessage: string) => {
+            dispatch(addMessageActionCreator(newMessage))
         }
     }
 }

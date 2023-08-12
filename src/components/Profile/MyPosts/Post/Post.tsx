@@ -6,7 +6,6 @@ type TypeProps = {
     like: number
 }
 
-
 class Post extends Component<TypeProps> {
     render() {
 

@@ -40,5 +40,8 @@ export type NewPostTextType = {
     post: string
 }
 
+export type FormValuesType = {
+    textarea: string;
+}
 
 

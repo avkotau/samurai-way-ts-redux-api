@@ -1,11 +1,8 @@
 import { DialogueDataType, MessageDataType } from "../types/declarations";
 
-
-export type ActionsDialoguesType = AddMessageType | UpdateMessageTextType
+export type ActionsDialoguesType = AddMessageType
 
 type AddMessageType = ReturnType<typeof addMessageActionCreator>
-type UpdateMessageTextType = ReturnType<typeof updateMessageTextActionCreator>
-
 
 const initialState = {
     dialoguesData: [
@@ -21,8 +18,6 @@ const initialState = {
         {id: Math.random().toString(36).slice(2), message: 'Hello Sacha'},
         {id: Math.random().toString(36).slice(2), message: 'Hello Masha'}
     ] as Array<MessageDataType>,
-
-    newMessageText: ''
 }
 
 export type InitialStateType = typeof initialState
@@ -32,12 +27,9 @@ export const dialoguesReducer = (state: InitialStateType = initialState, action:
         case 'ADD_MESSAGE': {
             const newMessage: MessageDataType = {
                 id: Math.random().toString(36).slice(2),
-                message: state.newMessageText
+                message: action.newMessage
             }
-            return {...state, messagesData: [newMessage, ...state.messagesData], newMessageText: ''}
-        }
-        case 'UPDATING_MESSAGE_TEXT': {
-            return {...state, newMessageText: action.textMessage}
+            return {...state, messagesData: [newMessage, ...state.messagesData]}
         }
         default: {
             return state
@@ -45,15 +37,10 @@ export const dialoguesReducer = (state: InitialStateType = initialState, action:
     }
 }
 
-export const addMessageActionCreator = () => {
+export const addMessageActionCreator = (newMessage: string) => {
+    debugger
     return {
         type: 'ADD_MESSAGE',
-    } as const
-}
-
-export const updateMessageTextActionCreator = (textMessage: string) => {
-    return {
-        type: 'UPDATING_MESSAGE_TEXT',
-        textMessage: textMessage
+        newMessage
     } as const
 }
