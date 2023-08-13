@@ -27,6 +27,13 @@ export type ResponseStatusType = {
     data: {}
 }
 
+export type ResponseCredentialsType = {
+    data: {}
+    fieldsErrors: []
+    messages: []
+    resultCode: number
+}
+
 const instance = axios.create({
     baseURL: 'https://social-network.samuraijs.com/api/1.0/',
     withCredentials: true,
@@ -60,4 +67,8 @@ export const getUserStatusAPI = (userId: number) => {
 
 export const updateUserStatusAPI = (status: string) => {
     return instance.put<ResponseStatusType>(`/profile/status`, {status})
+}
+
+export const credentialsDataAPI = (email: string, password: string, rememberMe: boolean) => {
+    return instance.post<ResponseCredentialsType>(`/auth/login`, {email, password, rememberMe})
 }
