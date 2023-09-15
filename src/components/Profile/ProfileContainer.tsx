@@ -15,6 +15,8 @@ import { compose } from "redux";
 type MapStateToPropsType = {
     profile: ProfileResponseType | null
     status: string
+    authorizedUserId: number | null
+    isAuth: boolean
 }
 
 type MapDispatchToPropsType = {
@@ -37,7 +39,8 @@ class ProfileContainer extends Component<PropsType> {
         let userId = this.props.match.params.userId
 
         if (!userId) {
-            userId = '29290'
+            // userId = '29290'
+            userId = this.props.authorizedUserId
         }
         //parseInt for change type because backend return type number, RouteComponentProps return type string
         const userIdNumber = parseInt(userId, 10);
@@ -58,7 +61,9 @@ class ProfileContainer extends Component<PropsType> {
 
 const mapStateToProps = (state: AppStateType): MapStateToPropsType => ({
     profile: state.profilePage.profile,
-    status: state.profilePage.status
+    status: state.profilePage.status,
+    authorizedUserId: state.auth.id,
+    isAuth: state.auth.isAuth,
 })
 
 //With help withRouter new component for get url data from props

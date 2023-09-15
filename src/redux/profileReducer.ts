@@ -67,7 +67,6 @@ export const profileReducer = (state: InitialStateType = initialState, action: A
                 ...state,
                 status: action.status
             }
-
     }
     return state
 }

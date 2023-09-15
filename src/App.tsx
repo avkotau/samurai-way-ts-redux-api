@@ -16,7 +16,7 @@ class App extends Component<TypeProps> {
 
     render() {
         const {state} = this.props
-
+debugger
         return (
             <div className='app'>
                 <HeaderContainer/>

@@ -1,5 +1,7 @@
 import { Dispatch } from "redux";
 import { authAPI, loginAPI, logoutAPI } from "../api/api";
+import { stopSubmit } from "redux-form";
+import { FORM_ERROR } from "final-form";
 
 export type ActionsUsersType =
     | SetUserDataType
@@ -73,16 +75,20 @@ export const getAuthUserData = () => (dispatch: Dispatch) => {
 }
 
 //thunk creator - (email, password, rememberMe) - thunk - (dispatch: Dispatch)
-export const login = (credentials: CredentialsType) => (dispatch: Dispatch ) => {
+export const login = (credentials: CredentialsType) => (dispatch: Dispatch) => {
+
     return loginAPI(credentials)
         .then(res => {
             if (res.data.resultCode === 0) {
                 dispatch(getAuthUserData())
+            } else {
+                let errorMessage = res.data.messages.length > 0 ? res.data.messages[0] : "Some error occurred";
+                return {[FORM_ERROR]: errorMessage}; // Возвращаем ошибку
             }
         })
 }
 
-export const logout = () => (dispatch: Dispatch, ) => {
+export const logout = () => (dispatch: Dispatch,) => {
     return logoutAPI()
         .then(res => {
             if (res.data.resultCode === 0) {
