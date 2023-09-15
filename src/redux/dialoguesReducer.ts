@@ -38,7 +38,6 @@ export const dialoguesReducer = (state: InitialStateType = initialState, action:
 }
 
 export const addMessageActionCreator = (newMessage: string) => {
-    debugger
     return {
         type: 'ADD_MESSAGE',
         newMessage

@@ -1,6 +1,7 @@
 import axios from "axios";
 import { ProfileResponseType } from "../redux/profileReducer";
-import { AuthUserDataType } from "../components/Header/HeaderContainer";
+import { InitialStateType } from "../redux/auth-reducer";
+
 
 type ResponseUserType<T = []> = {
     items: T
@@ -15,7 +16,7 @@ type ResponseSubscriberType<T = []> = {
 }
 
 type ResponseAuthType = {
-    data: AuthUserDataType
+    data: InitialStateType
     fieldsErrors: []
     messages: []
     resultCode: number
@@ -69,6 +70,9 @@ export const updateUserStatusAPI = (status: string) => {
     return instance.put<ResponseStatusType>(`/profile/status`, {status})
 }
 
-export const credentialsDataAPI = (email: string, password: string, rememberMe: boolean) => {
-    return instance.post<ResponseCredentialsType>(`/auth/login`, {email, password, rememberMe})
+export const loginAPI = ({rememberMe = false, ...credentials}) => {
+    return instance.post<ResponseCredentialsType>(`/auth/login`, {...credentials})
+}
+export const logoutAPI = () => {
+    return instance.delete<ResponseCredentialsType>(`/auth/login`)
 }

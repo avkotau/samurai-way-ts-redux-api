@@ -28,7 +28,6 @@ type PathParamsType = {
 }
 
 type OwnUsersType = MapStateToPropsType & MapDispatchToPropsType
-
 type PropsType = RouteComponentProps<PathParamsType> & OwnUsersType
 
 class ProfileContainer extends Component<PropsType> {
@@ -43,12 +42,8 @@ class ProfileContainer extends Component<PropsType> {
         //parseInt for change type because backend return type number, RouteComponentProps return type string
         const userIdNumber = parseInt(userId, 10);
         this.props.fetchUserProfile(userIdNumber)
-
         this.props.getUserStatus(userIdNumber)
-
     }
-
-
 
     render() {
         return (

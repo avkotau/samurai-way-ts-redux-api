@@ -1,12 +1,11 @@
 import React from 'react';
 import s from './Header.module.css';
 import { NavLink } from "react-router-dom";
-import { MapStateToPropsType } from "./HeaderContainer";
+import { UsersType } from "./HeaderContainer";
 
-type PropsType = MapStateToPropsType
+type PropsType = UsersType
 
 const Header = (props: PropsType) => {
-
     return (
         <header className={s.header}>
 
@@ -16,7 +15,11 @@ const Header = (props: PropsType) => {
             />
             <div className={s.loginBlock}>
                 {
-                    props.isAuth ? props.login : <NavLink to={'/login'}>Login</NavLink>
+                    props.isAuth
+                        ? <div>{props.login}
+                            <button onClick={props.logout}>Log out</button>
+                        </div>
+                        : <NavLink to={'/login'}>Login</NavLink>
                 }
 
             </div>
