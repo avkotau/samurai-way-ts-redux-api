@@ -1,4 +1,4 @@
-import { DialogueDataType, MessageDataType } from "../types/declarations";
+import { DialogueDataType, MessageDataType } from "types/declarations";
 
 export type ActionsDialoguesType = AddMessageType
 

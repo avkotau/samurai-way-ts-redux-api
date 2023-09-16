@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
+import { UserType } from "types/declarations";
 import s from "./Users.module.css";
-import photo from "../../assets/images/photoUser.png";
-import { UserType } from "../../types/declarations";
+import photo from '../../assets/images/photoUser.png';
 import { NavLink } from "react-router-dom";
 
 type UsersType = {
@@ -14,14 +14,10 @@ type UsersType = {
     onPageChanged: (pageNumber: number) => void
     toggleFollowInProgress: (userId: number, isFetching: boolean) => void
     toggleFollow: number[]
-
 }
 
-
 class Users extends Component<UsersType> {
-
     render() {
-
         const {
             users,
             totalUsersCount,

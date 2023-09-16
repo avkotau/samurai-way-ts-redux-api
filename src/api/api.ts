@@ -1,6 +1,6 @@
 import axios from "axios";
-import { ProfileResponseType } from "../redux/profileReducer";
-import { InitialStateType } from "../redux/auth-reducer";
+import { ProfileResponseType } from "store/profileReducer";
+import { InitialStateType } from "store/auth-reducer";
 
 
 type ResponseUserType<T = []> = {

@@ -1,13 +1,13 @@
 import React from "react";
 import Dialogues from "./Dialogues";
 import { connect } from "react-redux";
-import { AppStateType } from "../../redux/redux-store";
+import { AppStateType } from "store/redux-store";
 import { compose, Dispatch } from "redux";
 import {
     addMessageActionCreator,
     InitialStateType,
-} from "../../redux/dialoguesReducer";
-import { withAuthRedirect } from "../../hok/withAuthRedirect";
+} from "store/dialoguesReducer";
+import { withAuthRedirect } from "hok/withAuthRedirect";
 
 type MapStateToPropsType = InitialStateType
 
@@ -25,7 +25,7 @@ const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
     }
 }
 
-const mapDispatchToProps = ( dispatch: Dispatch): MapDispatchToPropsType => {
+const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
     return {
         addMessage: (newMessage: string) => {
             dispatch(addMessageActionCreator(newMessage))

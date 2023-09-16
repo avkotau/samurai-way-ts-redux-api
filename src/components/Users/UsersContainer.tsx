@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
-import { AppStateType } from "../../redux/redux-store";
+import { AppStateType } from "store/redux-store";
 import {
     followUser, getUsers,
     setCurrentPage,
     toggleFollowInProgress,
     unFollowUser
-} from "../../redux/usersReducer";
-import { UserType } from "../../types/declarations";
+} from "store/usersReducer";
+import { UserType } from "types/declarations";
 import Users from "./Users";
 import Preloader from "../common/Preloader/Preloader";
 
@@ -66,7 +66,7 @@ class UsersContainer extends Component<UsersType> {
                     currentPage={currentPage}
                     followUser={followUser}
                     unFollowUser={unFollowUser}
-                    onPageChanged={(p)=>this.onPageChanged(p)}
+                    onPageChanged={(p) => this.onPageChanged(p)}
                     toggleFollow={toggleFollow}
                     toggleFollowInProgress={toggleFollowInProgress}
                 />

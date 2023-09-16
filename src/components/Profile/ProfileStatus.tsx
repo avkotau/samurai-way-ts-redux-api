@@ -39,7 +39,7 @@ export class ProfileStatus extends Component<PropsType> {
     }
 
     render() {
-        
+
         return (
             this.state.editMode
                 ? <div>

@@ -1,5 +1,5 @@
-import { PostDataType } from "../types/declarations";
-import { getUserStatusAPI, profileUserAPI, updateUserStatusAPI } from "../api/api";
+import { PostDataType } from "types/declarations";
+import { getUserStatusAPI, profileUserAPI, updateUserStatusAPI } from "api/api";
 import { Dispatch } from "redux";
 
 export type ActionsProfileType = AddPostActionType

@@ -1,5 +1,5 @@
 import { Form, Field } from 'react-final-form'
-import { FormValuesType } from "../../types/declarations";
+import { FormValuesType } from "types/declarations";
 import { composeValidators, maxLength, required } from "../common/validators";
 import { FormControl } from "../common/FormsControls/FormsControls";
 
@@ -16,12 +16,12 @@ function MessageForm(props: MessageFormType) {
             onSubmit={props.onSubmit}
             render={({handleSubmit}) => (
                 <form onSubmit={handleSubmit}>
-                <Field component={FormControl}
-                       name='textarea'
-                       placeholder='Enter your message'
-                       validate={composeValidators(required, maxLength30)}
-                >
-                </Field>
+                    <Field component={FormControl}
+                           name='textarea'
+                           placeholder='Enter your message'
+                           validate={composeValidators(required, maxLength30)}
+                    >
+                    </Field>
                     <button type='submit'>Add message</button>
                 </form>
             )}

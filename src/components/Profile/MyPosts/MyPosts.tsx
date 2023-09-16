@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import s from './MyPosts.module.css';
 import Post from "./Post/Post";
 import { MyPostsPropsType } from "./MyPostsContainer";
-import { FormValuesType } from "../../../types/declarations";
+import { FormValuesType } from "types/declarations";
 import PostMessageForm from "../../PostMessageForm/PostMessageForm";
 
 class MyPosts extends Component<MyPostsPropsType> {

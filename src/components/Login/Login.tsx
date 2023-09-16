@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { Field, Form } from 'react-final-form'
-import { login } from "../../redux/auth-reducer";
+import { login } from "store/auth-reducer";
 import { connect } from "react-redux";
 import { FormControl } from '../common/FormsControls/FormsControls'
 import { composeValidators, minLength, required } from "../common/validators";
 import { Redirect } from "react-router-dom";
-import { AppStateType } from '../../redux/redux-store';
+import { AppStateType } from 'store/redux-store';
 
 
 type FormDataType = {
@@ -29,13 +29,13 @@ export const LoginForm = (props: any) => {
             render={({handleSubmit, submitError}) => (
                 <form onSubmit={handleSubmit}>
                     {submitError && <div style={{color: 'red'}}>{submitError}</div>}
-                        <Field name='email' placeholder='Email' component={FormControl}
-                               validate={composeValidators(required, maxLength10)}
-                        />
-                        <Field name='password' placeholder='password' type='password' component={FormControl}
-                               validate={composeValidators(required, maxLength10)}
-                        />
-                        <Field name='rememberMe' type='checkbox' component={FormControl}/> Remember Me
+                    <Field name='email' placeholder='Email' component={FormControl}
+                           validate={composeValidators(required, maxLength10)}
+                    />
+                    <Field name='password' placeholder='password' type='password' component={FormControl}
+                           validate={composeValidators(required, maxLength10)}
+                    />
+                    <Field name='rememberMe' type='checkbox' component={FormControl}/> Remember Me
                     <div>
                         {submitError && <div className="error">{submitError}</div>}
                         <button type='submit'>Sign up</button>
@@ -65,7 +65,7 @@ class Login extends Component<LoginType> {
         if (this.props.isAuth) {
             return <Redirect to={'/profile'}/>
         }
-        debugger
+
         return (
             <>
                 <h2>login</h2>

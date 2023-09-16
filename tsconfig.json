@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "baseUrl": "src",
     "target": "es5",
     "lib": [
       "dom",
@@ -23,9 +24,11 @@
       "plugins": [{ "name": "typescript-plugin-css-modules" }]
     },
     //add the following
-    "include": ["src/**/*.ts", "declarations.d.ts"]
+//    "include": ["src/**/*.ts", "declarations.d.ts"]
   },
-  "include": [
-    "src"
-  ]
+//  "include": [
+//    "src"
+  //  ]
+  "include": ["src/**/*"]
+//  "include": ["**/*.ts", "declarations.d.ts"]
 }

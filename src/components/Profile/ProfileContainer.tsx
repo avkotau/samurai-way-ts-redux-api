@@ -2,20 +2,17 @@ import React, { Component } from 'react';
 import s from './Profile.module.css'
 import Profile from "./Profile";
 import { connect } from "react-redux";
-import { AppStateType } from "../../redux/redux-store";
-import {
-    fetchUserProfile, getUserStatus,
-    ProfileResponseType,
-    updateUserStatus,
-} from "../../redux/profileReducer";
+import { AppStateType } from "store/redux-store";
+import { fetchUserProfile, getUserStatus, ProfileResponseType, updateUserStatus } from "store/profileReducer";
 import { RouteComponentProps, withRouter } from "react-router-dom";
-import { withAuthRedirect } from "../../hok/withAuthRedirect";
 import { compose } from "redux";
+import { withAuthRedirect } from 'hok/withAuthRedirect';
+
 
 type MapStateToPropsType = {
     profile: ProfileResponseType | null
     status: string
-    authorizedUserId: number | null
+    authorizedUserId: string | null
     isAuth: boolean
 }
 
@@ -35,12 +32,14 @@ type PropsType = RouteComponentProps<PathParamsType> & OwnUsersType
 class ProfileContainer extends Component<PropsType> {
 
     componentDidMount() {
-
         let userId = this.props.match.params.userId
-
         if (!userId) {
+            debugger
             // userId = '29290'
-            userId = this.props.authorizedUserId
+            userId = this.props.authorizedUserId;
+            // if (!userId) {
+            //     this.props.history.push('/login')
+            // }
         }
         //parseInt for change type because backend return type number, RouteComponentProps return type string
         const userIdNumber = parseInt(userId, 10);
@@ -72,3 +71,4 @@ export default compose<React.ComponentType>(
     connect(mapStateToProps, {fetchUserProfile, getUserStatus, updateUserStatus}),
     withRouter
 )(ProfileContainer)
+

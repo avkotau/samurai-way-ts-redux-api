@@ -1,6 +1,6 @@
 import React from 'react';
 import { Field, Form } from "react-final-form";
-import { FormValuesType } from "../../types/declarations";
+import { FormValuesType } from "types/declarations";
 import { FormControl } from "../common/FormsControls/FormsControls";
 import { composeValidators, maxLength, required } from "../common/validators";
 

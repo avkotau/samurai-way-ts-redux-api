@@ -1,9 +1,11 @@
 import {
     DialogueDataType,
-    MessageDataType, NewMessageTextType,
+    MessageDataType,
+
     NewPostTextType,
-    PostDataType, SidebarDataType,
-} from "../types/declarations";
+    PostDataType,
+    SidebarDataType,
+} from "types/declarations";
 import { profileReducer } from "./profileReducer";
 import { dialoguesReducer } from "./dialoguesReducer";
 import { sidebarReducer } from "./sidebarReducer";

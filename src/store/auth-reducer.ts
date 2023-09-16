@@ -1,6 +1,5 @@
 import { Dispatch } from "redux";
-import { authAPI, loginAPI, logoutAPI } from "../api/api";
-import { stopSubmit } from "redux-form";
+import { authAPI, loginAPI, logoutAPI } from "api/api";
 import { FORM_ERROR } from "final-form";
 
 export type ActionsUsersType =
@@ -15,7 +14,7 @@ export type CredentialsType = {
 }
 
 export const initialState = {
-    id: null as number | null,
+    id: null as string | null,
     email: null as string | null,
     login: null as string | null,
     isAuth: false,
@@ -30,18 +29,6 @@ export const authReducer = (state: InitialStateType = initialState, action: Acti
                 ...state,
                 ...action.payload,
             }
-        // case "SET_LOGIN_DATA":
-        //     debugger
-        //     return {
-        //         ...state,
-        //         credentials: {
-        //             ...state.credentials,
-        //             email: action.email,
-        //             password: action.password,
-        //             rememberMe: action.rememberMe
-        //         }
-        //     }
-
         default: {
             return state
         }
@@ -55,14 +42,6 @@ export const setAuthUserData = (payload: InitialStateType) => {
         payload,
     } as const
 }
-
-// export const setLoginData = (credentials: InitialStateType) => {
-//     const {email, password, rememberMe} = credentials.credentials
-//     return {
-//         type: 'SET_LOGIN_DATA',
-//         email, password, rememberMe
-//     } as const
-// }
 
 export const getAuthUserData = () => (dispatch: Dispatch) => {
     return authAPI()

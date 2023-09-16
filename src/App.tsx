@@ -3,25 +3,46 @@ import './App.css';
 import Navbar from "./components/Navbar/Navbar";
 import s from './components/Routes/RouterApp.module.css'
 import RoutesApp from "./components/Routes/RoutesApp";
-
-import { DispatchType, StateType } from "./redux";
+import { DispatchType, StateType } from "./store";
 import HeaderContainer from "./components/Header/HeaderContainer";
+import { connect } from "react-redux";
+import { initializeApp } from "./store/app-reducer";
+import { AppStateType } from "store/redux-store";
+import Preloader from "components/common/Preloader/Preloader";
 
 type TypeProps = {
     state: StateType
     dispatch: (action: DispatchType) => void
 }
 
-class App extends Component<TypeProps> {
+type MapDispatchToPropsType = {
+    initializeApp: () => void
+}
+
+type mapStateToPropsType = {
+    initialized: boolean
+}
+
+const mapStateToProps = (state: AppStateType) => {
+    return {
+        initialized: state.app.initialized
+    }
+}
+
+class App extends Component<TypeProps & MapDispatchToPropsType & mapStateToPropsType> {
+    componentDidMount() {
+        this.props.initializeApp()
+    }
 
     render() {
         const {state} = this.props
-debugger
+
+        if (!this.props.initialized) return <Preloader/>
+
         return (
             <div className='app'>
                 <HeaderContainer/>
                 <Navbar sidebarData={state.sidebar.sidebarData}/>
-
                 <div className={s.routers}>
                     <RoutesApp/>
                 </div>
@@ -30,4 +51,5 @@ debugger
     }
 }
 
-export default App;
+export default connect(mapStateToProps, {initializeApp})(App)
+

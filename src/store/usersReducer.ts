@@ -1,6 +1,7 @@
-import { UserType } from "../types/declarations";
-import { followAPI, getUsersAPI, unFollowAPI } from "../api/api";
+import { UserType } from "types/declarations";
+import { followAPI, getUsersAPI, unFollowAPI } from "api/api";
 import { Dispatch } from "redux";
+
 
 export type ActionsUsersType = FollowType
     | UnfollowType
@@ -13,7 +14,7 @@ export type ActionsUsersType = FollowType
 type FollowType = ReturnType<typeof follow>
 type UnfollowType = ReturnType<typeof unfollow>
 type SetUsersType = ReturnType<typeof setUsers>
-type SetCurrentPageType = ReturnType<typeof setCurrentPage>
+type SetCurrentPageType = ReturnType<typeof setCurrentPage>;
 type SetTotalUsersCountType = ReturnType<typeof setTotalUsersCount>
 type ToggleIsFetchingType = ReturnType<typeof toggleIsFetching>
 type ToggleFollowInProgressType = ReturnType<typeof toggleFollowInProgress>
@@ -55,10 +56,11 @@ export const usersReducer = (state: InitialStateType = initialState, action: Act
 
         case "TOGGLE_IS_FETCHING_IN_PROGRESS":
 
-            return {...state,
+            return {
+                ...state,
                 toggleFollow: action.isFetching
-                ? [...state.toggleFollow, action.userId]
-                : state.toggleFollow.filter(id => id !== action.userId)
+                    ? [...state.toggleFollow, action.userId]
+                    : state.toggleFollow.filter(id => id !== action.userId)
 
             }
 

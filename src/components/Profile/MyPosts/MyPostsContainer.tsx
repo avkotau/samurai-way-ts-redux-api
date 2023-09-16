@@ -1,9 +1,9 @@
 import React from 'react';
-import { addPostAC, InitialStateType } from "../../../redux/profileReducer";
 import MyPosts from "./MyPosts";
 import { connect } from "react-redux";
-import { AppStateType } from "../../../redux/redux-store";
+import { AppStateType } from "store/redux-store";
 import { Dispatch } from "redux";
+import { addPostAC, InitialStateType } from "store/profileReducer";
 
 export type MyPostsPropsType = MapStateToPropsType & MapDispatchToPropsType
 
