@@ -7,22 +7,9 @@ import { composeValidators, minLength, required } from "../common/validators";
 import { Redirect } from "react-router-dom";
 import { AppStateType } from 'store/redux-store';
 
-
-type FormDataType = {
-    email: string
-    password: string
-    rememberMe: boolean
-}
-
-type LoginFormProps = {
-    onSubmit: (values: FormDataType) => void;
-}
-// & InjectedFormProps<FormDataType>;
-
 const maxLength10 = minLength(10)
-export const LoginForm = (props: any) => {
+export const LoginForm = (props: LoginFormProps) => {
     const {onSubmit} = props;
-
     return (
         <Form
             onSubmit={onSubmit}
@@ -43,17 +30,8 @@ export const LoginForm = (props: any) => {
                 </form>
             )}
         />
-
     )
 }
-
-type MapDispatchToPropsType = {
-    login: (values: FormDataType) => void
-}
-type MapStateToPropsType = {
-    isAuth: boolean
-}
-type LoginType = MapDispatchToPropsType & MapStateToPropsType
 
 class Login extends Component<LoginType> {
     // login - callback which set params for thunk creator
@@ -65,7 +43,6 @@ class Login extends Component<LoginType> {
         if (this.props.isAuth) {
             return <Redirect to={'/profile'}/>
         }
-
         return (
             <>
                 <h2>login</h2>
@@ -80,6 +57,23 @@ const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
         isAuth: state.auth.isAuth
     }
 }
+type FormDataType = {
+    email: string
+    password: string
+    rememberMe: boolean
+}
+type LoginFormProps = {
+    onSubmit: (values: FormDataType) => void;
+}
+// & InjectedFormProps<FormDataType>;
+type MapDispatchToPropsType = {
+    login: (values: FormDataType) => void
+}
+type MapStateToPropsType = {
+    isAuth: boolean
+}
+type LoginType = MapDispatchToPropsType & MapStateToPropsType
+
 // login - this thunk creator
 export default connect(
     mapStateToProps,

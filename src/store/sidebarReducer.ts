@@ -1,4 +1,4 @@
-import { SidebarDataType } from "types/declarations";
+import { SidebarDataType } from "types/commonTypes";
 
 const initialState = {
     sidebarData: [

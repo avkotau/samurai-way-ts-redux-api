@@ -1,5 +1,5 @@
 import { getAuthUserData } from "./auth-reducer";
-import { Dispatch } from "redux";
+import { AppDispatch, AppThunk } from "store/redux-store";
 
 export type ActionsInitializedType = SetInitializedType
 
@@ -18,7 +18,6 @@ export const appReducer = (state: InitialStateType = initialState, action: Actio
                 ...state,
                 initialized: true,
             }
-
         default: {
             return state
         }
@@ -31,8 +30,10 @@ export const setInitializedSuccess = () => {
     } as const
 }
 
-export const initializeApp = () => (dispatch: Dispatch) => {
+export const initializeApp = (): AppThunk => (dispatch: AppDispatch) => {
     const res = dispatch(getAuthUserData())
+
+    console.log('res', res)
     res.then(() => {
         dispatch(setInitializedSuccess())
     })

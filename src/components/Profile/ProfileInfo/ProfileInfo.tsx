@@ -5,13 +5,10 @@ import { PropsType } from "../Profile";
 import { ProfileStatus } from "../ProfileStatus";
 
 class ProfileInfo extends Component<PropsType> {
-
     render() {
-
         if (!this.props.profile) {
             return <Preloader/>
         }
-
         return (
             <div className={s.profileInfoContainer}>
                 <div className={s.description}>

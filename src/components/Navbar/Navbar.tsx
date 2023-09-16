@@ -1,16 +1,9 @@
 import React from 'react';
 import s from './Navbar.module.css';
 import { NavLink } from "react-router-dom";
-import { SidebarDataType } from "types/declarations";
+import { SidebarDataType } from "types/commonTypes";
 
-type Props = {
-    sidebarData: SidebarDataType[]
-}
-
-const Navbar: React.FC<Props> = (
-    {
-        sidebarData
-    }
+const Navbar: React.FC<Props> = ({sidebarData}
 ) => {
     return (
         <>
@@ -44,5 +37,9 @@ const Navbar: React.FC<Props> = (
 
     );
 };
+
+type Props = {
+    sidebarData: SidebarDataType[]
+}
 
 export default Navbar;

@@ -1,7 +1,7 @@
 import React from 'react';
 import s from '../Dialogues.module.css'
 import { NavLink } from "react-router-dom";
-import { DialogueDataType } from "types/declarations";
+import { DialogueDataType } from "types/commonTypes";
 
 type Props = {
     dialoguesData: DialogueDataType[]

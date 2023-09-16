@@ -1,8 +1,4 @@
-import { DialogueDataType, MessageDataType } from "types/declarations";
-
-export type ActionsDialoguesType = AddMessageType
-
-type AddMessageType = ReturnType<typeof addMessageActionCreator>
+import { DialogueDataType, MessageDataType } from "types/commonTypes";
 
 const initialState = {
     dialoguesData: [
@@ -20,7 +16,6 @@ const initialState = {
     ] as Array<MessageDataType>,
 }
 
-export type InitialStateType = typeof initialState
 export const dialoguesReducer = (state: InitialStateType = initialState, action: ActionsDialoguesType): InitialStateType => {
 
     switch (action.type) {
@@ -43,3 +38,7 @@ export const addMessageActionCreator = (newMessage: string) => {
         newMessage
     } as const
 }
+
+export type InitialStateType = typeof initialState
+export type ActionsDialoguesType = AddMessageType
+type AddMessageType = ReturnType<typeof addMessageActionCreator>

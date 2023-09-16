@@ -1,14 +1,8 @@
 import React, { Component } from 'react';
 import s from './Post.module.css';
 
-type TypeProps = {
-    message: string,
-    like: number
-}
-
 class Post extends Component<TypeProps> {
     render() {
-
         return (
             <div className={s.posts}>
                 <div className={s.item}>
@@ -23,6 +17,11 @@ class Post extends Component<TypeProps> {
             </div>
         )
     }
+}
+
+type TypeProps = {
+    message: string,
+    like: number
 }
 
 export default Post;

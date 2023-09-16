@@ -1,16 +1,10 @@
 import { Form, Field } from 'react-final-form'
-import { FormValuesType } from "types/declarations";
 import { composeValidators, maxLength, required } from "../common/validators";
 import { FormControl } from "../common/FormsControls/FormsControls";
-
-type MessageFormType = {
-    onSubmit: (newMessage: FormValuesType) => void
-}
+import { FormValuesType } from "types/commonTypes";
 
 const maxLength30 = maxLength(200)
-
 function MessageForm(props: MessageFormType) {
-
     return (
         <Form
             onSubmit={props.onSubmit}
@@ -27,6 +21,10 @@ function MessageForm(props: MessageFormType) {
             )}
         />
     );
+}
+
+type MessageFormType = {
+    onSubmit: (newMessage: FormValuesType) => void
 }
 
 export default MessageForm;

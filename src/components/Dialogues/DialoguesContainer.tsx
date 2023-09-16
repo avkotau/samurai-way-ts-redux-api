@@ -9,16 +9,7 @@ import {
 } from "store/dialoguesReducer";
 import { withAuthRedirect } from "hok/withAuthRedirect";
 
-type MapStateToPropsType = InitialStateType
-
-type MapDispatchToPropsType = {
-    addMessage: (newMessage: string) => void
-}
-
-export type DialoguesType = MapStateToPropsType & MapDispatchToPropsType
-
 const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
-
     return {
         dialoguesData: state.dialoguesPage.dialoguesData,
         messagesData: state.dialoguesPage.messagesData,
@@ -32,6 +23,12 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
         }
     }
 }
+
+type MapStateToPropsType = InitialStateType
+type MapDispatchToPropsType = {
+    addMessage: (newMessage: string) => void
+}
+export type DialoguesType = MapStateToPropsType & MapDispatchToPropsType
 
 export default compose<React.ComponentType>(
     withAuthRedirect,

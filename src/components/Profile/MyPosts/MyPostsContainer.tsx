@@ -5,16 +5,7 @@ import { AppStateType } from "store/redux-store";
 import { Dispatch } from "redux";
 import { addPostAC, InitialStateType } from "store/profileReducer";
 
-export type MyPostsPropsType = MapStateToPropsType & MapDispatchToPropsType
-
-type MapStateToPropsType = InitialStateType
-
-type MapDispatchToPropsType = {
-    addPost: (newPost: string) => void
-}
-
 const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
-
     return {
         postsData: state.profilePage.postsData,
         //not use now
@@ -29,6 +20,14 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
             dispatch(addPostAC(newPost))
         },
     }
+}
+
+export type MyPostsPropsType = MapStateToPropsType & MapDispatchToPropsType
+
+type MapStateToPropsType = InitialStateType
+
+type MapDispatchToPropsType = {
+    addPost: (newPost: string) => void
 }
 
 const MyPostsContainer = connect(mapStateToProps, mapDispatchToProps)(MyPosts)

@@ -7,32 +7,12 @@ import {
     toggleFollowInProgress,
     unFollowUser
 } from "store/usersReducer";
-import { UserType } from "types/declarations";
 import Users from "./Users";
 import Preloader from "../common/Preloader/Preloader";
-
-export type UsersType = MapStateToPropsType & MapDispatchToPropsType
-
-type MapStateToPropsType = {
-    users: UserType[]
-    totalUsersCount: number
-    pageSize: number
-    currentPage: number
-    isFetching: boolean
-    toggleFollow: number[]
-}
-
-type MapDispatchToPropsType = {
-    followUser: (userId: number) => void
-    unFollowUser: (userId: number) => void
-    toggleFollowInProgress: (userId: number, isFetching: boolean) => void
-    setCurrentPage: (page: number) => void
-    getUsers: (currentPage: number, pageSize: number) => void
-}
+import { UserType } from "types/commonTypes";
 
 
 class UsersContainer extends Component<UsersType> {
-
     componentDidMount() {
         this.props.getUsers(this.props.currentPage, this.props.pageSize)
     }
@@ -55,7 +35,6 @@ class UsersContainer extends Component<UsersType> {
             toggleFollowInProgress
         } = this.props
 
-
         return (
             <>
                 {isFetching && <Preloader/>}
@@ -71,13 +50,11 @@ class UsersContainer extends Component<UsersType> {
                     toggleFollowInProgress={toggleFollowInProgress}
                 />
             </>
-
         );
     }
 }
 
 const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
-
     return {
         users: state.usersPage.users,
         pageSize: state.usersPage.pageSize,
@@ -86,6 +63,25 @@ const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
         isFetching: state.usersPage.isFetching,
         toggleFollow: state.usersPage.toggleFollow
     }
+}
+
+export type UsersType = MapStateToPropsType & MapDispatchToPropsType
+
+type MapStateToPropsType = {
+    users: UserType[]
+    totalUsersCount: number
+    pageSize: number
+    currentPage: number
+    isFetching: boolean
+    toggleFollow: number[]
+}
+
+type MapDispatchToPropsType = {
+    followUser: (userId: number) => void
+    unFollowUser: (userId: number) => void
+    toggleFollowInProgress: (userId: number, isFetching: boolean) => void
+    setCurrentPage: (page: number) => void
+    getUsers: (currentPage: number, pageSize: number) => void
 }
 
 export default connect(mapStateToProps, {

@@ -7,11 +7,12 @@ type FormControlProps<T> = {
     meta: FieldMetaState<T>
 };
 
-export const FormControl = <T extends string | number | readonly string[]>({
-                                                                               input,
-                                                                               meta,
-                                                                               ...resProps
-                                                                           }: FormControlProps<T>) => {
+export const FormControl = <T extends string | number | readonly string[]>(
+    {
+        input,
+        meta,
+        ...resProps
+    }: FormControlProps<T>) => {
 
     const hasErrorInput = (meta.error && meta.dirty) || (meta.error && meta.touched)
     const hasErrorTextarea = meta.error && meta.dirty

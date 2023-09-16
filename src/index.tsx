@@ -3,11 +3,10 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import { BrowserRouter } from "react-router-dom";
-import { store } from "./store/redux-store";
 import { Provider } from "react-redux";
+import { store } from "store/redux-store";
 
 export let rerenderTree = () => {
-
     ReactDOM.render(
         <BrowserRouter>
             <Provider store={store}>

@@ -24,3 +24,5 @@ yarn-error.log*
 
 .idea
 
+#old logic (not useing)
+/src/store/index.ts

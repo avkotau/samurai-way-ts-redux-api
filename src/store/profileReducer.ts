@@ -1,33 +1,6 @@
-import { PostDataType } from "types/declarations";
 import { getUserStatusAPI, profileUserAPI, updateUserStatusAPI } from "api/api";
 import { Dispatch } from "redux";
-
-export type ActionsProfileType = AddPostActionType
-    | SetUserProfileActionType | GetUserStatusActionType | UpdateUserStatusActionType
-
-type AddPostActionType = ReturnType<typeof addPostAC>
-type SetUserProfileActionType = ReturnType<typeof setUserProfileAC>
-type GetUserStatusActionType = ReturnType<typeof getUserStatusAC>
-type UpdateUserStatusActionType = ReturnType<typeof updateUserStatusAC>
-
-export type ProfileResponseType = {
-    aboutMe: string;
-    contacts: {
-        facebook: string;
-        website: null | string;
-        vk: string;
-        twitter: string;
-        instagram: string;
-    };
-    fullName: string;
-    lookingForAJob: boolean;
-    lookingForAJobDescription: string;
-    photos: {
-        small: string;
-        large: string;
-    };
-    userId: number;
-};
+import { PostDataType } from "types/commonTypes";
 
 const initialState = {
     postsData: [
@@ -120,3 +93,29 @@ export const fetchUserProfile = (userId: number) => (dispatch: Dispatch) => {
         })
 }
 
+export type ActionsProfileType = AddPostActionType
+    | SetUserProfileActionType | GetUserStatusActionType | UpdateUserStatusActionType
+
+type AddPostActionType = ReturnType<typeof addPostAC>
+type SetUserProfileActionType = ReturnType<typeof setUserProfileAC>
+type GetUserStatusActionType = ReturnType<typeof getUserStatusAC>
+type UpdateUserStatusActionType = ReturnType<typeof updateUserStatusAC>
+
+export type ProfileResponseType = {
+    aboutMe: string;
+    contacts: {
+        facebook: string;
+        website: null | string;
+        vk: string;
+        twitter: string;
+        instagram: string;
+    };
+    fullName: string;
+    lookingForAJob: boolean;
+    lookingForAJobDescription: string;
+    photos: {
+        small: string;
+        large: string;
+    };
+    userId: number;
+};

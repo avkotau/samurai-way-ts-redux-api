@@ -1,26 +1,8 @@
 import { Dispatch } from "redux";
 import { authAPI, loginAPI, logoutAPI } from "api/api";
 import { FORM_ERROR } from "final-form";
+import { AppDispatch, AppThunk } from "store/redux-store";
 
-export type ActionsUsersType =
-    | SetUserDataType
-
-export type SetUserDataType = ReturnType<typeof setAuthUserData>
-
-export type CredentialsType = {
-    email: string
-    password: string
-    rememberMe: boolean
-}
-
-export const initialState = {
-    id: null as string | null,
-    email: null as string | null,
-    login: null as string | null,
-    isAuth: false,
-}
-
-export type InitialStateType = typeof initialState
 export const authReducer = (state: InitialStateType = initialState, action: ActionsUsersType): InitialStateType => {
 
     switch (action.type) {
@@ -43,7 +25,7 @@ export const setAuthUserData = (payload: InitialStateType) => {
     } as const
 }
 
-export const getAuthUserData = () => (dispatch: Dispatch) => {
+export const getAuthUserData = (): AppThunk => (dispatch: AppDispatch) => {
     return authAPI()
         .then(res => {
             const {id, email, login} = res.data.data
@@ -54,20 +36,20 @@ export const getAuthUserData = () => (dispatch: Dispatch) => {
 }
 
 //thunk creator - (email, password, rememberMe) - thunk - (dispatch: Dispatch)
-export const login = (credentials: CredentialsType) => (dispatch: Dispatch) => {
+export const login = (credentials: CredentialsType): AppThunk => (dispatch: AppDispatch) => {
 
     return loginAPI(credentials)
         .then(res => {
             if (res.data.resultCode === 0) {
                 dispatch(getAuthUserData())
             } else {
-                let errorMessage = res.data.messages.length > 0 ? res.data.messages[0] : "Some error occurred";
-                return {[FORM_ERROR]: errorMessage}; // Возвращаем ошибку
+                let errorMessage = res.data.messages.length > 0 ? res.data.messages : "Some error occurred";
+                return {[FORM_ERROR]: errorMessage[0]}; // return error
             }
         })
-}
+};
 
-export const logout = () => (dispatch: Dispatch,) => {
+export const logout = () => (dispatch: Dispatch) => {
     return logoutAPI()
         .then(res => {
             if (res.data.resultCode === 0) {
@@ -76,8 +58,25 @@ export const logout = () => (dispatch: Dispatch,) => {
         })
 }
 
+export type ActionsUsersType =
+    | SetUserDataType
 
+export type SetUserDataType = ReturnType<typeof setAuthUserData>
 
+export type CredentialsType = {
+    email: string
+    password: string
+    rememberMe: boolean
+}
+
+export const initialState = {
+    id: null as string | null,
+    email: null as string | null,
+    login: null as string | null,
+    isAuth: false,
+}
+
+export type InitialStateType = typeof initialState
 
 
 
