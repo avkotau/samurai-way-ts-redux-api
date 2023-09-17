@@ -26,4 +26,3 @@ yarn-error.log*
 
 #old logic (not useing)
 /src/store/index.ts
-index.ts
