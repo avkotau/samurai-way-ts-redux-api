@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import s from './ProfileInfo.module.css'
 import Preloader from "../../common/Preloader/Preloader";
 import { PropsType } from "../Profile";
-import { ProfileStatus } from "../ProfileStatus";
+import { ProfileStatusWithHooks } from "components/Profile/ProfileStatusWithHooks";
 
 class ProfileInfo extends Component<PropsType> {
     render() {
@@ -14,7 +14,7 @@ class ProfileInfo extends Component<PropsType> {
                 <div className={s.description}>
                     <img src={this.props.profile.photos.large} alt=''/>
 
-                    <ProfileStatus status={this.props.status} updateUserStatus={this.props.updateUserStatus}/>
+                    <ProfileStatusWithHooks status={this.props.status} updateUserStatus={this.props.updateUserStatus}/>
 
                     <dl>
                         <dt>Full name:</dt>

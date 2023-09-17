@@ -17,17 +17,14 @@ import {
     getUsersSelector
 } from "store/users-selectors";
 
-
 class UsersContainer extends Component<UsersType> {
     componentDidMount() {
         this.props.getUsers(this.props.currentPage, this.props.pageSize)
     }
-
     onPageChanged(pageNumber: number) {
         this.props.setCurrentPage(pageNumber)
         this.props.getUsers(pageNumber, this.props.pageSize)
     }
-
     render() {
         const {
             users,
@@ -40,7 +37,6 @@ class UsersContainer extends Component<UsersType> {
             toggleFollow,
             toggleFollowInProgress
         } = this.props
-
         return (
             <>
                 {isFetching && <Preloader/>}
@@ -81,7 +77,6 @@ type MapStateToPropsType = {
     isFetching: boolean
     toggleFollow: number[]
 }
-
 type MapDispatchToPropsType = {
     followUser: (userId: number) => void
     unFollowUser: (userId: number) => void
