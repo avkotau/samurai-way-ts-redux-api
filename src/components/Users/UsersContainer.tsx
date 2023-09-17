@@ -10,6 +10,12 @@ import {
 import Users from "./Users";
 import Preloader from "../common/Preloader/Preloader";
 import { UserType } from "types/commonTypes";
+import {
+    getCurrentPageSelector, getIsFetchingSelector,
+    getPageSizeSelector, getToggleFollowSelector,
+    getTotalUsersCountSelector,
+    getUsersSelector
+} from "store/users-selectors";
 
 
 class UsersContainer extends Component<UsersType> {
@@ -56,12 +62,12 @@ class UsersContainer extends Component<UsersType> {
 
 const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
     return {
-        users: state.usersPage.users,
-        pageSize: state.usersPage.pageSize,
-        totalUsersCount: state.usersPage.totalUsersCount,
-        currentPage: state.usersPage.currentPage,
-        isFetching: state.usersPage.isFetching,
-        toggleFollow: state.usersPage.toggleFollow
+        users: getUsersSelector(state),
+        pageSize: getPageSizeSelector(state),
+        totalUsersCount: getTotalUsersCountSelector(state),
+        currentPage: getCurrentPageSelector(state),
+        isFetching: getIsFetchingSelector(state),
+        toggleFollow: getToggleFollowSelector(state)
     }
 }
 

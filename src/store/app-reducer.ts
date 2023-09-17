@@ -33,7 +33,6 @@ export const setInitializedSuccess = () => {
 export const initializeApp = (): AppThunk => (dispatch: AppDispatch) => {
     const res = dispatch(getAuthUserData())
 
-    console.log('res', res)
     res.then(() => {
         dispatch(setInitializedSuccess())
     })
