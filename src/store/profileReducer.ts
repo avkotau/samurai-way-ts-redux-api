@@ -40,8 +40,19 @@ export const profileReducer = (state: InitialStateType = initialState, action: A
                 ...state,
                 status: action.status
             }
+        case "DELETE_POST":
+            return {
+                ...state,
+                postsData: state.postsData.filter(p => p.id !== action.postId)
+            }
     }
     return state
+}
+export const deletePostAC = (postId: string) => {
+    return {
+        type: 'DELETE_POST',
+        postId
+    } as const
 }
 
 export const addPostAC = (newPost: string) => {
@@ -74,7 +85,7 @@ export const updateUserStatusAC = (status: string) => {
 
 export const updateUserStatus = (status: string) => (dispatch: Dispatch) => {
     return updateUserStatusAPI(status)
-        .then(res => {
+        .then(() => {
             dispatch(updateUserStatusAC(status))
         })
 }
@@ -95,11 +106,13 @@ export const fetchUserProfile = (userId: number) => (dispatch: Dispatch) => {
 
 export type ActionsProfileType = AddPostActionType
     | SetUserProfileActionType | GetUserStatusActionType | UpdateUserStatusActionType
+    | DeletePostActionType
 
 type AddPostActionType = ReturnType<typeof addPostAC>
 type SetUserProfileActionType = ReturnType<typeof setUserProfileAC>
 type GetUserStatusActionType = ReturnType<typeof getUserStatusAC>
 type UpdateUserStatusActionType = ReturnType<typeof updateUserStatusAC>
+type DeletePostActionType = ReturnType<typeof deletePostAC>
 
 export type ProfileResponseType = {
     aboutMe: string;
