@@ -27,7 +27,7 @@ export const ProfileStatusWithHooks = (props: PropsType) => {
                        onChange={changeStatus}
                 />
             </div>
-            : <div onDoubleClick={activateEditMode}>{status.trim() || 'empty status'}</div>
+            : <div onDoubleClick={activateEditMode}>{status ? status.trim() : 'empty status'}</div>
     )
 }
 

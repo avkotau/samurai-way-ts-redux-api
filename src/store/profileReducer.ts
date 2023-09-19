@@ -24,7 +24,6 @@ export const profileReducer = (state: InitialStateType = initialState, action: A
                 like: 0
             }
             return {...state, postsData: [newPost, ...state.postsData]}
-
         case "SET_USER-PROFILE":
             return {
                 ...state,
@@ -54,54 +53,43 @@ export const deletePostAC = (postId: string) => {
         postId
     } as const
 }
-
 export const addPostAC = (newPost: string) => {
     return {
         type: 'ADD_POST',
         newPost
     } as const
 }
-
 export const setUserProfileAC = (profile: ProfileResponseType) => {
     return {
         type: 'SET_USER-PROFILE',
         profile
     } as const
 }
-
 export const getUserStatusAC = (status: string) => {
     return {
         type: 'GET_USER_STATUS',
         status
     } as const
 }
-
 export const updateUserStatusAC = (status: string) => {
     return {
         type: 'UPDATE_USER_STATUS',
         status
     } as const
 }
-
-export const updateUserStatus = (status: string) => (dispatch: Dispatch) => {
-    return updateUserStatusAPI(status)
-        .then(() => {
-            dispatch(updateUserStatusAC(status))
-        })
+export const updateUserStatus = (status: string) => async (dispatch: Dispatch) => {
+    const res = await updateUserStatusAPI(status)
+    if (res.data.resultCode === 0) {
+        dispatch(updateUserStatusAC(status))
+    }
 }
-
-export const getUserStatus = (userId: number) => (dispatch: Dispatch) => {
-    return getUserStatusAPI(userId)
-        .then(res => {
-            dispatch(getUserStatusAC(res.data))
-        })
+export const getUserStatus = (userId: number) => async (dispatch: Dispatch) => {
+    const res = await getUserStatusAPI(userId)
+    dispatch(getUserStatusAC(res.data))
 }
-
-export const fetchUserProfile = (userId: number) => (dispatch: Dispatch) => {
-    return profileUserAPI(userId)
-        .then(res => {
-            dispatch(setUserProfileAC(res.data))
-        })
+export const fetchUserProfile = (userId: number) => async (dispatch: Dispatch) => {
+    const res = await profileUserAPI(userId)
+    dispatch(setUserProfileAC(res.data))
 }
 
 export type ActionsProfileType = AddPostActionType

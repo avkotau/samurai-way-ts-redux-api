@@ -2,7 +2,6 @@ type PhotosType = {
     small: null
     large: null
 }
-
 export type UserType = {
     id: number
     followed: boolean
@@ -11,7 +10,6 @@ export type UserType = {
     status: null
     uniqueUrlName: null
 }
-
 export type DialogueDataType = {
     id: string
     name: string
@@ -30,36 +28,29 @@ export type SidebarDataType = {
     name: string
     like: number
 }
-
 export type NewPostTextType = {
     id: string
     post: string
 }
-
 export type FormValuesType = {
     textarea: string;
 }
-
 type SidebarType = {
     sidebarData: SidebarDataType[]
 }
-
 export type DispatchType = {
     type: string
     textPost?: string
 }
-
 type ProfilePageType = {
     postsData: PostDataType[]
     newPostText: NewPostTextType[]
 };
-
 type DialoguesPageType = {
     dialoguesData: DialogueDataType[]
     messagesData: MessageDataType[]
-    newMessageText: {id: number, name: string}[]
+    newMessageText: { id: number, name: string }[]
 }
-
 export type StateType = {
     dialoguesPage: DialoguesPageType
     profilePage: ProfilePageType
