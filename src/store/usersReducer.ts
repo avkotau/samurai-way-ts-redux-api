@@ -1,18 +1,20 @@
 import { followAPI, getUsersAPI, unFollowAPI } from "api/api";
 import { Dispatch } from "redux";
 import { UserType } from "types/commonTypes";
+import { toggleFollowStatus } from "utils/helper-functions";
 
 export const usersReducer = (state: InitialStateType = initialState, action: ActionsUsersType): InitialStateType => {
     switch (action.type) {
         case "FOLLOW":
             return {
-                ...state, users: state.users.map(u =>
-                    u.id === action.userId ? ({...u, followed: !u.followed}) : u)
+                ...state,
+                users: toggleFollowStatus(state.users, action.userId, 'id',  {followed: true})
             }
         case "UNFOLLOW":
             return {
-                ...state, users: state.users.map(u =>
-                    u.id === action.userId ? ({...u, followed: !u.followed}) : u)
+                ...state,
+                users: toggleFollowStatus(state.users, action.userId, 'id',  {followed: false})
+
             }
         case "SET_USERS":
             return {...state, users: action.users}
@@ -85,7 +87,6 @@ export const toggleFollowInProgress = (userId: number, isFetching: boolean) => {
     } as const
 }
 
-
 const followUnfollowFlow = async (dispatch: Dispatch, userId: number, apiMethod:ApiMethodType, actionCreator: ActionCreatorType) => {
     dispatch(toggleFollowInProgress(userId, true))
     const res = await apiMethod(userId)
@@ -102,11 +103,11 @@ export const getUsers = (page: number, pageSize: number) => async (dispatch: Dis
     dispatch(setTotalUsersCount(res.totalCount))
 }
 export const unFollowUser = (userId: number) => async (dispatch: Dispatch) => {
-    followUnfollowFlow(dispatch, userId, unFollowAPI.bind(unFollowAPI), unfollow)
+    await followUnfollowFlow(dispatch, userId, unFollowAPI.bind(unFollowAPI), unfollow)
 
 }
 export const followUser = (userId: number) => async (dispatch: Dispatch) => {
-    followUnfollowFlow(dispatch, userId, followAPI.bind(followAPI), follow)
+    await followUnfollowFlow(dispatch, userId, followAPI.bind(followAPI), follow)
 }
 
 type ApiMethodType = (id: number) => Promise<{ data: { resultCode: number } }>;
