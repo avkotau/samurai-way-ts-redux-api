@@ -1,7 +1,7 @@
 import React from 'react';
 import { Field, Form } from "react-final-form";
 import { FormControl } from "../common/FormsControls/FormsControls";
-import { composeValidators, maxLength, required } from "../common/validators";
+import { composeValidators, maxLength, required } from "utils/validators";
 import { FormValuesType } from "types/commonTypes";
 
 const maxLength100 = maxLength(100)

@@ -10,12 +10,12 @@ type FormControlProps<T> = {
 export const FormControl = <T extends string | number | readonly string[]>(
     {
         input,
-        meta,
+        meta: {error, dirty, touched},
         ...resProps
     }: FormControlProps<T>) => {
 
-    const hasErrorInput = (meta.error && meta.dirty) || (meta.error && meta.touched)
-    const hasErrorTextarea = meta.error && meta.dirty
+    const hasErrorInput = (error && dirty) || (error && touched)
+    const hasErrorTextarea = error && dirty
     return (
         <div>
             {
@@ -25,8 +25,8 @@ export const FormControl = <T extends string | number | readonly string[]>(
             }
             {
                 input.name === 'textarea'
-                    ? hasErrorTextarea && <span className={s.error}>{meta.error}</span>
-                    : hasErrorInput && <span className={s.error}>{meta.error}</span>
+                    ? hasErrorTextarea && <span className={s.error}>{error}</span>
+                    : hasErrorInput && <span className={s.error}>{error}</span>
             }
         </div>
     )

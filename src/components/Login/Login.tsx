@@ -3,7 +3,7 @@ import { Field, Form } from 'react-final-form'
 import { login } from "store/auth-reducer";
 import { connect } from "react-redux";
 import { FormControl } from '../common/FormsControls/FormsControls'
-import { composeValidators, minLength, required } from "../common/validators";
+import { composeValidators, minLength, required } from "utils/validators";
 import { Redirect } from "react-router-dom";
 import { AppStateType } from 'store/redux-store';
 
@@ -65,7 +65,6 @@ type FormDataType = {
 type LoginFormProps = {
     onSubmit: (values: FormDataType) => void;
 }
-// & InjectedFormProps<FormDataType>;
 type MapDispatchToPropsType = {
     login: (values: FormDataType) => void
 }
@@ -78,5 +77,4 @@ type LoginType = MapDispatchToPropsType & MapStateToPropsType
 export default connect(
     mapStateToProps,
     {login}
-    // {credentialsData}
 )(Login)

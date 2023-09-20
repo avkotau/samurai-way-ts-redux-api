@@ -1,5 +1,5 @@
 import { Form, Field } from 'react-final-form'
-import { composeValidators, maxLength, required } from "../common/validators";
+import { composeValidators, maxLength, required } from "utils/validators";
 import { FormControl } from "../common/FormsControls/FormsControls";
 import { FormValuesType } from "types/commonTypes";
 
