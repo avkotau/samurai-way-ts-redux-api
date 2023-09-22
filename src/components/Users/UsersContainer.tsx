@@ -30,7 +30,7 @@ class UsersContainer extends Component<UsersType> {
             users,
             followUser,
             unFollowUser,
-            totalUsersCount,
+            totalItemsCount,
             pageSize,
             currentPage,
             isFetching,
@@ -42,7 +42,7 @@ class UsersContainer extends Component<UsersType> {
                 {isFetching && <Preloader/>}
                 <Users
                     users={users}
-                    totalUsersCount={totalUsersCount}
+                    totalItemsCount={totalItemsCount}
                     pageSize={pageSize}
                     currentPage={currentPage}
                     followUser={followUser}
@@ -60,7 +60,7 @@ const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
     return {
         users: getUsersSelector(state),
         pageSize: getPageSizeSelector(state),
-        totalUsersCount: getTotalUsersCountSelector(state),
+        totalItemsCount: getTotalUsersCountSelector(state),
         currentPage: getCurrentPageSelector(state),
         isFetching: getIsFetchingSelector(state),
         toggleFollow: getToggleFollowSelector(state)
@@ -71,7 +71,7 @@ export type UsersType = MapStateToPropsType & MapDispatchToPropsType
 
 type MapStateToPropsType = {
     users: UserType[]
-    totalUsersCount: number
+    totalItemsCount: number
     pageSize: number
     currentPage: number
     isFetching: boolean
@@ -83,6 +83,7 @@ type MapDispatchToPropsType = {
     toggleFollowInProgress: (userId: number, isFetching: boolean) => void
     setCurrentPage: (page: number) => void
     getUsers: (currentPage: number, pageSize: number) => void
+    onPageChanged: (pageNumber: number) => void
 }
 
 export default connect(mapStateToProps, {

@@ -11,8 +11,11 @@ const initialState = {
     status: ''
 }
 it('length of post should be incremented ', function () {
+    // test data
     let action = addPostAC('new post')
+    // action
     let newState = profileReducer(initialState, action)
+    //expectation
     expect(newState.postsData.length).toBe(4)
 });
 it('message of new post should be correct', function () {

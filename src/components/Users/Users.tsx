@@ -7,7 +7,7 @@ class Users extends Component<UsersType> {
     render() {
         const {
             users,
-            totalUsersCount,
+            totalItemsCount,
             pageSize,
             currentPage,
             onPageChanged,
@@ -18,7 +18,7 @@ class Users extends Component<UsersType> {
 
         return (
             <div>
-                <Paginator totalUsersCount={totalUsersCount}
+                <Paginator totalItemsCount={totalItemsCount}
                            pageSize={pageSize}
                            currentPage={currentPage}
                            onPageChanged={onPageChanged}/>
@@ -38,7 +38,7 @@ export default Users;
 
 type UsersType = {
     users: UserType[]
-    totalUsersCount: number
+    totalItemsCount: number
     pageSize: number
     currentPage: number
     followUser: (userId: number) => void

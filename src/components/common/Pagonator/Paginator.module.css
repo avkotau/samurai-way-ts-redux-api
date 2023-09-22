@@ -1,6 +1,8 @@
 .pages {
     padding: 0 5px;
     cursor: pointer;
+    border: 1px solid black;
+    margin-left: 1px;
 }
 .selectedPage {
     font-weight: bold;

@@ -3,9 +3,8 @@ import photo from '../../assets/images/photoUser.png';
 import { NavLink } from "react-router-dom";
 import { UserType } from "types/commonTypes";
 
-class User extends Component<UsersType> {
+class User extends Component<PropsType> {
     render() {
-        console.log(this.props)
         const {
             user,
             toggleFollow,
@@ -46,16 +45,21 @@ class User extends Component<UsersType> {
 
 export default User;
 
-type UsersType = {
-    users: UserType[]
-    totalUsersCount: number
-    pageSize: number
-    currentPage: number
+// type UsersType = {
+//     users: UserType[]
+//     totalUsersCount: number
+//     pageSize: number
+//     currentPage: number
+//     followUser: (userId: number) => void
+//     unFollowUser: (userId: number) => void
+//     onPageChanged: (pageNumber: number) => void
+//     toggleFollowInProgress: (userId: number, isFetching: boolean) => void
+//     toggleFollow: number[]
+// }
+
+type PropsType = {
+    user: UserType
+    toggleFollow: number[]
     followUser: (userId: number) => void
     unFollowUser: (userId: number) => void
-    onPageChanged: (pageNumber: number) => void
-    toggleFollowInProgress: (userId: number, isFetching: boolean) => void
-    toggleFollow: number[]
 }
-
-
