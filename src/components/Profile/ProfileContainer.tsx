@@ -9,13 +9,11 @@ import { compose } from "redux";
 import { withAuthRedirect } from 'hok/withAuthRedirect';
 
 class ProfileContainer extends Component<PropsType> {
-    componentDidMount() {
+
+    refreshProfile() {
         let userId = this.props.match.params.userId
         if (!userId) {
             userId = this.props.authorizedUserId as string;
-            // if (!userId) {
-            //     this.props.history.push('/login')
-            // }
         }
         //parseInt for change type because backend return type number, RouteComponentProps return type string
         const userIdNumber = parseInt(userId, 10);
@@ -23,11 +21,25 @@ class ProfileContainer extends Component<PropsType> {
         this.props.getUserStatus(userIdNumber)
     }
 
+    componentDidMount() {
+        this.refreshProfile()
+    }
+
+    componentDidUpdate(prevProps: Readonly<PropsType>, prevState: Readonly<{}>, snapshot?: any) {
+        let userId = prevProps.match.params.userId
+        if (userId !== this.props.match.params.userId) {
+            this.refreshProfile()
+        }
+
+    }
+
     render() {
         return (
             <div className={s.content}>
                 <Profile {...this.props}
+                         isOwner={!this.props.match.params.userId}
                          profile={this.props.profile}
+                         savePhoto={this.props.savePhoto}
                 />
             </div>
         )
@@ -39,6 +51,7 @@ const mapStateToProps = (state: AppStateType): MapStateToPropsType => ({
     status: state.profilePage.status,
     authorizedUserId: state.auth.id,
     isAuth: state.auth.isAuth,
+    // savePhoto: state.
 })
 type MapStateToPropsType = {
     profile: ProfileResponseType | null

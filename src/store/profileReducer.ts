@@ -77,6 +77,18 @@ export const updateUserStatusAC = (status: string) => {
         status
     } as const
 }
+export const savePhotoSuccess = (photo: any) => {
+    return {
+        type: 'UPDATE_USER_STATUS',
+        status
+    } as const
+}
+export const savePhoto = (file: string) => async (dispatch: Dispatch) => {
+    const res = await savePhotoAPI(file)
+    if (res.data.resultCode === 0) {
+        dispatch(updateUserStatusAC(file))
+    }
+}
 export const updateUserStatus = (status: string) => async (dispatch: Dispatch) => {
     const res = await updateUserStatusAPI(status)
     if (res.data.resultCode === 0) {
