@@ -18,14 +18,14 @@ const rootReducer = combineReducers({
     app: appReducer
 });
 
-//@ts-ignored
+//@ts-ignore
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 export const store = createStore(rootReducer, composeEnhancers(
     applyMiddleware(thunk)
 ));
 
 export type AppStateType = ReturnType<typeof rootReducer>
-// export const store = createStore(rootReducer, applyMiddleware(thunk));
+
 export type AppThunk = ThunkAction<any, AppStateType, unknown, AnyAction>;
 export type AppDispatch = ThunkDispatch<AppStateType, unknown, AnyAction>;
 

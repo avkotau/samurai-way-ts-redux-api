@@ -21,10 +21,12 @@ class UsersContainer extends Component<UsersType> {
     componentDidMount() {
         this.props.getUsers(this.props.currentPage, this.props.pageSize)
     }
+
     onPageChanged(pageNumber: number) {
         this.props.setCurrentPage(pageNumber)
         this.props.getUsers(pageNumber, this.props.pageSize)
     }
+
     render() {
         const {
             users,
@@ -83,7 +85,6 @@ type MapDispatchToPropsType = {
     toggleFollowInProgress: (userId: number, isFetching: boolean) => void
     setCurrentPage: (page: number) => void
     getUsers: (currentPage: number, pageSize: number) => void
-    onPageChanged: (pageNumber: number) => void
 }
 
 export default connect(mapStateToProps, {

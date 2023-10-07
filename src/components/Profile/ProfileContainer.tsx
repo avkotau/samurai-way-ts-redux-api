@@ -3,7 +3,13 @@ import s from './Profile.module.css'
 import Profile from "./Profile";
 import { connect } from "react-redux";
 import { AppStateType } from "store/redux-store";
-import { fetchUserProfile, getUserStatus, ProfileResponseType, updateUserStatus } from "store/profileReducer";
+import {
+    fetchUserProfile,
+    getUserStatus,
+    ProfileResponseType,
+    savePhoto,
+    updateUserStatus
+} from "store/profileReducer";
 import { RouteComponentProps, withRouter } from "react-router-dom";
 import { compose } from "redux";
 import { withAuthRedirect } from 'hok/withAuthRedirect';
@@ -30,7 +36,6 @@ class ProfileContainer extends Component<PropsType> {
         if (userId !== this.props.match.params.userId) {
             this.refreshProfile()
         }
-
     }
 
     render() {
@@ -51,7 +56,6 @@ const mapStateToProps = (state: AppStateType): MapStateToPropsType => ({
     status: state.profilePage.status,
     authorizedUserId: state.auth.id,
     isAuth: state.auth.isAuth,
-    // savePhoto: state.
 })
 type MapStateToPropsType = {
     profile: ProfileResponseType | null
@@ -63,6 +67,7 @@ type MapDispatchToPropsType = {
     fetchUserProfile: (userId: number) => void
     getUserStatus: (userId: number) => void
     updateUserStatus: (status: string) => void
+    savePhoto: (file: any) => void
 }
 type PathParamsType = {
     userId: string
@@ -74,7 +79,7 @@ type PropsType = RouteComponentProps<PathParamsType> & OwnUsersType
 //With help withRouter new component for get url data from props
 export default compose<React.ComponentType>(
     withAuthRedirect,
-    connect(mapStateToProps, {fetchUserProfile, getUserStatus, updateUserStatus}),
+    connect(mapStateToProps, {fetchUserProfile, getUserStatus, updateUserStatus, savePhoto}),
     withRouter
 )(ProfileContainer)
 

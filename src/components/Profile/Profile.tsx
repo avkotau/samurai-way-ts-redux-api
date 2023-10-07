@@ -11,6 +11,7 @@ const Profile = (props: PropsType) => {
                          status={props.status}
                          updateUserStatus={props.updateUserStatus}
                          isOwner={props.isOwner}
+                         savePhoto={props.savePhoto}
             />
             <MyPostsContainer/>
         </div>
@@ -22,7 +23,7 @@ export type PropsType = {
     status: string
     updateUserStatus: (status: string) => void
     isOwner: boolean
-    savePhoto: () => void
+    savePhoto: (file: Blob) => void
 }
 
 export default Profile;

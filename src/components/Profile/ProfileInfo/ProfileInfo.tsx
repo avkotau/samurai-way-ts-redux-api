@@ -12,8 +12,9 @@ class ProfileInfo extends Component<PropsType> {
         }
 
         const mainPhotoSelected = (e: ChangeEvent<HTMLInputElement>) => {
+
             if (e.target.files?.length) {
-                props.savePhoto(e.target.files[0])
+                this.props.savePhoto(e.target.files[0])
             }
         }
 
