@@ -160,7 +160,7 @@ export type ProfileResponseType = {
     userId: number;
 };
 
-type ContactsType = {
+export type ContactsType = {
     facebook: null | string
     github: null | string
     instagram: null | string

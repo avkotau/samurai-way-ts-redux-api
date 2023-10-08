@@ -18,6 +18,10 @@ class ProfileInfo extends Component<PropsType> {
             }
         }
 
+        const Contact: React.FC<ContactProps> = ({contactTitle, contactValue}) => {
+            return <li>{contactTitle}: {contactValue}</li>
+        }
+
         return (
             <div className={s.profileInfoContainer}>
                 <div className={s.description}>
@@ -29,7 +33,7 @@ class ProfileInfo extends Component<PropsType> {
                         <dt>Full name:</dt>
                         <dd>{this.props.profile.fullName}</dd>
 
-                        <dt>about me:</dt>
+                        <dt>About me:</dt>
                         <dd>{this.props.profile.aboutMe}</dd>
 
                         <dt>Looking for a job:</dt>
@@ -40,11 +44,10 @@ class ProfileInfo extends Component<PropsType> {
                     </dl>
                     <h3>Contact:</h3>
                     <ul>
-                        <li>facebook: {this.props.profile.contacts.facebook}</li>
-                        <li>website: {this.props.profile.contacts.website}</li>
-                        <li>vk: {this.props.profile.contacts.vk}</li>
-                        <li>twitter: {this.props.profile.contacts.twitter}</li>
-                        <li>instagram: {this.props.profile.contacts.instagram}</li>
+                        {Object.keys(this.props.profile.contacts).map((c, i) => {
+                            return <Contact key={i} contactTitle={c}
+                                            contactValue={this.props.profile.contacts[c] !== null ? this.props.profile.contacts[c] : '-'}/>
+                        })}
                     </ul>
                 </div>
             </div>
@@ -53,3 +56,8 @@ class ProfileInfo extends Component<PropsType> {
 }
 
 export default ProfileInfo;
+
+type ContactProps = {
+    contactTitle: string;
+    contactValue: string;
+};
