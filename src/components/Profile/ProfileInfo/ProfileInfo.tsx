@@ -1,63 +1,43 @@
-import React, { ChangeEvent, Component } from 'react';
+import React, { ChangeEvent, Component, useState } from 'react';
 import s from './ProfileInfo.module.css'
 import Preloader from "../../common/Preloader/Preloader";
 import { PropsType } from "../Profile";
 import { ProfileStatusWithHooks } from "components/Profile/ProfileStatusWithHooks";
 import photo from '../../../assets/images/photoUser.png';
+import { ProfileDate } from "components/Profile/ProfileDate";
+import { ProfileDateForm } from "components/Profile/ProfileDateForm";
 
-class ProfileInfo extends Component<PropsType> {
-    render() {
-        if (!this.props.profile) {
-            return <Preloader/>
-        }
+// class ProfileInfo extends Component<PropsType> {
+export const ProfileInfo = (props: PropsType) => {
 
-        const mainPhotoSelected = (e: ChangeEvent<HTMLInputElement>) => {
+    const [editMode, setEditMode] = useState(false)
 
-            if (e.target.files?.length) {
-                this.props.savePhoto(e.target.files[0])
-            }
-        }
-
-        const Contact: React.FC<ContactProps> = ({contactTitle, contactValue}) => {
-            return <li>{contactTitle}: {contactValue}</li>
-        }
-
-        return (
-            <div className={s.profileInfoContainer}>
-                <div className={s.description}>
-                    <img src={this.props.profile.photos.large || photo} alt='' style={{width: '300px'}}/>
-
-                    <ProfileStatusWithHooks status={this.props.status} updateUserStatus={this.props.updateUserStatus}/>
-                    {this.props.isOwner && <input type={'file'} onChange={mainPhotoSelected}/>}
-                    <dl>
-                        <dt>Full name:</dt>
-                        <dd>{this.props.profile.fullName}</dd>
-
-                        <dt>About me:</dt>
-                        <dd>{this.props.profile.aboutMe}</dd>
-
-                        <dt>Looking for a job:</dt>
-                        <dd>{this.props.profile.lookingForAJob ? "Yes" : "No"}</dd>
-
-                        <dt>Description:</dt>
-                        <dd>{this.props.profile.lookingForAJobDescription}</dd>
-                    </dl>
-                    <h3>Contact:</h3>
-                    <ul>
-                        {Object.keys(this.props.profile.contacts).map((c, i) => {
-                            return <Contact key={i} contactTitle={c}
-                                            contactValue={this.props.profile.contacts[c] !== null ? this.props.profile.contacts[c] : '-'}/>
-                        })}
-                    </ul>
-                </div>
-            </div>
-        );
+    if (!props.profile) {
+        return <Preloader/>
     }
+    const mainPhotoSelected = (e: ChangeEvent<HTMLInputElement>) => {
+
+        if (e.target.files?.length) {
+            props.savePhoto(e.target.files[0])
+        }
+    }
+
+    return (
+        <div className={s.profileInfoContainer}>
+            <div className={s.description}>
+                <img src={props.profile.photos.large || photo} alt='' style={{width: '300px'}}/>
+
+                <ProfileStatusWithHooks status={props.status} updateUserStatus={props.updateUserStatus}/>
+                {props.isOwner && <input type={'file'} onChange={mainPhotoSelected}/>}
+                {
+                    editMode
+                        ? <ProfileDateForm profile={props.profile}/>
+                        : <ProfileDate profile={props.profile} isOwner={props.isOwner}
+                                       goToEditMode={() => setEditMode(!editMode)}/>
+                }
+            </div>
+        </div>
+    );
 }
 
-export default ProfileInfo;
 
-type ContactProps = {
-    contactTitle: string;
-    contactValue: string;
-};

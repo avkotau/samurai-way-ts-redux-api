@@ -1,8 +1,8 @@
 import React from 'react';
 import s from './Profile.module.css'
-import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import MyPostsContainer from "./MyPosts/MyPostsContainer";
 import { ProfileResponseType } from "store/profileReducer";
+import { ProfileInfo } from "components/Profile/ProfileInfo/ProfileInfo";
 
 const Profile = (props: PropsType) => {
     return (
@@ -19,7 +19,7 @@ const Profile = (props: PropsType) => {
 }
 
 export type PropsType = {
-    profile: ProfileResponseType | null
+    profile: ProfileResponseType
     status: string
     updateUserStatus: (status: string) => void
     isOwner: boolean
