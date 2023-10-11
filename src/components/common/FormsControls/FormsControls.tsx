@@ -19,15 +19,24 @@ export const FormControl = <T extends string | number | readonly string[]>(
     return (
         <div>
             {
-                input.name === 'textarea'
+                input.type === 'textarea'
                     ? <textarea {...input} {...resProps} className={hasErrorTextarea ? s.errorTextarea : ''}/>
-                    : <input {...input} {...resProps} className={hasErrorInput ? s.errorTextarea : ''}/>
+                    : input.type === 'checkbox'
+                        ? <input {...input} {...resProps} type={'checkbox'} className={hasErrorInput ? s.errorTextarea : ''}/>
+                        : <input {...input} {...resProps} type={'text'} className={hasErrorInput ? s.errorTextarea : ''}/>
             }
             {
-                input.name === 'textarea'
+                input.type === 'textarea'
                     ? hasErrorTextarea && <span className={s.error}>{error}</span>
                     : hasErrorInput && <span className={s.error}>{error}</span>
             }
         </div>
     )
 }
+
+
+// export const createField = (name, placeholder, component, props, text = '') => (
+//   <>
+//     <Field name={name} placeholder={placeholder} component={component} {...props}/> {text}
+//   </>
+// )

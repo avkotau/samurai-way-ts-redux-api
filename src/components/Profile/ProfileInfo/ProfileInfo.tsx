@@ -1,4 +1,4 @@
-import React, { ChangeEvent, Component, useState } from 'react';
+import React, { ChangeEvent, useState } from 'react';
 import s from './ProfileInfo.module.css'
 import Preloader from "../../common/Preloader/Preloader";
 import { PropsType } from "../Profile";
@@ -6,8 +6,8 @@ import { ProfileStatusWithHooks } from "components/Profile/ProfileStatusWithHook
 import photo from '../../../assets/images/photoUser.png';
 import { ProfileDate } from "components/Profile/ProfileDate";
 import { ProfileDateForm } from "components/Profile/ProfileDateForm";
+import { ProfileResponseType } from "store/profileReducer";
 
-// class ProfileInfo extends Component<PropsType> {
 export const ProfileInfo = (props: PropsType) => {
 
     const [editMode, setEditMode] = useState(false)
@@ -22,6 +22,10 @@ export const ProfileInfo = (props: PropsType) => {
         }
     }
 
+    const onSubmit = (formData: ProfileResponseType) => {
+        props.saveProfile(formData)
+    }
+
     return (
         <div className={s.profileInfoContainer}>
             <div className={s.description}>
@@ -31,7 +35,7 @@ export const ProfileInfo = (props: PropsType) => {
                 {props.isOwner && <input type={'file'} onChange={mainPhotoSelected}/>}
                 {
                     editMode
-                        ? <ProfileDateForm profile={props.profile}/>
+                        ? <ProfileDateForm profile={props.profile} onSubmit={onSubmit}/>
                         : <ProfileDate profile={props.profile} isOwner={props.isOwner}
                                        goToEditMode={() => setEditMode(!editMode)}/>
                 }

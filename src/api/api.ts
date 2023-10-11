@@ -56,6 +56,10 @@ export const savePhotoAPI = (photoFile: Blob) => {
     })
 }
 
+export const saveProfileAPI = (profile: ProfileResponseType) => {
+    return instance.put<ResponseStatusType>(`/profile`, profile)
+}
+
 type ResponseUserType<T = []> = {
     items: T
     error: null | string

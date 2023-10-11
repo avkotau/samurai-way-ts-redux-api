@@ -7,7 +7,7 @@ import {
     fetchUserProfile,
     getUserStatus,
     ProfileResponseType,
-    savePhoto,
+    savePhoto, saveProfile,
     updateUserStatus
 } from "store/profileReducer";
 import { RouteComponentProps, withRouter } from "react-router-dom";
@@ -45,6 +45,7 @@ class ProfileContainer extends Component<PropsType> {
                          isOwner={!this.props.match.params.userId}
                          profile={this.props.profile}
                          savePhoto={this.props.savePhoto}
+                         saveProfile={this.props.saveProfile}
                 />
             </div>
         )
@@ -57,8 +58,9 @@ const mapStateToProps = (state: AppStateType): MapStateToPropsType => ({
     authorizedUserId: state.auth.id,
     isAuth: state.auth.isAuth,
 })
+
 type MapStateToPropsType = {
-    profile: ProfileResponseType | null
+    profile: ProfileResponseType
     status: string
     authorizedUserId: string | null
     isAuth: boolean
@@ -68,7 +70,9 @@ type MapDispatchToPropsType = {
     getUserStatus: (userId: number) => void
     updateUserStatus: (status: string) => void
     savePhoto: (file: any) => void
+    saveProfile: (formData: ProfileResponseType) => void
 }
+
 type PathParamsType = {
     userId: string
 }
@@ -79,7 +83,7 @@ type PropsType = RouteComponentProps<PathParamsType> & OwnUsersType
 //With help withRouter new component for get url data from props
 export default compose<React.ComponentType>(
     withAuthRedirect,
-    connect(mapStateToProps, {fetchUserProfile, getUserStatus, updateUserStatus, savePhoto}),
+    connect(mapStateToProps, {fetchUserProfile, getUserStatus, updateUserStatus, savePhoto, saveProfile}),
     withRouter
 )(ProfileContainer)
 

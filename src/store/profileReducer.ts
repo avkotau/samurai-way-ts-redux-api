@@ -1,4 +1,4 @@
-import { getUserStatusAPI, profileUserAPI, savePhotoAPI, updateUserStatusAPI } from "api/api";
+import { getUserStatusAPI, profileUserAPI, savePhotoAPI, saveProfileAPI, updateUserStatusAPI } from "api/api";
 import { Dispatch } from "redux";
 import { PostDataType } from "types/commonTypes";
 
@@ -113,6 +113,20 @@ export const savePhotoSuccessAC = (photos: PhotosType) => {
         type: 'SAVE_PHOTO_SUCCESS',
         photos
     } as const
+}
+
+export const saveProfileAC = (photos: PhotosType) => {
+    return {
+        type: 'SAVE_PHOTO_SUCCESS',
+        photos
+    } as const
+}
+
+export const saveProfile = (profile: ProfileResponseType) => async () => {
+    const res = await saveProfileAPI(profile)
+    if (res.data.resultCode === 0) {
+        //dispatch(savePhotoSuccessAC(res.data.data.photos))
+    }
 }
 
 export const savePhoto = (file: Blob) => async (dispatch: Dispatch) => {
