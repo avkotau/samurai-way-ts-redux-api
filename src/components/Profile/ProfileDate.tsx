@@ -7,7 +7,7 @@ type Props = {
     goToEditMode: () => void
 }
 
-export const ProfileDate: React.FC<any> = (props: Props) => {
+export const ProfileDate: React.FC<Props> = (props) => {
     const Contact = ({contactTitle, contactValue}: ContactProps) => {
         return <li>{contactTitle}: {contactValue}</li>
     }
@@ -18,14 +18,15 @@ export const ProfileDate: React.FC<any> = (props: Props) => {
                 <dt>Full name:</dt>
                 <dd>{props.profile.fullName}</dd>
 
-                <dt>About me:</dt>
-                <dd>{props.profile.aboutMe}</dd>
-
                 <dt>Looking for a job:</dt>
                 <dd>{props.profile.lookingForAJob ? "Yes" : "No"}</dd>
 
-                <dt>Description:</dt>
+                <dt>My professional skills:</dt>
                 <dd>{props.profile.lookingForAJobDescription}</dd>
+
+                <dt>About me:</dt>
+                <dd>{props.profile.aboutMe}</dd>
+
             </dl>
             <h3>Contact:</h3>
             <ul>
