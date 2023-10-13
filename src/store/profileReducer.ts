@@ -2,6 +2,7 @@ import { getUserStatusAPI, profileUserAPI, savePhotoAPI, saveProfileAPI, updateU
 import { Dispatch } from "redux";
 import { PostDataType } from "types/commonTypes";
 import { AppThunk } from "store/redux-store";
+import { FORM_ERROR } from "final-form";
 
 const initialState = {
     postsData: [
@@ -117,11 +118,16 @@ export const savePhotoSuccessAC = (photos: PhotosType) => {
 }
 
 export const saveProfile = (profile: ProfileResponseType): AppThunk => async (dispatch, getState) => {
-    const userId = getState().auth.id
+    const userId = Number(getState().auth.id)
     const res = await saveProfileAPI(profile)
+
     if (res.data.resultCode === 0) {
         await dispatch(fetchUserProfile(userId))
+    } else {
+        let errorMessage = res.data.messages.length > 0 ? res.data.messages : "Some error occurred";
+        return {[FORM_ERROR]: errorMessage[0]}; // return error
     }
+
 }
 
 export const savePhoto = (file: Blob) => async (dispatch: Dispatch) => {

@@ -22,9 +22,9 @@ export const ProfileInfo = (props: PropsType) => {
         }
     }
 
-    const onSubmit = (formData: ProfileResponseType) => {
-        props.saveProfile(formData)
+    const handleOnSubmit = async (formData: ProfileResponseType) => {
         setEditMode(false)
+        return props.saveProfile(formData)
     }
 
     return (
@@ -36,7 +36,8 @@ export const ProfileInfo = (props: PropsType) => {
                 {props.isOwner && <input type={'file'} onChange={mainPhotoSelected}/>}
                 {
                     editMode
-                        ? <ProfileDateForm initialValues={props.profile} onSubmit={onSubmit} profile={props.profile}/>
+                        ? <ProfileDateForm initialValues={props.profile} onSubmit={handleOnSubmit}
+                                           profile={props.profile}/>
                         : <ProfileDate profile={props.profile} isOwner={props.isOwner}
                                        goToEditMode={() => setEditMode(true)}/>
                 }

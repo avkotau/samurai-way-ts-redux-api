@@ -39,6 +39,7 @@ class ProfileContainer extends Component<PropsType> {
     }
 
     render() {
+
         return (
             <div className={s.content}>
                 <Profile {...this.props}

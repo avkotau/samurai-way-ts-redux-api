@@ -8,12 +8,15 @@ type Props = {
 }
 
 export const ProfileDate: React.FC<Props> = (props) => {
+
     const Contact = ({contactTitle, contactValue}: ContactProps) => {
         return <li>{contactTitle}: {contactValue}</li>
     }
+
     return (
         <>
             {props.isOwner && <button onClick={props.goToEditMode}>edit</button>}
+
             <dl>
                 <dt>Full name:</dt>
                 <dd>{props.profile.fullName}</dd>
@@ -26,8 +29,8 @@ export const ProfileDate: React.FC<Props> = (props) => {
 
                 <dt>About me:</dt>
                 <dd>{props.profile.aboutMe}</dd>
-
             </dl>
+
             <h3>Contact:</h3>
             <ul>
                 {Object.keys(props.profile.contacts).map((c, i) => {

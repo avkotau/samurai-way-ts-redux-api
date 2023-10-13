@@ -10,25 +10,31 @@ import { AppStateType } from 'store/redux-store';
 const maxLength10 = minLength(10)
 export const LoginForm = (props: LoginFormProps) => {
     const {onSubmit} = props;
+
     return (
         <Form
             onSubmit={onSubmit}
-            render={({handleSubmit, submitError}) => (
-                <form onSubmit={handleSubmit}>
-                    {submitError && <div style={{color: 'red'}}>{submitError}</div>}
-                    <Field name='email' placeholder='Email' component={FormControl}
-                           validate={composeValidators(required, maxLength10)}
-                    />
-                    <Field name='password' placeholder='password' type='password' component={FormControl}
-                           validate={composeValidators(required, maxLength10)}
-                    />
-                    <Field name='rememberMe' type='checkbox' component={FormControl}/> Remember Me
-                    <div>
-                        {submitError && <div className="error">{submitError}</div>}
-                        <button type='submit'>Sign up</button>
-                    </div>
-                </form>
-            )}
+            render={({handleSubmit, submitError}) => {
+
+                return (
+                    <form onSubmit={handleSubmit}>
+                        {submitError && <div style={{color: 'red'}}>{submitError}</div>}
+                        <Field name='email' placeholder='Email' component={FormControl}
+                               validate={composeValidators(required, maxLength10)}
+                        />
+                        <Field name='password' placeholder='password' type='password' component={FormControl}
+                               validate={composeValidators(required, maxLength10)}
+                        />
+                        <Field name='rememberMe' type='checkbox' component={FormControl}/> Remember Me
+                        <div>
+                            {submitError && <div className="error">{submitError}</div>}
+                            <button type='submit'>Sign up</button>
+                        </div>
+                    </form>
+                )
+            }
+
+        }
         />
     )
 }
