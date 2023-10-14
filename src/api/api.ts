@@ -39,6 +39,7 @@ export const updateUserStatusAPI = (status: string) => {
 }
 
 export const loginAPI = ({rememberMe = false, ...credentials}) => {
+
     return instance.post<ResponseCredentialsType>(`/auth/login`, {...credentials})
 }
 
@@ -58,6 +59,12 @@ export const savePhotoAPI = (photoFile: Blob) => {
 
 export const saveProfileAPI = (profile: ProfileResponseType) => {
     return instance.put<ResponseStatusType>(`/profile`, profile)
+}
+
+export const securityAPI = {
+    getCaptchaUrl() {
+        return instance.put<CaptchaResponse>(`security/get-captcha-url`)
+    }
 }
 
 type ResponseUserType<T = []> = {
@@ -86,4 +93,8 @@ export type ResponseCredentialsType<T = { photos: PhotosType }> = {
     fieldsErrors: []
     messages: []
     resultCode: number
+}
+
+type CaptchaResponse = {
+    url: string;
 }

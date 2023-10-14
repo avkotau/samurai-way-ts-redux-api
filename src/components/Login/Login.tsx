@@ -1,16 +1,29 @@
 import React, { Component } from 'react';
-import { Field, Form } from 'react-final-form'
+import { Field, FieldInputProps, FieldMetaState, Form } from 'react-final-form'
 import { login } from "store/auth-reducer";
 import { connect } from "react-redux";
 import { FormControl } from '../common/FormsControls/FormsControls'
 import { composeValidators, minLength, required } from "utils/validators";
 import { Redirect } from "react-router-dom";
 import { AppStateType } from 'store/redux-store';
+import s from './Login.module.css'
 
 const maxLength10 = minLength(10)
-export const LoginForm = (props: LoginFormProps) => {
-    const {onSubmit} = props;
+const minLength6 = minLength(6)
 
+type FormControlProps<T> = {
+    input: FieldInputProps<T>
+    meta: FieldMetaState<T>
+    value: string
+};
+
+export const LoginForm = (props: LoginFormProps) => {
+    const {onSubmit, captchaUrl} = props;
+
+    const FormControlWithFixedValue = <T extends string>(props: FormControlProps<T>) => {
+
+        return <FormControl {...props} value="Remember Me"/>;
+    }
     return (
         <Form
             onSubmit={onSubmit}
@@ -18,29 +31,57 @@ export const LoginForm = (props: LoginFormProps) => {
 
                 return (
                     <form onSubmit={handleSubmit}>
-                        {submitError && <div style={{color: 'red'}}>{submitError}</div>}
-                        <Field name='email' placeholder='Email' component={FormControl}
-                               validate={composeValidators(required, maxLength10)}
+                        <Field
+                            name='email'
+                            placeholder='Email'
+                            component={FormControl}
+                            validate={composeValidators(required, maxLength10)}
                         />
-                        <Field name='password' placeholder='password' type='password' component={FormControl}
-                               validate={composeValidators(required, maxLength10)}
+
+                        <Field
+                            name='password'
+                            placeholder='Password'
+                            type='password'
+                            component={FormControl}
+                            validate={composeValidators(required, minLength6)}
                         />
-                        <Field name='rememberMe' type='checkbox' component={FormControl}/> Remember Me
-                        <div>
-                            {submitError && <div className="error">{submitError}</div>}
-                            <button type='submit'>Sign up</button>
-                        </div>
+
+                        <Field
+                            name='rememberMe'
+                            type='checkbox'
+                            component={FormControlWithFixedValue}
+                        />
+
+                        {captchaUrl && (
+                            <>
+                                <img src={captchaUrl} alt='captcha'/>
+                                <Field
+                                    name='captcha'
+                                    placeholder='Enter the symbols from the picture'
+                                    component={FormControl}
+                                    validate={composeValidators(required)}
+                                />
+                            </>
+                        )}
+
+                        {submitError ? (
+                            <div style={{color: 'red'}}>{submitError}</div>
+                        ) : (
+                            <div className={s.element}></div>
+                        )}
+
+                        <button type='submit'>Sign up</button>
                     </form>
                 )
             }
 
-        }
+            }
         />
     )
 }
 
 class Login extends Component<LoginType> {
-    // login - callback which set params for thunk creator
+
     handleOnSubmit = async (values: FormDataType) => {
         return this.props.login(values);
     };
@@ -52,7 +93,7 @@ class Login extends Component<LoginType> {
         return (
             <>
                 <h2>login</h2>
-                <LoginForm onSubmit={this.handleOnSubmit}/>
+                <LoginForm onSubmit={this.handleOnSubmit} captchaUrl={this.props.captchaUrl}/>
             </>
         )
     }
@@ -60,27 +101,36 @@ class Login extends Component<LoginType> {
 
 const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
     return {
-        isAuth: state.auth.isAuth
+        isAuth: state.auth.isAuth,
+        captchaUrl: state.auth.captchaUrl
     }
 }
-type FormDataType = {
+type CaptchaUrl = {
+    captchaUrl: string
+}
+
+type FormFields = {
     email: string
     password: string
     rememberMe: boolean
 }
+
+type FormDataType = CaptchaUrl & FormFields;
+
 type LoginFormProps = {
-    onSubmit: (values: FormDataType) => void;
+    onSubmit: (values: FormDataType) => void
+} & CaptchaUrl;
+
+type AuthInfo = {
+    isAuth: boolean
 }
+
 type MapDispatchToPropsType = {
     login: (values: FormDataType) => void
 }
-type MapStateToPropsType = {
-    isAuth: boolean
-}
+
+type MapStateToPropsType = CaptchaUrl & AuthInfo;
+
 type LoginType = MapDispatchToPropsType & MapStateToPropsType
 
-// login - this thunk creator
-export default connect(
-    mapStateToProps,
-    {login}
-)(Login)
+export default connect(mapStateToProps, {login})(Login)

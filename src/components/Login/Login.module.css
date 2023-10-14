@@ -1,0 +1,3 @@
+.element {
+    margin-top: calc(1.3em); /* Here em will be equal to the font size of the .text-element */
+}

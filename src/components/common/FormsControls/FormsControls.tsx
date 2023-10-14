@@ -5,32 +5,45 @@ import React from "react";
 type FormControlProps<T> = {
     input: FieldInputProps<T>
     meta: FieldMetaState<T>
+    value: string
 };
 
 export const FormControl = <T extends string | number | readonly string[]>(
     {
         input,
         meta: {error, dirty, touched},
+        value,
         ...resProps
     }: FormControlProps<T>) => {
 
     const hasErrorInput = (error && dirty) || (error && touched)
     const hasErrorTextarea = error && dirty
 
+    const renderInputBasedOnType = () => {
+        switch (input.type) {
+            case 'textarea':
+                return <textarea {...input} {...resProps} className={hasErrorTextarea ? s.errorTextarea : ''}/>;
+
+            case 'checkbox':
+                return <input {...input} {...resProps} type='checkbox'
+                              className={hasErrorInput ? s.errorTextarea : ''}/>;
+
+            case 'password':
+                return <input {...input} {...resProps} type='password'
+                              className={hasErrorInput ? s.errorTextarea : ''}/>;
+
+            default:
+                return <input {...input} {...resProps} type='text' className={hasErrorInput ? s.errorTextarea : ''}/>;
+        }
+    };
+
     return (
         <div>
-            {
-                input.type === 'textarea'
-                    ? <textarea {...input} {...resProps} className={hasErrorTextarea ? s.errorTextarea : ''}/>
-                    : input.type === 'checkbox'
-                        ? <input {...input} {...resProps} type={'checkbox'} className={hasErrorInput ? s.errorTextarea : ''}/>
-                        : <input {...input} {...resProps} type={'text'} className={hasErrorInput ? s.errorTextarea : ''}/>
-            }
-            {
-                input.type === 'textarea'
-                    ? hasErrorTextarea && <span className={s.error}>{error}</span>
-                    : hasErrorInput && <span className={s.error}>{error}</span>
-            }
+            {renderInputBasedOnType()}
+
+            {(hasErrorInput || hasErrorTextarea) && <span className={s.error}>{error}</span>}
+
+            <span>{value}</span>
         </div>
     )
 }
