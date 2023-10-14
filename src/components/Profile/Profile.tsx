@@ -5,6 +5,7 @@ import { ProfileResponseType } from "store/profileReducer";
 import { ProfileInfo } from "components/Profile/ProfileInfo/ProfileInfo";
 
 const Profile = (props: PropsType) => {
+
     return (
         <div className={s.content}>
             <ProfileInfo profile={props.profile}
@@ -25,7 +26,7 @@ export type PropsType = {
     updateUserStatus: (status: string) => void
     isOwner: boolean
     savePhoto: (file: Blob) => void
-    saveProfile: (formData: ProfileResponseType) => void
+    saveProfile: (formData: ProfileResponseType) => Promise<{ submitErrors: string } | undefined>
 
 }
 

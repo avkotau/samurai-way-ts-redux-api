@@ -16,6 +16,7 @@ export const FormControl = <T extends string | number | readonly string[]>(
 
     const hasErrorInput = (error && dirty) || (error && touched)
     const hasErrorTextarea = error && dirty
+
     return (
         <div>
             {
@@ -33,10 +34,3 @@ export const FormControl = <T extends string | number | readonly string[]>(
         </div>
     )
 }
-
-
-// export const createField = (name, placeholder, component, props, text = '') => (
-//   <>
-//     <Field name={name} placeholder={placeholder} component={component} {...props}/> {text}
-//   </>
-// )

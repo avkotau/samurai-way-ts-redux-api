@@ -23,8 +23,13 @@ export const ProfileInfo = (props: PropsType) => {
     }
 
     const handleOnSubmit = async (formData: ProfileResponseType) => {
+
+        const error = await props.saveProfile(formData);
+
+        if (error) {
+            return error
+        }
         setEditMode(false)
-        return props.saveProfile(formData)
     }
 
     return (
@@ -37,9 +42,11 @@ export const ProfileInfo = (props: PropsType) => {
                 {
                     editMode
                         ? <ProfileDateForm initialValues={props.profile} onSubmit={handleOnSubmit}
-                                           profile={props.profile}/>
+                                           profile={props.profile}
+                        />
                         : <ProfileDate profile={props.profile} isOwner={props.isOwner}
-                                       goToEditMode={() => setEditMode(true)}/>
+                                       goToEditMode={() => setEditMode(true)}
+                        />
                 }
             </div>
         </div>

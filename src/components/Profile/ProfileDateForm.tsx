@@ -16,12 +16,13 @@ export const ProfileDateForm = (props: Props) => {
         <Form
             onSubmit={onSubmit}
             initialValues={props.initialValues}
-            render={({handleSubmit, submitErrors}) => {
+            render={({handleSubmit, submitErrors }) => {
 
                 return (
                     <form onSubmit={handleSubmit}>
-                        {<div>{submitErrors && submitErrors['FINAL_FORM/form-error']}</div>}
+                        {<div style={{color: 'red'}}>{submitErrors?.submitErrors}</div>}
                         {<button>save</button>}
+
                         <dl>
                             <dt>Full name:</dt>
                             <dd>{<Field type='text' name='fullName' placeholder='Full Name'
@@ -52,7 +53,8 @@ export const ProfileDateForm = (props: Props) => {
                             })}
                         </ul>
                     </form>
-                )}
+                )
+            }
             }
         />
     )
