@@ -1,0 +1,14 @@
+.statusText {
+    min-height: 39px;
+    width: 500px;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 9;
+    overflow: hidden;
+}
+
+.error {
+    color: rgb(255, 0, 0);
+}
+

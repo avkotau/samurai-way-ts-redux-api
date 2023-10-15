@@ -14,6 +14,7 @@ const Profile = (props: PropsType) => {
                          isOwner={props.isOwner}
                          savePhoto={props.savePhoto}
                          saveProfile={props.saveProfile}
+                         statusError={props.statusError}
             />
             <MyPostsContainer/>
         </div>
@@ -27,7 +28,7 @@ export type PropsType = {
     isOwner: boolean
     savePhoto: (file: Blob) => void
     saveProfile: (formData: ProfileResponseType) => Promise<{ submitErrors: string } | undefined>
-
+    statusError?: string
 }
 
 export default Profile;

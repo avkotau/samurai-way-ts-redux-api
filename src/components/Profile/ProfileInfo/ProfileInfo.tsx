@@ -37,7 +37,10 @@ export const ProfileInfo = (props: PropsType) => {
             <div className={s.description}>
                 <img src={props.profile.photos.large || photo} alt='' style={{width: '300px'}}/>
 
-                <ProfileStatusWithHooks status={props.status} updateUserStatus={props.updateUserStatus}/>
+                <ProfileStatusWithHooks status={props.status}
+                                        updateUserStatus={props.updateUserStatus}
+                                        statusError={props.statusError}
+                />
                 {props.isOwner && <input type={'file'} onChange={mainPhotoSelected}/>}
                 {
                     editMode

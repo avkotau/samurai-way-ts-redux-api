@@ -1,5 +1,5 @@
 import React, { Component, Suspense } from 'react';
-import { Route } from "react-router-dom";
+import { Redirect, Route, Switch } from "react-router-dom";
 import Dialogues from "../Dialogues/Dialogues";
 import Profile from "../Profile/Profile";
 import UsersContainer from "../Users/UsersContainer";
@@ -14,10 +14,15 @@ class RoutesApp extends Component {
     render() {
         return (
             <>
-                <Route path='/dialogues' render={withSuspense(DialoguesContainer)}/>
-                <Route path='/profile/:userId?' render={withSuspense(ProfileContainer)}/>
-                <Route path='/users' render={() => <UsersContainer/>}/>
-                <Route path='/login' render={() => <Login/>}/>
+                <Switch>
+                    <Route exact path='/' render={() => <Redirect to={'/profile'}/>}/>
+                    <Route path='/dialogues' render={withSuspense(DialoguesContainer)}/>
+                    <Route path='/profile/:userId?' render={withSuspense(ProfileContainer)}/>
+                    <Route path='/users' render={() => <UsersContainer/>}/>
+                    <Route path='/login' render={() => <Login/>}/>
+                    <Route path='*' render={() => <div>404 NOTE FOUND</div>}/>
+                </Switch>
+
             </>
         )
     }

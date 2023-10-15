@@ -30,7 +30,8 @@ const initialState = {
         },
         userId: 0
     },
-    status: ''
+    status: '',
+    statusError: undefined as string | undefined
 }
 
 export type InitialStateType = typeof initialState
@@ -69,6 +70,12 @@ export const profileReducer = (state: InitialStateType = initialState, action: A
             return {
                 ...state,
                 profile: {...state.profile, photos: action.photos}
+            }
+        }
+        case "STATUS_ERROR": {
+            return {
+                ...state,
+                statusError: action.error
             }
         }
     }
@@ -116,6 +123,14 @@ export const savePhotoSuccessAC = (photos: PhotosType) => {
     } as const
 }
 
+export const statusErrorAC = (error: string | undefined) => {
+
+    return {
+        type: 'STATUS_ERROR',
+        error
+    } as const
+}
+
 export const saveProfile = (profile: ProfileResponseType): AppThunk => async (dispatch, getState) => {
     const userId = Number(getState().auth.id)
     const res = await saveProfileAPI(profile)
@@ -136,14 +151,22 @@ export const savePhoto = (file: Blob) => async (dispatch: Dispatch) => {
 }
 
 export const updateUserStatus = (status: string) => async (dispatch: Dispatch) => {
+
     const res = await updateUserStatusAPI(status)
+
     if (res.data.resultCode === 0) {
         dispatch(updateUserStatusAC(status))
+        dispatch(statusErrorAC(''))
+    } else {
+        if (res.data.messages.length > 0) {
+            dispatch(statusErrorAC(res.data.messages[0]))
+        }
     }
 }
 
 export const getUserStatus = (userId: number) => async (dispatch: Dispatch) => {
     const res = await getUserStatusAPI(userId)
+
     dispatch(getUserStatusAC(res.data))
 }
 
@@ -154,7 +177,7 @@ export const fetchUserProfile = (userId: number) => async (dispatch: Dispatch) =
 
 export type ActionsProfileType = AddPostActionType
     | SetUserProfileActionType | GetUserStatusActionType | UpdateUserStatusActionType
-    | DeletePostActionType | SavePhotoSuccessActionType
+    | DeletePostActionType | SavePhotoSuccessActionType | StatusErrorActionType
 
 type AddPostActionType = ReturnType<typeof addPostAC>
 type SetUserProfileActionType = ReturnType<typeof setUserProfileAC>
@@ -162,6 +185,7 @@ type GetUserStatusActionType = ReturnType<typeof getUserStatusAC>
 type UpdateUserStatusActionType = ReturnType<typeof updateUserStatusAC>
 type DeletePostActionType = ReturnType<typeof deletePostAC>
 type SavePhotoSuccessActionType = ReturnType<typeof savePhotoSuccessAC>
+type StatusErrorActionType = ReturnType<typeof statusErrorAC>
 
 export type ProfileResponseType = {
     aboutMe: string;

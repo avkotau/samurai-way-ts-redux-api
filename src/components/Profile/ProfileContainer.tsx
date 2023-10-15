@@ -47,6 +47,7 @@ class ProfileContainer extends Component<PropsType> {
                          profile={this.props.profile}
                          savePhoto={this.props.savePhoto}
                          saveProfile={this.props.saveProfile}
+                         statusError={this.props.statusError}
                 />
             </div>
         )
@@ -58,6 +59,7 @@ const mapStateToProps = (state: AppStateType): MapStateToPropsType => ({
     status: state.profilePage.status,
     authorizedUserId: state.auth.id,
     isAuth: state.auth.isAuth,
+    statusError: state.profilePage.statusError
 })
 
 type MapStateToPropsType = {
@@ -65,13 +67,14 @@ type MapStateToPropsType = {
     status: string
     authorizedUserId: string | null
     isAuth: boolean
+    statusError?: string
 }
 type MapDispatchToPropsType = {
     fetchUserProfile: (userId: number) => void
     getUserStatus: (userId: number) => void
     updateUserStatus: (status: string) => void
     savePhoto: (file: any) => void
-    saveProfile: (formData: ProfileResponseType) => void
+    saveProfile: (formData: ProfileResponseType) => Promise<{ submitErrors: string } | undefined>
 }
 
 type PathParamsType = {

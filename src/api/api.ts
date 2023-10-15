@@ -31,11 +31,11 @@ export const authAPI = () => {
 }
 
 export const getUserStatusAPI = (userId: number) => {
-    return instance.get<string>(`/profile/status/${userId}`)
+    return instance.get<any>(`/profile/status/${userId}`)
 }
 
-export const updateUserStatusAPI = (status: string) => {
-    return instance.put<ResponseStatusType>(`/profile/status`, {status})
+export const updateUserStatusAPI = <T>(status: string) => {
+    return instance.put<ResponseStatusType<T>>(`/profile/status`, {status})
 }
 
 export const loginAPI = ({rememberMe = false, ...credentials}) => {
@@ -57,8 +57,8 @@ export const savePhotoAPI = (photoFile: Blob) => {
     })
 }
 
-export const saveProfileAPI = (profile: ProfileResponseType) => {
-    return instance.put<ResponseStatusType>(`/profile`, profile)
+export const saveProfileAPI = <T>(profile: ProfileResponseType) => {
+    return instance.put<ResponseStatusType<T>>(`/profile`, profile)
 }
 
 export const securityAPI = {
@@ -83,10 +83,11 @@ export type ResponseAuthType = {
     messages: []
     resultCode: number
 }
-export type ResponseStatusType = {
+export type ResponseStatusType<T> = {
+    data: T
+    fieldsErrors: string[]
+    messages: string[]
     resultCode: number
-    messages: []
-    data: {}
 }
 export type ResponseCredentialsType<T = { photos: PhotosType }> = {
     data: T
