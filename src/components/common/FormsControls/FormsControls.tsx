@@ -30,20 +30,21 @@ export const FormControl = <T extends string | number | readonly string[]>(
 
             case 'password':
                 return <input {...input} {...resProps} type='password'
-                              className={hasErrorInput ? s.errorTextarea : ''}/>;
+                              className={`${hasErrorInput ? s.errorTextarea : ''} ${s.common}`}/>;
 
             default:
-                return <input {...input} {...resProps} type='text' className={hasErrorInput ? s.errorTextarea : ''}/>;
+                return <input {...input} {...resProps} type='text'
+                              className={`${hasErrorInput ? s.errorTextarea : ''} ${s.common}`}/>;
         }
     };
 
     return (
-        <div>
+        <>
             {renderInputBasedOnType()}
 
             {(hasErrorInput || hasErrorTextarea) && <span className={s.error}>{error}</span>}
 
             <span>{value}</span>
-        </div>
+        </>
     )
 }

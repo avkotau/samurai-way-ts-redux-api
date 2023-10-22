@@ -7,3 +7,14 @@
     color: red
 }
 
+.common {
+    border: none;
+    border-bottom: 2px solid #545454;
+    display: block;
+    font-size: 16px;
+    height: 40px;
+    margin-bottom: 10px;
+    outline: none;
+    transition: border-bottom .5s linear;
+    width: 100%;
+}

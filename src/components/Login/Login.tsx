@@ -9,7 +9,7 @@ import { AppStateType } from 'store/redux-store';
 import s from './Login.module.css'
 
 const maxLength10 = minLength(10)
-const minLength6 = minLength(6)
+const minLength4 = minLength(4)
 
 type FormControlProps<T> = {
     input: FieldInputProps<T>
@@ -30,7 +30,7 @@ export const LoginForm = (props: LoginFormProps) => {
             render={({handleSubmit, submitError}) => {
 
                 return (
-                    <form onSubmit={handleSubmit}>
+                    <form onSubmit={handleSubmit} className={s.form}>
                         <Field
                             name='email'
                             placeholder='Email'
@@ -43,7 +43,7 @@ export const LoginForm = (props: LoginFormProps) => {
                             placeholder='Password'
                             type='password'
                             component={FormControl}
-                            validate={composeValidators(required, minLength6)}
+                            validate={composeValidators(required, minLength4)}
                         />
 
                         <Field
@@ -70,12 +70,10 @@ export const LoginForm = (props: LoginFormProps) => {
                             <div className={s.element}></div>
                         )}
 
-                        <button type='submit'>Sign up</button>
+                        <button type='submit' className={s.button}>Sign up</button>
                     </form>
                 )
-            }
-
-            }
+            }}
         />
     )
 }

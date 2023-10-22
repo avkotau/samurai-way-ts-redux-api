@@ -22,7 +22,6 @@ class RoutesApp extends Component {
                     <Route path='/login' render={() => <Login/>}/>
                     <Route path='*' render={() => <div>404 NOTE FOUND</div>}/>
                 </Switch>
-
             </>
         )
     }

@@ -9,18 +9,38 @@ import { initializeApp } from "store/app-reducer";
 import { AppStateType } from "store/redux-store";
 import Preloader from "components/common/Preloader/Preloader";
 import { DispatchType, StateType } from "types/commonTypes";
+import Login from "components/Login/Login";
+import stl from "LoginPage.module.css"
 
-const mapStateToProps = (state: AppStateType) => {
-    return {
-        initialized: state.app.initialized
-    }
-}
 class App extends Component<AppStateType & TypeProps & MapDispatchToPropsType & mapStateToPropsType> {
     componentDidMount() {
         this.props.initializeApp()
     }
+
     render() {
         const {state} = this.props
+
+        if (!this.props.isAuth) {
+            return <div className={stl.loginPage}>
+                <div className={stl.left}>
+                    <div>
+                        <h2>Hello!</h2>
+                        <p>Welcome to my social network!</p>
+
+                        <p>Test account</p>
+
+                        <p>Email: free@samuraijs.com</p>
+
+                        <p>Password: free</p>
+                    </div>
+
+                </div>
+                <div className={stl.right}>
+                    <Login/>
+                </div>
+
+            </div>
+        }
 
         if (!this.props.initialized) return <Preloader/>
         return (
@@ -35,6 +55,13 @@ class App extends Component<AppStateType & TypeProps & MapDispatchToPropsType & 
     }
 }
 
+const mapStateToProps = (state: AppStateType) => {
+    return {
+        initialized: state.app.initialized,
+        isAuth: state.auth.isAuth
+    }
+}
+
 type TypeProps = {
     state: StateType
     dispatch: (action: DispatchType) => void
@@ -46,6 +73,7 @@ type MapDispatchToPropsType = {
 
 type mapStateToPropsType = {
     initialized: boolean
+    isAuth: boolean
 }
 
 export default connect(mapStateToProps, {initializeApp})(App);
