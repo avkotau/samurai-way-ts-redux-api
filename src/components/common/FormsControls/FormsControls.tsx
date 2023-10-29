@@ -1,6 +1,7 @@
 import s from './FormsControls.module.css'
 import { FieldMetaState, FieldInputProps } from "react-final-form";
 import React from "react";
+import sl from 'components/common/style.module.css'
 
 type FormControlProps<T> = {
     input: FieldInputProps<T>
@@ -22,7 +23,7 @@ export const FormControl = <T extends string | number | readonly string[]>(
     const renderInputBasedOnType = () => {
         switch (input.type) {
             case 'textarea':
-                return <textarea {...input} {...resProps} className={hasErrorTextarea ? s.errorTextarea : ''}/>;
+                return <textarea {...input} {...resProps} className={`${sl.textarea} ${hasErrorTextarea ? s.errorTextarea : ''}`}/>;
 
             case 'checkbox':
                 return <input {...input} {...resProps} type='checkbox'
@@ -41,9 +42,9 @@ export const FormControl = <T extends string | number | readonly string[]>(
     return (
         <>
             {renderInputBasedOnType()}
-
-            {(hasErrorInput || hasErrorTextarea) && <span className={s.error}>{error}</span>}
-
+            <div className={s.error}>
+                {(hasErrorInput || hasErrorTextarea) && error}
+                </div>
             <span>{value}</span>
         </>
     )

@@ -15,7 +15,7 @@ export const ProfileDate: React.FC<Props> = (props) => {
 
     return (
         <>
-            {props.isOwner && <button onClick={props.goToEditMode}>edit</button>}
+            {props.isOwner && <button onClick={props.goToEditMode}>Edit Data</button>}
 
             <dl>
                 <dt>Full name:</dt>

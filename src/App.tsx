@@ -11,6 +11,7 @@ import Preloader from "components/common/Preloader/Preloader";
 import { DispatchType, StateType } from "types/commonTypes";
 import Login from "components/Login/Login";
 import stl from "LoginPage.module.css"
+import { LoginPassword } from "components/Login/LoginPassword";
 
 class App extends Component<AppStateType & TypeProps & MapDispatchToPropsType & mapStateToPropsType> {
     componentDidMount() {
@@ -23,16 +24,7 @@ class App extends Component<AppStateType & TypeProps & MapDispatchToPropsType & 
         if (!this.props.isAuth) {
             return <div className={stl.loginPage}>
                 <div className={stl.left}>
-                    <div>
-                        <h2>Hello!</h2>
-                        <p>Welcome to my social network!</p>
-
-                        <p>Test account</p>
-
-                        <p>Email: free@samuraijs.com</p>
-
-                        <p>Password: free</p>
-                    </div>
+                <LoginPassword/>
 
                 </div>
                 <div className={stl.right}>

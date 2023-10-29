@@ -12,12 +12,13 @@ const PostMessageForm = (props: PostMessageType) => {
             onSubmit={props.onSubmit}
             render={({handleSubmit}) => (
                 <form onSubmit={handleSubmit}>
-                    <Field component={FormControl}
-                           name='textarea'
+                    <Field
+                           name='message'
+                           type='textarea'
                            placeholder='Enter your message'
                            validate={composeValidators(required, maxLength100)}
-                    >
-                    </Field>
+                           component={FormControl}
+                    />
                     <button type='submit'>Add post</button>
                 </form>
             )}

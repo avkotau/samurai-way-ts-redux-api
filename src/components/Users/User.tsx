@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import photo from '../../assets/images/photoUser.png';
+import photo from 'assets/images/photoUser.png';
 import { NavLink } from "react-router-dom";
 import { UserType } from "types/commonTypes";
 

@@ -8,9 +8,9 @@ import { MyPosts } from "components/Profile/MyPosts/MyPosts";
 const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
     return {
         postsData: state.profilePage.postsData,
-        //not use now
         profile: state.profilePage.profile,
-        status: state.profilePage.status
+        status: state.profilePage.status,
+        statusError: state.profilePage.statusError
     }
 }
 

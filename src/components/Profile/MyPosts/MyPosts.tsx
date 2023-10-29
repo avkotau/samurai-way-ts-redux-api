@@ -1,4 +1,4 @@
-import React, { memo, PureComponent } from 'react';
+import React, { memo } from 'react';
 import s from './MyPosts.module.css';
 import Post from "./Post/Post";
 import { MyPostsPropsType } from "./MyPostsContainer";
@@ -15,9 +15,11 @@ export const MyPosts = memo<MyPostsPropsType>(props => {
             <div>
                 <PostMessageForm onSubmit={sendPost}/>
             </div>
-            {props.postsData.map(el => (
-                <Post key={el.id} message={el.message} like={el.like}/>
-            ))}
+            <div className={s.posts}>
+                {props.postsData.map(el => (
+                    <Post key={el.id} message={el.message} like={el.like}/>
+                ))}
+            </div>
         </div>
     )
 })

@@ -1,13 +1,26 @@
-.posts {
-    grid-area: posts;
-
+.post {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+.post > span {
+    cursor: pointer;
+    transition: color .2s ease;
+    display: flex;
+    align-items: center;
+    gap: 5px;
 }
 
-.item {
-    color: green;
+span > svg {
+    height: 1em
 }
 
-.item img {
-    width: 50px;
-    border-radius: 10px;
+span > svg:hover {
+    color: #e70909;
+    cursor: pointer;
+}
+
+.post img {
+    border-radius: 50%;
+    padding-right: 10px;
 }

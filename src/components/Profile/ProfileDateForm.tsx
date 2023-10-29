@@ -20,8 +20,9 @@ export const ProfileDateForm = (props: Props) => {
 
                 return (
                     <form onSubmit={handleSubmit}>
-                        {<div style={{color: 'red'}}>{submitErrors?.submitErrors}</div>}
                         {<button>save</button>}
+
+                        {<div style={{color: 'red', minHeight: '30px'}}>{submitErrors?.submitErrors}</div>}
 
                         <dl>
                             <dt>Full name:</dt>

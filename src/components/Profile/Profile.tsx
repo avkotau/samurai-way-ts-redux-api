@@ -1,5 +1,4 @@
 import React from 'react';
-import s from './Profile.module.css'
 import MyPostsContainer from "./MyPosts/MyPostsContainer";
 import { ProfileResponseType } from "store/profileReducer";
 import { ProfileInfo } from "components/Profile/ProfileInfo/ProfileInfo";
@@ -7,7 +6,7 @@ import { ProfileInfo } from "components/Profile/ProfileInfo/ProfileInfo";
 const Profile = (props: PropsType) => {
 
     return (
-        <div className={s.content}>
+        <>
             <ProfileInfo profile={props.profile}
                          status={props.status}
                          updateUserStatus={props.updateUserStatus}
@@ -17,7 +16,7 @@ const Profile = (props: PropsType) => {
                          statusError={props.statusError}
             />
             <MyPostsContainer/>
-        </div>
+        </>
     )
 }
 

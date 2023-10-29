@@ -5,9 +5,15 @@ import { AppThunk } from "store/redux-store";
 
 const initialState = {
     postsData: [
-        {id: Math.random().toString(36).slice(2), message: 'Hello bro', like: 12},
-        {id: Math.random().toString(36).slice(2), message: 'Hello man', like: 20},
-        {id: Math.random().toString(36).slice(2), message: 'Hello women', like: 6}
+        {id: Math.random().toString(36).slice(2), message: 'The popular tourist destinations Hawaii and ' +
+                'Thailand now join the growing group of states that has decided to ban a range of single-use plastic.',
+            like: 12},
+        {id: Math.random().toString(36).slice(2), message: 'The number of people worldwide without access to ' +
+                'electricity decreased last year from 1000 million to 860 million. Most of the progress ' +
+                'happened in India.', like: 20},
+        {id: Math.random().toString(36).slice(2), message: 'The hatching of 100 eggs brings new hope to the ' +
+                'critically endangered gharial-crocodile. Every egg counts, as there are only 1000 adult ' +
+                'crocodiles left.', like: 6}
     ] as Array<PostDataType>,
     profile: {
         aboutMe: '',

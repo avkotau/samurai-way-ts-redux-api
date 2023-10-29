@@ -1,6 +1,6 @@
 .containerDialoguesMessages {
     display: grid;
-    grid-template-columns: 2fr 5fr;
+    grid-template-columns: 1fr 5fr;
 }
 
 .dialogues {
@@ -20,6 +20,7 @@
 
 .dialogue, .message {
     padding: 5px;
+    max-width: 600px;
 }
 
 .active {

@@ -1,9 +1,12 @@
 .description {
     padding: 10px;
 }
+.description > img {
+    width: 200px;
+    border-radius: 50%;
+    border: 3px solid #ffdd00;
+}
 
-.profileInfoContainer > img {
-
-    height: 60px; /*// chenge*/
-    width: 100%;
+.description > button {
+    margin-right: 30px;
 }

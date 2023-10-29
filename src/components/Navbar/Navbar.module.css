@@ -1,7 +1,9 @@
 .nav {
     grid-area: nav;
-    background-color: chocolate;
+    background-color: #fdfdfd;
     padding: 20px;
+    margin-left: 10px;
+    min-width: 200px;
 }
 
 .item {

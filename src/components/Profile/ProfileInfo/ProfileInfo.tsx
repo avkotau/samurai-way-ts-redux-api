@@ -3,7 +3,7 @@ import s from './ProfileInfo.module.css'
 import Preloader from "../../common/Preloader/Preloader";
 import { PropsType } from "../Profile";
 import { ProfileStatusWithHooks } from "components/Profile/ProfileStatusWithHooks";
-import photo from '../../../assets/images/photoUser.png';
+import photo from 'assets/images/photoUser.png';
 import { ProfileDate } from "components/Profile/ProfileDate";
 import { ProfileDateForm } from "components/Profile/ProfileDateForm";
 import { ProfileResponseType } from "store/profileReducer";
@@ -31,27 +31,31 @@ export const ProfileInfo = (props: PropsType) => {
         }
         setEditMode(false)
     }
-
     return (
-        <div className={s.profileInfoContainer}>
-            <div className={s.description}>
-                <img src={props.profile.photos.large || photo} alt='' style={{width: '300px'}}/>
+        <div className={s.description}>
+            <img src={props.profile.photos.large || photo} alt='My photo'/>
 
-                <ProfileStatusWithHooks status={props.status}
-                                        updateUserStatus={props.updateUserStatus}
-                                        statusError={props.statusError}
-                />
-                {props.isOwner && <input type={'file'} onChange={mainPhotoSelected}/>}
-                {
-                    editMode
-                        ? <ProfileDateForm initialValues={props.profile} onSubmit={handleOnSubmit}
-                                           profile={props.profile}
-                        />
-                        : <ProfileDate profile={props.profile} isOwner={props.isOwner}
-                                       goToEditMode={() => setEditMode(true)}
-                        />
-                }
-            </div>
+            <ProfileStatusWithHooks status={props.status}
+                                    updateUserStatus={props.updateUserStatus}
+                                    statusError={props.statusError}
+            />
+            {props.isOwner &&
+                <button>
+                    <input type={'file'} id="fileInput" style={{ display: 'none' }} onChange={mainPhotoSelected}/>
+                    <label htmlFor="fileInput" >
+                        Edit Photo
+                    </label>
+                </button>
+            }
+            {
+                editMode
+                    ? <ProfileDateForm initialValues={props.profile} onSubmit={handleOnSubmit}
+                                       profile={props.profile}
+                    />
+                    : <ProfileDate profile={props.profile} isOwner={props.isOwner}
+                                   goToEditMode={() => setEditMode(true)}
+                    />
+            }
         </div>
     );
 }

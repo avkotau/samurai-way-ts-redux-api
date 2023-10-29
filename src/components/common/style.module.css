@@ -1,0 +1,11 @@
+.textarea {
+    display: flex;
+    color: #8c8b8b;
+    font-family: inherit;
+    font-size: inherit;
+    height: 60px;
+    outline: none;
+    padding: 10px;
+    resize: none;
+    width: 50%;
+}

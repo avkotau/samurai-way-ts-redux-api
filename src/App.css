@@ -6,9 +6,10 @@
             "header header"
             "nav content"
             "posts posts";
-    grid-template-rows: 60px 1fr;
+    grid-template-rows: 100px 1fr;
     grid-template-columns: 2fr 10fr;
-
+    gap: 20px;
+    background-color: #f4f2f2;
 }
 
 
