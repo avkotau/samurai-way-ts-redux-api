@@ -6,9 +6,14 @@ import PostMessageForm from "../../PostMessageForm/PostMessageForm";
 import { FormValuesType } from "types/commonTypes";
 
 export const MyPosts = memo<MyPostsPropsType>(props => {
+
     const sendPost = (values: FormValuesType) => {
-        props.addPost(values.textarea)
+        const currentDate = new Date();
+        const formattedDate = `
+        ${currentDate.getDate().toString().padStart(2, '0')}.${(currentDate.getMonth() + 1).toString().padStart(2, '0')}.${currentDate.getFullYear()}, ${currentDate.getHours().toString().padStart(2, '0')}:${currentDate.getMinutes().toString().padStart(2, '0')}:${currentDate.getSeconds().toString().padStart(2, '0')}`;
+        props.addPost({message: values.message, published: formattedDate})
     }
+
     return (
         <div className={s.myPostsContainer}>
             <h3 className={s.title}>My posts</h3>
@@ -17,7 +22,7 @@ export const MyPosts = memo<MyPostsPropsType>(props => {
             </div>
             <div className={s.posts}>
                 {props.postsData.map(el => (
-                    <Post key={el.id} message={el.message} like={el.like}/>
+                    <Post key={el.id} message={el.message} like={el.like} photo={props.profile.photos.small} published={el.published}/>
                 ))}
             </div>
         </div>

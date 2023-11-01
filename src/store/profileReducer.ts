@@ -2,19 +2,26 @@ import { getUserStatusAPI, profileUserAPI, savePhotoAPI, saveProfileAPI, updateU
 import { Dispatch } from "redux";
 import { PostDataType } from "types/commonTypes";
 import { AppThunk } from "store/redux-store";
+import { DateMessage } from "components/Profile/MyPosts/MyPostsContainer";
 
 const initialState = {
     postsData: [
-        {id: Math.random().toString(36).slice(2), message: 'The popular tourist destinations Hawaii and ' +
+        {
+            id: Math.random().toString(36).slice(2), message: 'The popular tourist destinations Hawaii and ' +
                 'Thailand now join the growing group of states that has decided to ban a range of single-use plastic.',
-            like: 12},
-        {id: Math.random().toString(36).slice(2), message: 'The number of people worldwide without access to ' +
+            like: 12, published: '12.06.2022, 12:22:30'
+        },
+        {
+            id: Math.random().toString(36).slice(2), message: 'The number of people worldwide without access to ' +
                 'electricity decreased last year from 1000 million to 860 million. Most of the progress ' +
-                'happened in India.', like: 20},
-        {id: Math.random().toString(36).slice(2), message: 'The hatching of 100 eggs brings new hope to the ' +
+                'happened in India.', like: 20, published: '12.06.2022, 12:22:30'
+        },
+        {
+            id: Math.random().toString(36).slice(2), message: 'The hatching of 100 eggs brings new hope to the ' +
                 'critically endangered gharial-crocodile. Every egg counts, as there are only 1000 adult ' +
-                'crocodiles left.', like: 6}
-    ] as Array<PostDataType>,
+                'crocodiles left.', like: 6, published: '12.06.2022, 12:22:30'
+        }
+    ] as unknown as Array<PostDataType>,
     profile: {
         aboutMe: '',
         contacts: {
@@ -48,8 +55,9 @@ export const profileReducer = (state: InitialStateType = initialState, action: A
         case 'ADD_POST':
             const newPost: PostDataType = {
                 id: Math.random().toString(36).slice(2),
-                message: action.newPost,
-                like: 0
+                message: action.postData.message,
+                like: 0,
+                published: action.postData.published
             }
             return {...state, postsData: [newPost, ...state.postsData]}
         case "SET_USER-PROFILE":
@@ -95,10 +103,10 @@ export const deletePostAC = (postId: string) => {
     } as const
 }
 
-export const addPostAC = (newPost: string) => {
+export const addPostAC = (postData: DateMessage) => {
     return {
         type: 'ADD_POST',
-        newPost
+        postData
     } as const
 }
 

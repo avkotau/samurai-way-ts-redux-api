@@ -22,6 +22,7 @@ export type PostDataType = {
     id: string
     message: string
     like: number
+    published: string
 }
 export type SidebarDataType = {
     id: string
@@ -33,7 +34,7 @@ export type NewPostTextType = {
     post: string
 }
 export type FormValuesType = {
-    textarea: string;
+    message: string;
 }
 type SidebarType = {
     sidebarData: SidebarDataType[]
