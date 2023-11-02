@@ -1,4 +1,5 @@
 .nav {
+    all: unset;
     grid-area: nav;
     background-color: #fdfdfd;
     padding: 20px;
@@ -7,11 +8,24 @@
 }
 
 .item {
+    padding-bottom: 10px;
     color: black;
 }
 
+a, a:visited, a:hover, a:active {
+    color: inherit; /* This will force the links to inherit the text color from the parent element */
+    text-decoration: none; /*Removes underline from links */
+}
+
 .item a {
-    text-decoration: none;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 5px;
+}
+
+a:hover {
+    color: gold;
 }
 
 /*.item */
@@ -21,11 +35,9 @@
 
 .friendsContainer {
     /*display: grid;*/
-
 }
 
 .friend {
-
     padding: 10px
 }
 

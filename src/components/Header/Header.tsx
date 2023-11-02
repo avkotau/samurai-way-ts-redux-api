@@ -9,7 +9,7 @@ const Header = (props: PropsType) => {
             <div>
                 {
                     props.isAuth
-                        ? <div>{props.login}
+                        ? <div className={s.loginName}> Hello {props.login}
                             <button onClick={props.logout}>
                                 Log out
                             </button>

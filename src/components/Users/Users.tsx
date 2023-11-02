@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { UserType } from "types/commonTypes";
-import { Paginator } from "components/common/Pagonator/Paginator";
+import { Paginator } from "components/common/Paginator/Paginator";
 import User from "components/Users/User";
 
 class Users extends Component<UsersType> {

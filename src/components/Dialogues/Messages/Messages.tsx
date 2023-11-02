@@ -1,7 +1,7 @@
 import React from 'react';
 import s from '../Dialogues.module.css'
 import MessageForm from "../../MessageForm/MessageForm";
-import { FormValuesType, MessageDataType } from "types/commonTypes";
+import { MessageDataType } from "types/commonTypes";
 
 type Props = {
     messagesData: MessageDataType[]
@@ -13,7 +13,7 @@ const Messages: React.FC<Props> = (
         addMessage,
     }
 ) => {
-    const sendMessage = (values: FormValuesType) => {
+    const sendMessage = (values: Record<string, any>) => {
         addMessage(values.textarea)
     }
     return (

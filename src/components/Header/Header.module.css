@@ -6,3 +6,9 @@
     grid-area: header;
     flex-direction: column;
 }
+
+.loginName {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
