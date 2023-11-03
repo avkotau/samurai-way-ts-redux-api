@@ -13,7 +13,9 @@ const Dialogues: React.FC<DialoguesType> = (
 ) => {
     return (
         <div className={s.containerDialoguesMessages}>
-            <Dialogue dialoguesData={dialoguesData}/>
+            <Dialogue dialoguesData={dialoguesData}
+                      messagesData={messagesData}
+            />
             <Messages messagesData={messagesData}
                       addMessage={addMessage}
             />

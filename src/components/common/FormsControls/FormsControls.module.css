@@ -19,3 +19,22 @@
     transition: border-bottom .5s linear;
     width: 50%;
 }
+
+button {
+    background-color: #238abd;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+    margin-left: 10px;
+    padding: 5px 15px;
+}
+
+input {
+    border: 1px solid #238abd;
+    border-radius: 5px;
+    flex-grow: 1;
+    height: 30px;
+    outline: none;
+    padding: 0 10px;
+}

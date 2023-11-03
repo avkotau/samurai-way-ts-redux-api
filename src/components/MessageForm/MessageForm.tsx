@@ -2,6 +2,7 @@ import { Form, Field } from 'react-final-form'
 import { composeValidators, maxLength, required } from "utils/validators";
 import { FormControl } from "../common/FormsControls/FormsControls";
 import { FormValuesType } from "types/commonTypes";
+import s from './MessageForm.module.css'
 
 const maxLength30 = maxLength(200)
 function MessageForm(props: MessageFormType) {
@@ -9,7 +10,7 @@ function MessageForm(props: MessageFormType) {
         <Form
             onSubmit={props.onSubmit}
             render={({handleSubmit}) => (
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit} id={s.messageForm}>
                     <Field component={FormControl}
                            name='textarea'
                            placeholder='Enter your message'
