@@ -1,4 +1,6 @@
-#messageForm {
+.messageForm {
     display: flex;
-    width: 100%;
+    justify-content: end;
+    width: 90%;
+    padding-left: 10px;
 }

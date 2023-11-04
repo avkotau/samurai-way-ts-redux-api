@@ -1,19 +1,17 @@
+.messagesOnline {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
 .containerDialoguesMessages {
     display: grid;
-    grid-template-columns: 2fr 5fr;
+    grid-template-columns: 2fr minmax(600px, auto);
     padding: 20px;
 }
 
 .dialogues {
     display: grid;
-}
-
-.dialogues a {
-
-
-}
-.dialogues  {
-
     padding: 10px 0;
 }
 
@@ -45,7 +43,7 @@
 }
 
 .messagesContainer {
-    max-height: 500px;
+    max-height: 570px;
     overflow: auto;
     padding: 20px;
 }

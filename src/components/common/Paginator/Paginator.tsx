@@ -32,7 +32,7 @@ export class Paginator extends Component<PropsType, StateType> {
         const rightPortionPageNumber = portionNumber * portionSize
 
         return (
-            <div>
+            <div className={s.pagination}>
                 {portionNumber > 1 &&
                     <button onClick={() => {
                         this.setState(prevState => ({portionNumber: prevState.portionNumber - 1}))

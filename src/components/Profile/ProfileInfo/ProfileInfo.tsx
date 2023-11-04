@@ -31,9 +31,13 @@ export const ProfileInfo = (props: PropsType) => {
         }
         setEditMode(false)
     }
+
     return (
         <div className={s.description}>
+
             <img src={props.profile.photos.large || photo} alt='My photo'/>
+
+            <div className={s.online}></div>
 
             <ProfileStatusWithHooks status={props.status}
                                     updateUserStatus={props.updateUserStatus}

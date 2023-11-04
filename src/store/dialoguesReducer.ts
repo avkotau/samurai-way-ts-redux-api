@@ -28,11 +28,14 @@ export const dialoguesReducer = (state: InitialStateType = initialState, action:
 
     switch (action.type) {
         case 'ADD_MESSAGE': {
-            const newMessage: MessageDataType = {
-                id: Math.random().toString(36).slice(2),
-                message: action.newMessage
+            if (action.newMessage !== undefined) {
+                const newMessage: MessageDataType = {
+                    id: Math.random().toString(36).slice(2),
+                    message: action.newMessage
+                }
+                return {...state, messagesData: [...state.messagesData, newMessage]}
             }
-            return {...state, messagesData: [...state.messagesData, newMessage]}
+            return state
         }
         default: {
             return state

@@ -29,7 +29,7 @@ const Messages: React.FC<Props> = (
     }, [messagesData]);
 
     return (
-        <div>
+        <div className={s.messagesOnline}>
             <div className={`${s.messagesContainer} ${g.customScrollbar}`}>
                 <div className={s.contact}>
                     <div className={s.avatar}>
@@ -54,6 +54,14 @@ const Messages: React.FC<Props> = (
                         </div>
                         <div className={s.text}>Did you like it there?</div>
                     </div>
+                    {messagesData.slice(8).map(m => (
+                        <div key={m.id} className={` ${s.message}`}>
+                            <div className={s.avatar}><img
+                                src={myFriendBase64} alt="logo"/>
+                            </div>
+                            <div className={s.text}>{m.message}</div>
+                        </div>
+                    ))}
                 </div>
                 <div ref={messagesEndRef}/>
             </div>
