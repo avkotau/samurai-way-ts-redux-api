@@ -1,8 +1,8 @@
-import { myFriendBase64 } from "assets/images/base64";
 import s from './MessagesFriends.module.css'
 import g from '../common/stylesForScroll.module.css'
 import React, { FC } from "react";
 import { DialogueDataType, MessageDataType } from "types/commonTypes";
+import avaGirl from "assets/images/avaGirl.png";
 
 type Props = {
     dialoguesData: DialogueDataType[]
@@ -19,7 +19,7 @@ export const MessagesFriends: FC<Props> = ({dialoguesData, messagesData}) => {
 
                     <div className={s.contact}>
                         <div className={s.avatar}>
-                            <img src={myFriendBase64} alt={f.name}/></div>
+                            <img src={avaGirl} alt={f.name}/></div>
                         <div className={s.contactInfo}>
                             <div className={s.name}>
                                 <a className=""

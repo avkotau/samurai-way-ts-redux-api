@@ -1,10 +1,7 @@
-import React, { Component, Suspense } from 'react';
+import React, { Component } from 'react';
 import { Redirect, Route, Switch } from "react-router-dom";
-import Dialogues from "../Dialogues/Dialogues";
-import Profile from "../Profile/Profile";
 import UsersContainer from "../Users/UsersContainer";
 import Login from "../Login/Login";
-import Preloader from 'components/common/Preloader/Preloader';
 import { withSuspense } from "hok/withSuspense";
 
 const DialoguesContainer = React.lazy(() => import("../Dialogues/DialoguesContainer"))

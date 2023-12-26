@@ -21,10 +21,10 @@ class App extends Component<AppStateType & TypeProps & MapDispatchToPropsType & 
     render() {
         const {state} = this.props
 
-        if (!this.props.isAuth) {
+        if (!this.props.isAuth && this.props.initialized) {
             return <div className={stl.loginPage}>
                 <div className={stl.left}>
-                <LoginPassword/>
+                    <LoginPassword/>
 
                 </div>
                 <div className={stl.right}>

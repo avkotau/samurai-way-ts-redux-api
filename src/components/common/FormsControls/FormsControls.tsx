@@ -27,8 +27,13 @@ export const FormControl = <T extends string | number | readonly string[]>(
                                  className={`${sl.textarea} ${hasErrorTextarea ? s.errorTextarea : ''}`}/>;
 
             case 'checkbox':
-                return <input {...input} {...resProps} type='checkbox'
-                              className={hasErrorInput ? s.errorTextarea : ''}/>;
+                return <div className={s.checkboxWrapper}>
+                    <input {...input} {...resProps} type='checkbox'
+                                className={hasErrorInput ? s.errorTextarea : ''}/>
+                    <span>{value}</span>
+                </div>
+
+
 
             case 'password':
                 return <input {...input} {...resProps} type='password'
@@ -46,7 +51,6 @@ export const FormControl = <T extends string | number | readonly string[]>(
             <div className={s.error}>
                 {(hasErrorInput || hasErrorTextarea) && error}
             </div>
-            <span>{value}</span>
         </>
     )
 }

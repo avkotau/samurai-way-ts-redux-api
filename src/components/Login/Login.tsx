@@ -54,7 +54,7 @@ export const LoginForm = (props: LoginFormProps) => {
 
                         {captchaUrl && (
                             <>
-                                <img src={captchaUrl} alt='captcha'/>
+                                <img className={s.captchaImg} src={captchaUrl} alt='captcha'/>
                                 <Field
                                     name='captcha'
                                     placeholder='Enter the symbols from the picture'
@@ -65,7 +65,7 @@ export const LoginForm = (props: LoginFormProps) => {
                         )}
 
                         {submitError ? (
-                            <div style={{color: 'red'}}>{submitError}</div>
+                            <div className={s.errorCaptcha}>{submitError}</div>
                         ) : (
                             <div className={s.element}></div>
                         )}

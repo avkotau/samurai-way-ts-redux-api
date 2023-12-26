@@ -48,7 +48,7 @@ export const ProfileDateForm = (props: Props) => {
                                         component={FormControl}/>}</dd>
 
                         </dl>
-                        <h3>Contact:</h3>
+                        <h3>Contacts:</h3>
                         <ul>
                             {Object.keys(props.profile.contacts).map((c, i) => {
                                 const key = c as keyof typeof props.profile.contacts;
