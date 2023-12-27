@@ -14,27 +14,26 @@ import { RouteComponentProps, withRouter } from "react-router-dom";
 import { compose } from "redux";
 import { withAuthRedirect } from 'hok/withAuthRedirect';
 
-class ProfileContainer extends Component<PropsType> {
-
-    refreshProfile() {
-        let userId = this.props.match.params.userId
-        if (!userId) {
-            userId = this.props.authorizedUserId as string;
-        }
-        //parseInt for change type because backend return type number, RouteComponentProps return type string
-        const userIdNumber = parseInt(userId, 10);
-        this.props.fetchUserProfile(userIdNumber)
-        this.props.getUserStatus(userIdNumber)
+export const refreshProfile = (props: OwnUsersType & ProfileType) => {
+    let userId = props.match.params.userId;
+    if (!userId) {
+        userId = props.authorizedUserId as string;
     }
+    const userIdNumber = parseInt(userId, 10);
+    props.fetchUserProfile(userIdNumber);
+    props.getUserStatus(userIdNumber);
+}
+
+class ProfileContainer extends Component<ProfileType> {
 
     componentDidMount() {
-        this.refreshProfile()
+        refreshProfile(this.props)
     }
 
-    componentDidUpdate(prevProps: Readonly<PropsType>, prevState: Readonly<{}>, snapshot?: any) {
+    componentDidUpdate(prevProps: Readonly<ProfileType>, prevState: Readonly<{}>, snapshot?: any) {
         let userId = prevProps.match.params.userId
         if (userId !== this.props.match.params.userId) {
-            this.refreshProfile()
+            refreshProfile(this.props)
         }
     }
 
@@ -82,7 +81,7 @@ type PathParamsType = {
 }
 
 type OwnUsersType = MapStateToPropsType & MapDispatchToPropsType
-type PropsType = RouteComponentProps<PathParamsType> & OwnUsersType
+export type ProfileType = RouteComponentProps<PathParamsType> & OwnUsersType
 
 //With help withRouter new component for get url data from props
 export default compose<React.ComponentType>(
