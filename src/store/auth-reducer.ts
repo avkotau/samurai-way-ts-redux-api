@@ -57,7 +57,7 @@ export const getAuthUserData = (): AppThunk => async (dispatch: AppDispatch) => 
     }
 
 }
-//thunk creator - (email, password, rememberMe) - thunk - (dispatch: Dispatch)
+
 export const login = (credentials: CredentialsType): AppThunk => async (dispatch: AppDispatch) => {
     const res = await loginAPI(credentials)
 

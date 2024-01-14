@@ -21,7 +21,7 @@ export const MyPosts = memo<MyPostsPropsType>(props => {
             </div>
             <div className={s.posts}>
                 {props.postsData.map(el => (
-                    <Post key={el.id} message={el.message} like={el.like} photo={props.profile.photos.small} published={el.published}/>
+                    <Post key={el.id} id={el.id} message={el.message} like={el.like} photo={props.profile.photos.small} published={el.published}/>
                 ))}
             </div>
         </div>

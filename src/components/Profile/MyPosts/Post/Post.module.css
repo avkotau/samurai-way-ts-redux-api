@@ -24,3 +24,7 @@ span > svg:hover {
     border-radius: 50%;
     width: 40px;
 }
+
+.wrapperLike {
+    width: 50px;
+}

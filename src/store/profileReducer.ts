@@ -60,6 +60,13 @@ export const profileReducer = (state: InitialStateType = initialState, action: A
                 published: action.postData.published
             }
             return {...state, postsData: [newPost, ...state.postsData]}
+        case 'UPDATE_LIKE':
+            return {
+                ...state,
+                postsData: state.postsData.map(post =>
+                    post.id === action.payload.postId ? { ...post, like: action.payload.newLikeCount } : post
+                )
+            };
         case "SET_USER-PROFILE":
             return {
                 ...state,
@@ -109,6 +116,13 @@ export const addPostAC = (postData: DateMessage) => {
         postData
     } as const
 }
+
+export const updateLikeAC = (postId: string, newLikeCount: number) => {
+    return {
+        type: 'UPDATE_LIKE',
+        payload: {postId, newLikeCount}
+    } as const
+};
 
 export const setUserProfileAC = (profile: ProfileResponseType) => {
     return {
@@ -189,11 +203,12 @@ export const fetchUserProfile = (userId: number) => async (dispatch: Dispatch) =
     dispatch(setUserProfileAC(res.data))
 }
 
-export type ActionsProfileType = AddPostActionType
+export type ActionsProfileType = AddPostActionType | updateLikeActionType
     | SetUserProfileActionType | GetUserStatusActionType | UpdateUserStatusActionType
     | DeletePostActionType | SavePhotoSuccessActionType | StatusErrorActionType
 
 type AddPostActionType = ReturnType<typeof addPostAC>
+type updateLikeActionType = ReturnType<typeof updateLikeAC>
 type SetUserProfileActionType = ReturnType<typeof setUserProfileAC>
 type GetUserStatusActionType = ReturnType<typeof getUserStatusAC>
 type UpdateUserStatusActionType = ReturnType<typeof updateUserStatusAC>
